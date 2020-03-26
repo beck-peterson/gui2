@@ -1,0 +1,23 @@
+body{
+  background-color: lightgrey;
+}
+#content{
+  background-color: white;
+  padding: 50px;
+  border-radius: 15px;
+}
+#welcome{
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+
+	border-bottom: 3px solid black;
+  border-top: 3px solid black;
+  color: green;
+}
+#signup{
+  margin-top: 50px;
+}
+.optional_signup{
+  margin-top: 15px;
+}

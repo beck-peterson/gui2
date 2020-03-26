@@ -1,0 +1,25 @@
+body{
+  background-image: url("../images/landingout.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#wrapper{
+  width: 35%;
+  padding: 100px;
+  background-color: lightgrey;
+  margin: 20px;
+  min-width: 400px;
+  border-radius: 15px;
+}
+#p1{
+	font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: underline;
+}
+#info_content{
+  margin-top: 150px;
+}
+#info_content p{
+  font-weight: bold;
+}
