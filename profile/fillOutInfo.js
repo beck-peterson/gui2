@@ -14,7 +14,8 @@ $(document).ready(function() {
   // Action
 
   // content
-  $("#content #displayInfo #profilePicture").html("<img src=\"" + window.testPerson.publicInfo.profilePicture + "\" width=\"164\" height=\"164\"class=\"img-thumbnail img-md-cropped\">");
+  $("#content #displayInfo #profilePicture").html("<img src=\"" + window.testPerson.publicInfo.profilePicture + "\" class=\"img-thumbnail img-md-cropped\">");
   $("#content #displayInfo #name").html(window.testPerson.publicInfo.firstName + " " + window.testPerson.publicInfo.lastName);
-  $("#content #displayInfo #organisation").html(window.testPerson.publicInfo.organization);
+  $("#content #displayInfo #organization").html(window.testPerson.publicInfo.organization);
+  $("#content #displayInfo #bio").html(window.testPerson.bio);
 });

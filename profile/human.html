@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://beck-peterson.github.io/gui2/css/CanineConnection.css">
+    <link rel="stylesheet" href="../css/CanineConnection.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../js/DataStructures.js"> </script>
     <script src="../profile/fillOutInfo.js"> </script>
@@ -48,11 +49,13 @@
         </div>
         <div id="content" class="col-sm-8"> <!-- center -->
           <div id="displayInfo">
-            <div id="profilePicture"><!-- Populated by javascript --></div>
+            <div id="profilePicture" style="float:left"><!-- Populated by javascript --></div>
             <div id="name"><!-- Populated by javascript --></div>
-            <div id="organisation"><!-- Populated by javascript --></div>
+            <div id="organization"><!-- Populated by javascript --></div>
+            <div id="bio" style="float:right"><!-- Populated by javascript --></div>
           </div>
-          <div id="postBox">
+          <div id="comment" class="form-group">
+            <textarea class="form-control" rows="3" style="resize:none" placeholder="Share something!"></textarea>
           </div>
           <div id="wall"><!-- Populated by javascript --></div>
         </div>

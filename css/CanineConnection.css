@@ -9,8 +9,7 @@ body {
 }
 
 img.img-md-cropped {
-    object-fit: none;
-    object.position: center;
-    width: 164;
-    height: 164;
+    width: 164px;
+    height: 164px;
+    object-fit: cover;
 }

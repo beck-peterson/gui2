@@ -1,7 +1,7 @@
 /* Created 3:00 PM 3/19/2020 */
 
 lola = new Dog(new GeneralInfo("Lola"));
-window.testPerson = new Person(new PublicInfo("Cesar", "Milan", "Dog Whisperer", "https://www.gstatic.com/tv/thumb/persons/503118/503118_v9_ba.jpg"), null, null, new PersonSettings(true, true), "", "", lola);
+window.testPerson = new Person(new PublicInfo("Cesar", "Milan", "Dog Whisperer", "https://www.gstatic.com/tv/thumb/persons/503118/503118_v9_ba.jpg"), null, null, new PersonSettings(true, true), "I teach dogs", null, lola);
 
 function Person(publicInfo = null, privateInfo = null, accountInfo = null, personSettings = null, bio = "", pictures = null, dogs = null) {
 	this.publicInfo = publicInfo != null ? publicInfo : new PublicInfo();
@@ -19,10 +19,10 @@ function Person(publicInfo = null, privateInfo = null, accountInfo = null, perso
 	}
 }
 
-function PublicInfo(firstName = "", lastName = "", organisation = "", profilePicture = null) {
+function PublicInfo(firstName = "", lastName = "", organization = "", profilePicture = null) {
 	this.firstName = firstName;
 	this.lastName = lastName;
-	this.organisation = organisation;
+	this.organization = organization;
 	this.profilePicture = profilePicture;
 }
 
