@@ -1,6 +1,6 @@
 /* Created 3:00 PM 3/19/2020 */
 
-window.testPerson = new Person(new PublicInfo("Cesar", "Milan", "Dog Whisperer"), null, null, new PersonSettings(true, true), "", "");
+window.testPerson = new Person(new PublicInfo("Cesar", "Milan", "Dog Whisperer", "https://www.gstatic.com/tv/thumb/persons/503118/503118_v9_ba.jpg"), null, null, new PersonSettings(true, true), "", "");
 
 function Person(publicInfo = null, privateInfo = null, accountInfo = null, personSettings = null, bio = "", pictures = null) {
 	this.publicInfo = publicInfo != null ? publicInfo : new PublicInfo();
