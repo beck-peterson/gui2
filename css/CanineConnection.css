@@ -7,3 +7,10 @@ body {
     background: #b6d7a8;
     font-family: "Tahoma, Geneva, sans-serif";
 }
+
+img.img-md-cropped {
+    object-fit: none;
+    object.position: center;
+    width: 164;
+    height: 164;
+}
