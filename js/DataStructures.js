@@ -14,7 +14,7 @@ function Person(publicInfo = null, privateInfo = null, accountInfo = null, perso
 function PublicInfo(firstName = "", lastName = "", organization = "", profilePicture = null) {
 	this.firstName = firstName;
 	this.lastName = lastName;
-	this.organisation = organisation;
+	this.organization = organization;
 	this.profilePicture = profilePicture;
 }
 
