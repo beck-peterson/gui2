@@ -11,7 +11,7 @@ function Person(publicInfo = null, privateInfo = null, accountInfo = null, perso
 	this.pictures = pictures;
 }
 
-function PublicInfo(firstName = "", lastName = "", organisation = "", profilePicture = null) {
+function PublicInfo(firstName = "", lastName = "", organization = "", profilePicture = null) {
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.organisation = organisation;
@@ -31,4 +31,15 @@ function AccountInfo(friends = null) {
 function PersonSettings(breeder = false, visible = false) {
 	this.breeder = breeder;
 	this.visible = visible;
+}
+
+function Dog(age = null, breed = "", city = "", dogPurpose = "", name = "", sex = "", state = "", zip = null) {
+	this.age = age;
+	this.breed = breed;
+	this.city = city;
+	this.dogPurpose = dogPurpose;
+	this.name = name;
+	this.sex = sex;
+	this.state = state;
+	this.zip = zip;
 }

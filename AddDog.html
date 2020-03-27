@@ -10,13 +10,11 @@
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
 
-    <title>Sign Up | Canine Connection</title>
+    <title>AddDog | Canine Connection</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/Sign_up.css">
-    <script src="js/Sign_up.js"> </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-to">
@@ -41,41 +39,77 @@
                 <a href="Log_in.html" class="btn btn-primary active">Log In</a>
               </form>
             </li>
+            <li>
+              <form class="navbar-form">
+                <a href="Sign_up.html" class="btn btn-primary active">Sign Up</a>
+              </form>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class = "container" id = "content">
-      <div id = "welcome">
-        <p>Create a New Account</p>
+    <form id="add-dog-form">
+      <h2> Dog Info </h2>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="dogName">Name</label>
+          <input type="text" class="form-control" name="dogName" id="dogName" placeholder="Name">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="dogSex">Sex</label>
+          <select name="dogSex" id="dogSex" class="form-control">
+            <option selected>Choose...</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
       </div>
-      <form id = signup>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Full Name">
+      <div class="form-group">
+        <label for="dogAge">Age</label>
+        <input type="text" class="form-control" name="dogAge" id="dogAge" placeholder="Age">
+      </div>
+      <div class="form-group">
+        <label for="dogBreed">Breed</label>
+        <input type="text" class="form-control" name="dogBreed" id="dogBreed" placeholder="Breed">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" name="dogCity" id="inputCity">
         </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Email">
+        <div class="form-group col-md-4">
+          <label for="inputState">State</label>
+          <select name="inputState" id="dogState" class="form-control">
+            <option selected>Choose...</option>
+            <option>MA</option>
+          </select>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password">
+        <div class="form-group col-md-2">
+          <label for="dogZip">Zip</label>
+          <input type="text" class="form-control" name="dogZip" id="dogZip">
         </div>
-        <div>
-          <button type="submit" class="btn btn-success optional_signup">Sign up</button>
+      </div>
+      <div class="form-group">
+        <span> Looking for.. </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="dogPurpose" id="dogPurposeAdoption" value="Adoption">
+          <label class="form-check-label" for="dogPurposeAdoption">Adoption</label>
         </div>
-        <div>
-          <button type="submit" class="btn btn-primary optional_signup">Sign up with Facebook</button>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="dogPurpose" id="dogPurposeBreeding" value="Breeding">
+          <label class="form-check-label" for="dogPurposeBreeding">Breeding</label>
         </div>
-        <div>
-          <button type="submit" class="btn btn-primary optional_signup">Sign up with Google</button>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="dogPurpose" id="dogPurposePlay" value="Play">
+          <label class="form-check-label" for="dogPurposePlay">Play</label>
         </div>
-      </form>
-    </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
@@ -95,6 +129,6 @@
       // db.settings({ timestampsInSnapshots: true });
       firebase.analytics();
     </script>
-    <script src="Database.js"></script>
+    <script src="js/Database.js"></script>
   </body>
 </html>
