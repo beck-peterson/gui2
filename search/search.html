@@ -7,13 +7,153 @@
 <head>
     <meta charset="utf-8">
     <title>Canine Connection - Search</title>
-    <link rel="stylesheet" href="./search.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="../css/CanineConnection.css">
+    <link rel="stylesheet" href="./css/Search.css">
 </head>
 
 <body>
-    <div class="field_box">
-    </div>
-    <div class="results_box">
+    <div class="container" id="search_pane">
+        <!-- Search fields are divided by dog, location, and owner information -->
+        <form id="search_form">
+            <div class="form-row">
+                <!-- Dog fields -->
+                <div class="col-4" id="dog_fields">
+                    <div class="form-row">
+                        <!-- Dog name input -->
+                        <div class="form-group col-4">
+                            <label for="dog_name_input">Name</label>
+                            <input type="text" class="form-control" id="dog_name_input">
+                        </div>
+                        <!-- Dog sex select -->
+                        <div class="form-group col-4">
+                            <label for="sex_select">Sex</label>
+                            <select class="form-control" id="sex_select">
+                                <option>Any</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <!-- Dog age range selects -->
+                        <div class="form-group col-4">
+                            <label for="age_min_select">Age</label>
+                            <div class="input-group">
+                                <!-- Age min -->
+                                <select class="form-control" id="age_min_select">
+                                    <!-- TO-DO: Populate with nums 1-20 via script-->
+                                    <option>-</option>
+                                </select>
+                                <span class="input-group-text"> to</span>
+                                <!-- Age max -->
+                                <select class="form-control" id="age_max_select">
+                                    <!-- TO-DO: Populate with nums 1-20 via script-->
+                                    <option>-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Dog heritage input -->
+                        <div class="form-group col-12">
+                            <label for="heritage_input">Heritage</label>
+                            <div class="input-group">
+                                <div class="dropdown input-group-prepend">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                        Add Breed<span class="caret"></span>
+                                    </button>
+                                    <!-- TO-DO: Populate list with possible breeds via script-->
+                                    <ul class="dropdown-menu" id="breed_dropdown_list">
+                                    </ul>
+                                </div>
+                                <input type="text" class="form-control" id="heritage_input">
+                            </div>
+                        </div>
+                        <!-- Dog listing purpose checkboxes -->
+                        <div class="form-group col-12">
+                            <label for="breeding_checkbox">Available for:</label>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="breeding_checkbox">Breeding
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="sale_checkbox">Sale
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="play_checkbox">Play
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location fields -->
+                <div class="col-4" id="location_fields">
+                    <div class="form-row">
+                        <!-- Dog city input -->
+                        <div class="form-group col-6">
+                            <label for="city_input">City</label>
+                            <input type="text" class="form-control" id="city_input" placeholder="City">
+                        </div>
+                        <!-- Dog state input -->
+                        <div class="form-group col-3">
+                            <label for="state_select">State</label>
+                            <select class="form-control" id="state_select">
+                                <!-- TO-DO: Populate with states via script -->
+                                <option>-</option>
+                                <option>MA</option>
+                            </select>
+                        </div>
+                        <!-- Dog zip code input -->
+                        <div class="form-group col-3">
+                            <label for="zip_input">Zip Code</label>
+                            <input type="text" class="form-control" id="zip_input" placeholder="Zip">
+                        </div>
+                        <!-- Distance from location input -->
+                        <div class="form-group col-4">
+                            <label for="distance_select">Distance</label>
+                            <select class="form-control" id="distance_select">
+                                <!-- TO-DO: Populate with distances via script -->
+                                <option>-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Owner fields -->
+                <div class="col-4" id="owner_fields">
+                    <div class="form-row">
+                        <!-- Owner name input-->
+                        <div class="form-group col-12">
+                            <label for="firstname_input">Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="firstname_input" placeholder="First">
+                                <input type="text" class="form-control" id="lastname_input" placeholder="Last">
+                            </div>
+                        </div>
+                        <!-- Owner organization input-->
+                        <div class="form-group col-12">
+                            <label for="company_name_input">Company</label>
+                            <input type="text" class="form-control" id="company_name_input" placeholder="Company">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="search_btn">Search</button>
+        </form>
     </div>
 </body>
 

@@ -2,10 +2,25 @@ body {
     background: #93c47d;
 }
 
-.field_box {
-    width: 100%;
+#search_pane {
+    border: solid black 2px;
 }
 
-.results_box {
+#results_pane {
+}
+
+
+#dog_fields {
+}
+
+#location_fields {
+    
+}
+#owner_fields {
+
+}
+
+#results_pane {
     background: #b6d7a8;
 }
+
