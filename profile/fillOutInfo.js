@@ -1,12 +1,16 @@
 $(document).ready(function() {
+  loadUser(window.testPerson, window.testPerson);
+});
+
+function loadUser(user, owner = user) {
   // Navigation
 
   // Information
   var subProfiles = "<ul class=\"nav nav-tabs nav-stacked\">";
-  subProfiles += "<li class=\"active col-sm-12\"><a href=\"#\">" + window.testPerson.publicInfo.firstName + " " + window.testPerson.publicInfo.lastName + "</a></li>";
-  for (i in window.testPerson.dogs) {
-    var dog = window.testPerson.dogs[i];
-    subProfiles += "<li class=\"col-sm-10\"><a href=\"#\">" + dog.generalInfo.firstName + "</a></li>";
+  subProfiles += "<li class=\"active col-sm-12\"><a href=\"#\" onclick=\"setOwner()\">" + owner.publicInfo.firstName + " " + owner.publicInfo.lastName + "</a></li>";
+  for (i in owner.dogs) {
+    var dog = owner.dogs[i];
+    subProfiles += "<li class=\"col-sm-10\" onclick=\"setDog()\"><a href=\"#\">" + dog.publicInfo.firstName + "</a></li>";
   }
   subProfiles += "</ul>";
   $("#information #subProfiles").html(subProfiles);
@@ -14,8 +18,20 @@ $(document).ready(function() {
   // Action
 
   // content
-  $("#content #displayInfo #profilePicture").html("<img src=\"" + window.testPerson.publicInfo.profilePicture + "\" class=\"img-thumbnail img-md-cropped\">");
-  $("#content #displayInfo #name").html(window.testPerson.publicInfo.firstName + " " + window.testPerson.publicInfo.lastName);
-  $("#content #displayInfo #organization").html(window.testPerson.publicInfo.organization);
-  $("#content #displayInfo #bio").html(window.testPerson.bio);
-});
+  $("#content #displayInfo #profilePicture").html("<img src=\"" + user.publicInfo.profilePicture + "\" class=\"img-thumbnail img-md-cropped\">");
+  $("#content #displayInfo #name").html(user.publicInfo.firstName + " " + user.publicInfo.lastName);
+  $("#content #displayInfo #organization").html(user.publicInfo.organization);
+  $("#content #displayInfo #bio").html(user.publicInfo.bio);
+}
+
+function setOwner() {
+  loadUser(window.testPerson);
+  $("#subProfiles ul li:eq(0)").addClass("active");
+  $("#subProfiles ul li:eq(1)").removeClass("active");
+}
+
+function setDog() {
+  loadUser(window.testPerson.dogs[0], window.testPerson);
+  $("#subProfiles ul li:eq(0)").removeClass("active");
+  $("#subProfiles ul li:eq(1)").addClass("active");
+}

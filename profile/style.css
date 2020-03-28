@@ -1,3 +1,7 @@
 * {
   font-weight: bold;
 }
+
+button.actionButton {
+  margin-bottom: 10px;
+}
