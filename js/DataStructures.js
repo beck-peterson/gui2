@@ -1,71 +1,108 @@
 /* Created 3:00 PM 3/19/2020 */
 
-var generalInfo = new PublicInfo("Lola", "", "I love to run and play!", "Havenese", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRDGYBmx5kmMtX8ONMDrT3fl_joH_6844jDXwqHv5pNa1QqTlaS");
+var personPhoto = "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/32412214_1677014109085640_5046637897659187200_n.jpg?_nc_cat=109&_nc_sid=85a577&_nc_ohc=ssOHO73Nvn4AX8wOSzn&_nc_ht=scontent-lga3-1.xx&oh=0a6e436d50355a41ab851ea7168add5d&oe=5EB5C552";
+var personDisplay = new PersonDisplay(personPhoto, "", "Beck", "", "Peterson", "", "22", "", "Lowell", "College student with a cute pup waiting at home for me");
+var photos = new Array();
+var dogsInfo = new DogsInfo();
+var contactInfo = new ContactInfo("9789953608", "beckpeterson2016@gmail.com");
+var addressInfo = new AddressInfo("102 Martin St", "Lowell", "MA", "01854", "Apartment 2");
+var info = new Map();
+info.set(dogsInfo.title, dogsInfo);
+info.set(contactInfo.title, contactInfo);
+info.set(addressInfo.title, addressInfo);
+window.testPerson = new Person(personDisplay, photos, info);
+
+var dogPhoto = "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/1175746_528238690629860_1388233212_n.jpg?_nc_cat=104&_nc_sid=110474&_nc_ohc=kz3b-Wv0-VIAX-iifDi&_nc_ht=scontent-lga3-1.xx&oh=5366ba467a859d3fb646db3ce9b6422b&oe=5EB29C45";
+var dogDisplay = new DogDisplay(dogPhoto, "", "Lola", "", "", "", "Female", "Havenese", "5", "North Reading", "An energetic gal who loves to play and cuddle");
+var dogPhotos = new Array();
 var healthInfo = new HealthInfo();
 var breedingInfo = new BreedingInfo();
 var sellingInfo = new SellingInfo();
-var dog = new Dog(generalInfo, healthInfo, breedingInfo, sellingInfo);
-var publicInfo = new PublicInfo("Cesar", "Milan", "I train dogs when the owners can't", "Dog Whisperer", "https://www.gstatic.com/tv/thumb/persons/503118/503118_v9_ba.jpg");
-var privateInfo = new PrivateInfo("po box 7356, Hollywood CA", "14638547395", "thedogwhisperer@discory.org");
-var accountInfo = new AccountInfo();
-var personSettings = new PersonSettings(true, true);
-var pictures = new Array("https://www.gstatic.com/tv/thumb/persons/503118/503118_v9_ba.jpg");
-var dogs = new Array(dog);
-window.testPerson = new Person(publicInfo, privateInfo, accountInfo, personSettings, pictures, dogs);
+var dogInfo = new Map();
+dogInfo.set(healthInfo.title, healthInfo);
+dogInfo.set(breedingInfo.title, breedingInfo);
+dogInfo.set(sellingInfo.title, sellingInfo);
+var dog = new Dog(window.testPerson, dogDisplay, dogPhotos, dogInfo);
+window.testPerson.info.get("Dogs").map.set(dog.display.firstName, dog);
 
-function Person(publicInfo = null, privateInfo = null, accountInfo = null, personSettings = null, pictures = null, dogs = null) {
-	this.publicInfo = publicInfo != null ? publicInfo : new PublicInfo();
-	this.privateInfo = privateInfo != null ? privateInfo : new PrivateInfo();
-	this.accountInfo = accountInfo != null ? accountInfo : new AccountInfo();
-	this.personSettings = personSettings != null ? personSettings : new PersonSettings();
-	this.pictures = pictures;
-	if (dogs == null) {
-		dogs = new Array();
-	} else if (Array.isArray(dogs)) {
-		this.dogs = dogs;
-	} else {
-		this.dogs = new Array(dogs);
-	}
+window.testPerson.info.get("Dogs").map.set("Test", new Dog(window.testPerson, new DogDisplay(null, "", "Test")));
+
+
+function Account(display = null, photos = null, info = null, parent = null) {
+    this.display = display != null ? display : new Display();
+    this.photos = photos != null ? photos : new Array();
+    this.info = info != null ? info : new Map();
+    this.parent = parent;
 }
 
-function PublicInfo(firstName = "", lastName = "", bio = "", organization = "", profilePicture = null) {
-	this.firstName = firstName;
-	this.lastName = lastName;
-	this.bio = bio;
-	this.organization = organization;
-	this.profilePicture = profilePicture;
+function Display(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", firstLine = "", secondLine = "", thirdLine = "", fourthLine = "", summary = "") {
+    this.photo = photo;
+    this.prefix = prefix;
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.lastName = lastName;
+    this.suffix = suffix;
+    this.firstLine = firstLine;
+    this.secondLine = secondLine;
+    this.thirdLine = thirdLine;
+    this.fourthLine = fourthLine;
+    this.summary = summary;
 }
 
-function PrivateInfo(address = null, phone = null, email = null) {
-	this.address = address;
-	this.phone = phone;
-	this.email = email;
+function Photos() {
+
 }
 
-function AccountInfo(friends = null) {
-	this.friends = friends != null ? friends : null;//new Friends();
+function Info(title = "", isPublic = false) {
+    this.title = title;
+    this.isPublic = isPublic;
 }
 
-function PersonSettings(breeder = false, visible = false) {
-	this.breeder = breeder;
-	this.visible = visible;
+function Settings() {
+
 }
 
-function Dog(publicInfo = null, healthInfo = null, breedingInfo = null, sellingInfo = null) {
-	this.publicInfo = publicInfo != null ? publicInfo : new PublicInfo();
-	this.healthInfo = healthInfo != null ? healthInfo : new HealthInfo();
-	this.breedingInfo = breedingInfo != null ? breedingInfo : new BreedingInfo();
-	this.sellingInfo = sellingInfo != null ? sellingInfo : new SellingInfo();
+function Person(personDisplay = null, photos = null, info = null) {
+    Account.call(this, personDisplay, photos, info, null);
+}
+
+function PersonDisplay(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", age = "", organisation = "", location = "", summary = "") {
+    Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, age, organisation, location, summary);
+}
+
+function Dog(owner, dogDisplay = null, photos = null, info = null) {
+    Account.call(this, dogDisplay, photos, info, owner);
+}
+
+function DogDisplay(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", gender = "", breed = "", age = "", location = "", summary = "") {
+    Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, gender, breed + ", " + age, location, summary);
+}
+
+function DogsInfo() {
+    Info.call(this, "Dogs", true);
+    this.map = new Map();
+}
+
+function OrganizationInfo() {
+    Info.call(this, "Organization", true);
+}
+
+function ContactInfo() {
+    Info.call(this, "Contact", false);
+}
+
+function AddressInfo() {
+    Info.call(this, "Address", false);
 }
 
 function HealthInfo() {
-
+    Info.call(this, "Health", true);
 }
 
 function BreedingInfo() {
-
+    Info.call(this, "Breeding", true);
 }
 
 function SellingInfo() {
-
+    Info.call(this, "Selling", true);
 }

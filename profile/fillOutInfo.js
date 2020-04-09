@@ -1,37 +1,37 @@
 $(document).ready(function() {
-  loadUser(window.testPerson, window.testPerson);
+    loadAccount(window.testPerson);
 });
 
-function loadUser(user, owner = user) {
-  // Navigation
+// This function can accept person or dog accounts
+function loadAccount(account) {
+    var person = account.parent == null ? account : account.parent;
+    window.currentPerson = person;
 
-  // Information
-  var subProfiles = "<ul class=\"nav nav-tabs nav-stacked\">";
-  subProfiles += "<li class=\"active col-sm-12\"><a href=\"#\" onclick=\"setOwner()\">" + owner.publicInfo.firstName + " " + owner.publicInfo.lastName + "</a></li>";
-  for (i in owner.dogs) {
-    var dog = owner.dogs[i];
-    subProfiles += "<li class=\"col-sm-10\" onclick=\"setDog()\"><a href=\"#\">" + dog.publicInfo.firstName + "</a></li>";
-  }
-  subProfiles += "</ul>";
-  $("#information #subProfiles").html(subProfiles);
+    // Navigation
 
-  // Action
+    // Information
+    var subProfiles = "<ul class=\"nav nav-tabs nav-stacked\">";
+    subProfiles += "<li id=\"" + person.display.firstName + "\" class=\"col-sm-12\"><a href=\"#\" onclick=\"changeProfile('" + person.display.firstName + "')\">" + person.display.firstName + " " + person.display.lastName + "</a></li>";
+    for (let dog of person.info.get("Dogs").map.values()) {
+        subProfiles += "<li id=\"" + dog.display.firstName + "\" class=\"col-sm-10\" onclick=\"changeProfile('" + dog.display.firstName + "')\"><a href=\"#\">" + dog.display.firstName + "</a></li>";
+    }
+    subProfiles += "</ul>";
+    $("#information #subProfiles").html(subProfiles);
+    $("#information #subProfiles ul #" + account.display.firstName).addClass("active");
 
-  // content
-  $("#content #displayInfo #profilePicture").html("<img src=\"" + user.publicInfo.profilePicture + "\" class=\"img-thumbnail img-md-cropped\">");
-  $("#content #displayInfo #name").html(user.publicInfo.firstName + " " + user.publicInfo.lastName);
-  $("#content #displayInfo #organization").html(user.publicInfo.organization);
-  $("#content #displayInfo #bio").html(user.publicInfo.bio);
+    // Action
+
+    // Content
+    var photo = account.display.photo != null ? account.display.photo : "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png";
+    $("#content #displayInfo #photo").html("<img src=\"" + photo + "\" class=\"img-thumbnail img-md-cropped\">");
+    $("#content #displayInfo #firstLine").html(account.display.firstLine);
+    $("#content #displayInfo #secondLine").html(account.display.secondLine);
+    $("#content #displayInfo #thirdLine").html(account.display.thirdLine);
+    $("#content #displayInfo #fourthLine").html(account.display.fourthLine);
+    $("#content #displayInfo #summary").html(account.display.summary);
 }
 
-function setOwner() {
-  loadUser(window.testPerson);
-  $("#subProfiles ul li:eq(0)").addClass("active");
-  $("#subProfiles ul li:eq(1)").removeClass("active");
-}
-
-function setDog() {
-  loadUser(window.testPerson.dogs[0], window.testPerson);
-  $("#subProfiles ul li:eq(0)").removeClass("active");
-  $("#subProfiles ul li:eq(1)").addClass("active");
+function changeProfile(name) {
+    var account = window.currentPerson.display.firstName == name ? window.currentPerson : window.currentPerson.info.get("Dogs").map.get(name);
+    loadAccount(account);
 }
