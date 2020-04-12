@@ -13,3 +13,9 @@ img.img-md-cropped {
     height: 164px;
     object-fit: cover;
 }
+
+img.img-lg-cropped {
+    width: 328px;
+    height: 328px;
+    object-fit: cover;
+}

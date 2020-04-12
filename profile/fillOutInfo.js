@@ -1,37 +1,93 @@
 $(document).ready(function() {
-    loadAccount(window.testPerson);
+    loadAccount(window.testPerson, "profile");
+
+    $("#action button").click(function() {
+        $("#action button").each(function() {
+            $(this).removeClass("btn-outline-primary");
+            $(this).addClass("btn-primary");
+        });
+        $(this).removeClass("btn-primary");
+        $(this).addClass("btn-outline-primary");
+        loadAccount(window.currentAccount, $(this).attr("id"));
+    });
 });
 
 // This function can accept person or dog accounts
-function loadAccount(account) {
+function loadAccount(account, selectedTab = "profile") {
     var person = account.parent == null ? account : account.parent;
     window.currentPerson = person;
-
+    window.currentAccount = account;
+    window.currentTab = selectedTab;
+    
     // Navigation
 
     // Information
-    var subProfiles = "<ul class=\"nav nav-tabs nav-stacked\">";
-    subProfiles += "<li id=\"" + person.display.firstName + "\" class=\"col-sm-12\"><a href=\"#\" onclick=\"changeProfile('" + person.display.firstName + "')\">" + person.display.firstName + " " + person.display.lastName + "</a></li>";
-    for (let dog of person.info.get("Dogs").map.values()) {
-        subProfiles += "<li id=\"" + dog.display.firstName + "\" class=\"col-sm-10\" onclick=\"changeProfile('" + dog.display.firstName + "')\"><a href=\"#\">" + dog.display.firstName + "</a></li>";
-    }
-    subProfiles += "</ul>";
-    $("#information #subProfiles").html(subProfiles);
+    $("#information #subProfiles").each(function() {
+        $(this).empty();
+        $(this).append("<ul class=\"nav nav-tabs nav-stacked\"></ul>");
+        $("#information #subProfiles ul").each(function() {
+            $(this).append("<li id=\"" + person.display.firstName + "\" class=\"col-sm-12\"><a href=\"#\" onclick=\"changeProfile('" + person.display.firstName + "')\">" + person.display.firstName + " " + person.display.lastName + "</a></li>");
+            for (let dog of person.info.get("Dogs").map.values()) {
+                $(this).append("<li id=\"" + dog.display.firstName + "\" class=\"col-sm-10\" onclick=\"changeProfile('" + dog.display.firstName + "')\"><a href=\"#\">" + dog.display.firstName + "</a></li>");
+            }
+        });
+
+    });
     $("#information #subProfiles ul #" + account.display.firstName).addClass("active");
 
     // Action
+    if (window.loggedInPerson == window.currentPerson) {
+        $("#action #settings").css("visibility", "visible");
+    } else {
+        $("#action #settings").css("visibility", "hidden");
+    }
 
-    // Content
-    var photo = account.display.photo != null ? account.display.photo : "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png";
-    $("#content #displayInfo #photo").html("<img src=\"" + photo + "\" class=\"img-thumbnail img-md-cropped\">");
-    $("#content #displayInfo #firstLine").html(account.display.firstLine);
-    $("#content #displayInfo #secondLine").html(account.display.secondLine);
-    $("#content #displayInfo #thirdLine").html(account.display.thirdLine);
-    $("#content #displayInfo #fourthLine").html(account.display.fourthLine);
-    $("#content #displayInfo #summary").html(account.display.summary);
+    $("#content").each(function() {
+        $(this).empty();
+        switch (selectedTab) {
+            case "profile":
+                $(this).append("<div id=\"displayInfo\"></div>");
+                $("#content #displayInfo").each(function() {
+                    var photo = account.display.photo != null ? account.display.photo : "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png";
+                    $(this).append("<div id=\"photo\" style=\"float:left\"><img src=\"" + photo + "\" class=\"img-thumbnail img-md-cropped\"></div>");
+                    $(this).append("<div id=\"firstLine\">" + account.display.firstLine + "</div>");
+                    $(this).append("<div id=\"secondLine\">" + account.display.secondLine + "</div>");
+                    $(this).append("<div id=\"thirdLine\">" + account.display.thirdLine + "</div>");
+                    $(this).append("<div id=\"fourthLine\">" + account.display.fourthLine + "</div>");
+                    $(this).append("<div id=\"summary\" style=\"float:right\">" + account.display.summary + "</div>");
+                });
+                $(this).append("<div id=\"comment\" class=\"form-group\"></div>");
+                $("#content #comment").each(function() {
+                    $(this).append("<textarea class=\"form-control\" rows=\"3\" style=\"resize:none\" placeholder=\"Share something!\"></textarea>");
+                });
+                $(this).append("<div id=\"wall\"></div>");
+                if (account.info.get("Posts") != null) {
+                    for (let post of account.info.get("Posts").array) {
+                        $("#content #wall").append("<div class=\"panel panel-primary\"><div class=\"post panel-body\">" + post.text + "</div></div>")
+                    }
+                }
+                break;
+            case "photos":
+                for (let photo of account.photos) {
+                    $(this).append("<img src=\"" + photo + "\" class=\"img-thumbnail img-lg-cropped\">");
+                }
+                break;
+            case "moreInfo":
+                for (let info of account.info.values()) {
+                    if (info.isPublic) {
+                        $(this).append("<div id=\"" + info.title + "\" class=\"panel panel-primary\"></div>");
+                        $("#content #" + info.title).append("<div class=\"panel-heading\">" + info.title + "</div>");
+                        $("#content #" + info.title).append("<div class=\"panel-body\">" + info.toString() + "</div>");
+                    }
+                }
+                break;
+            case "settings":
+                break;
+        }
+    });
 }
 
 function changeProfile(name) {
     var account = window.currentPerson.display.firstName == name ? window.currentPerson : window.currentPerson.info.get("Dogs").map.get(name);
-    loadAccount(account);
+    loadAccount(account, window.currentTab);
 }

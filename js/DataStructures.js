@@ -3,13 +3,21 @@
 var personPhoto = "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/32412214_1677014109085640_5046637897659187200_n.jpg?_nc_cat=109&_nc_sid=85a577&_nc_ohc=ssOHO73Nvn4AX8wOSzn&_nc_ht=scontent-lga3-1.xx&oh=0a6e436d50355a41ab851ea7168add5d&oe=5EB5C552";
 var personDisplay = new PersonDisplay(personPhoto, "", "Beck", "", "Peterson", "", "22", "", "Lowell", "College student with a cute pup waiting at home for me");
 var photos = new Array();
+photos.push(personPhoto);
+photos.push(personPhoto);
+photos.push(personPhoto);
+photos.push(personPhoto);
 var dogsInfo = new DogsInfo();
 var contactInfo = new ContactInfo("9789953608", "beckpeterson2016@gmail.com");
 var addressInfo = new AddressInfo("102 Martin St", "Lowell", "MA", "01854", "Apartment 2");
+var postsInfo = new PostsInfo();
+postsInfo.array.push(new Post("Hey, this is a test post to my wall"));
+postsInfo.array.push(new Post("This is a second post about my dog"));
 var info = new Map();
 info.set(dogsInfo.title, dogsInfo);
 info.set(contactInfo.title, contactInfo);
 info.set(addressInfo.title, addressInfo);
+info.set(postsInfo.title, postsInfo);
 window.testPerson = new Person(personDisplay, photos, info);
 
 var dogPhoto = "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/1175746_528238690629860_1388233212_n.jpg?_nc_cat=104&_nc_sid=110474&_nc_ohc=kz3b-Wv0-VIAX-iifDi&_nc_ht=scontent-lga3-1.xx&oh=5366ba467a859d3fb646db3ce9b6422b&oe=5EB29C45";
@@ -27,6 +35,7 @@ window.testPerson.info.get("Dogs").map.set(dog.display.firstName, dog);
 
 window.testPerson.info.get("Dogs").map.set("Test", new Dog(window.testPerson, new DogDisplay(null, "", "Test")));
 
+window.loggedInPerson = window.testPerson;
 
 function Account(display = null, photos = null, info = null, parent = null) {
     this.display = display != null ? display : new Display();
@@ -67,7 +76,7 @@ function Person(personDisplay = null, photos = null, info = null) {
 }
 
 function PersonDisplay(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", age = "", organisation = "", location = "", summary = "") {
-    Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, age, organisation, location, summary);
+    Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, age, location, organisation, summary);
 }
 
 function Dog(owner, dogDisplay = null, photos = null, info = null) {
@@ -78,31 +87,78 @@ function DogDisplay(photo = null, prefix = "", firstName = "", middleName = "", 
     Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, gender, breed + ", " + age, location, summary);
 }
 
+function Post(text = "", photo = null, file = null) {
+    this.text = text;
+    this.photo = photo;
+    this.file = file;
+}
+
+////
+/// Private Infos
+//
+
+function PostsInfo() {
+    Info.call(this, "Posts");
+    this.array = new Array();
+}
+
+function ContactInfo() {
+    Info.call(this, "Contact");
+}
+
+function AddressInfo() {
+    Info.call(this, "Address");
+}
+
+////
+/// Public Infos
+//
+
 function DogsInfo() {
     Info.call(this, "Dogs", true);
     this.map = new Map();
 }
 
+DogsInfo.prototype.toString = function() {
+    var string = "";
+    for (let dog of this.map.values()) {
+        string += dog.display.firstName + " " + dog.display.lastName + "<br>";
+    }
+    return string;
+};
+
 function OrganizationInfo() {
     Info.call(this, "Organization", true);
 }
 
-function ContactInfo() {
-    Info.call(this, "Contact", false);
-}
-
-function AddressInfo() {
-    Info.call(this, "Address", false);
+OrganizationInfo.prototype.toString = function() {
+    var string = "";
+    return string;
 }
 
 function HealthInfo() {
     Info.call(this, "Health", true);
 }
 
+HealthInfo.prototype.toString = function() {
+    var string = "";
+    return string;
+}
+
 function BreedingInfo() {
     Info.call(this, "Breeding", true);
 }
 
+BreedingInfo.prototype.toString = function() {
+    var string = "";
+    return string;
+}
+
 function SellingInfo() {
     Info.call(this, "Selling", true);
+}
+
+SellingInfo.prototype.toString = function() {
+    var string = "";
+    return string;
 }
