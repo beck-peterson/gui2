@@ -74,14 +74,38 @@ function loadAccount(account, selectedTab = "profile") {
                 break;
             case "moreInfo":
                 for (let info of account.info.values()) {
-                    if (info.isPublic) {
+                    if (info.visibility == "public") {
                         $(this).append("<div id=\"" + info.title + "\" class=\"panel panel-primary\"></div>");
                         $("#content #" + info.title).append("<div class=\"panel-heading\">" + info.title + "</div>");
-                        $("#content #" + info.title).append("<div class=\"panel-body\">" + info.toString() + "</div>");
+                        var contents = "";
+                        for (let [key, value] of info.map) {
+                            contents += key + ": " + value + "<br>";
+                        }
+                        contents = contents.replace(/<br>$/, "");
+                        $("#content #" + info.title).append("<div class=\"panel-body\">" + contents + "</div>");
                     }
                 }
                 break;
             case "settings":
+                for (let info of account.info.values()) {
+                    if (info.visibility == "public" || info.visibility == "protected") {
+                        $(this).append("<div id=\"" + info.title + "\" class=\"panel panel-primary\"></div>");
+                        $("#content #" + info.title).each(function() {
+                            $(this).append("<div class=\"panel-heading\">" + info.title + "</div>");
+                            $(this).append("<div id=\"" + info.title + "\" class=\"panel-body\"></div>");
+                            $("#content #" + info.title + " .panel-body").each(function() {
+                                for (let [key, value] of info.map) {
+                                    $(this).append("<div id=\"" + key + "\" class=\"form-group\"></div>");
+                                    $("#content #" + info.title + " .panel-body #" + key).each(function() {
+                                        $(this).append("<label class=\"control-label col-sm-2\">" + key + ":</label>");
+                                        $(this).append("<div class=\"col-sm-10\"><input type=\"text\" class=\"form-control\" value=\"" + value + "\"></div>");
+                                    });
+                                }
+                            });
+                        });
+                    }
+                }
+                $(this).append("<div class=\"col-sm-2\"><button id=\"save\" class=\"btn btn-block btn-primary\">Save</button></div>")
                 break;
         }
     });
