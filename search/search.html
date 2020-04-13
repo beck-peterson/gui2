@@ -18,68 +18,69 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified CSS -->
 
     <link rel="stylesheet" href="../css/CanineConnection.css">
     <link rel="stylesheet" href="./css/Search.css">
 </head>
 
 <body>
+    <!-- Search fields form and submit button-->
     <div class="container" id="search_pane">
-        <!-- Search fields are divided by dog, location, and owner information -->
         <form id="search_form">
+            <!-- Search fields placed in columns by dog, location, and owner fields-->
             <div class="form-row">
-                <!-- Dog fields -->
+                <!-- Dog fields-->
                 <div class="col-4" id="dog_fields">
                     <div class="form-row">
-                        <!-- Dog name input -->
+                        <!-- Dog name input-->
                         <div class="form-group col-4">
                             <label for="dog_name_input">Name</label>
                             <input type="text" class="form-control" id="dog_name_input">
                         </div>
-                        <!-- Dog sex select -->
+                        <!-- Dog sex select-->
                         <div class="form-group col-4">
                             <label for="sex_select">Sex</label>
                             <select class="form-control" id="sex_select">
-                                <option>Any</option>
+                                <option>Either</option>
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
                         </div>
-                        <!-- Dog age range selects -->
+                        <!-- Dog age range selects-->
                         <div class="form-group col-4">
                             <label for="age_min_select">Age</label>
                             <div class="input-group">
-                                <!-- Age min -->
+                                <!-- Age min-->
                                 <select class="form-control" id="age_min_select">
                                     <!-- TO-DO: Populate with nums 1-20 via script-->
                                     <option>-</option>
                                 </select>
                                 <span class="input-group-text"> to</span>
-                                <!-- Age max -->
+                                <!-- Age max-->
                                 <select class="form-control" id="age_max_select">
                                     <!-- TO-DO: Populate with nums 1-20 via script-->
                                     <option>-</option>
                                 </select>
                             </div>
                         </div>
-                        <!-- Dog heritage input -->
+                        <!-- Dog heritage input-->
                         <div class="form-group col-12">
                             <label for="heritage_input">Heritage</label>
                             <div class="input-group">
+                                <!-- Selecting a breed in dropdown appends that breed to text input-->
                                 <div class="dropdown input-group-prepend">
                                     <button type="button" class="btn btn-secondary dropdown-toggle"
                                         data-toggle="dropdown">
                                         Add Breed<span class="caret"></span>
                                     </button>
-                                    <!-- TO-DO: Populate list with possible breeds via script-->
+                                    <!-- TO-DO: Populate list with supported breeds via script-->
                                     <ul class="dropdown-menu" id="breed_dropdown_list">
                                     </ul>
                                 </div>
                                 <input type="text" class="form-control" id="heritage_input">
                             </div>
                         </div>
-                        <!-- Dog listing purpose checkboxes -->
+                        <!-- Dog listing purpose checkboxes-->
                         <div class="form-group col-12">
                             <label for="breeding_checkbox">Available for:</label>
                             <div class="form-check form-check-inline">
@@ -100,40 +101,38 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Location fields -->
+                <!-- Location fields-->
                 <div class="col-4" id="location_fields">
                     <div class="form-row">
-                        <!-- Dog city input -->
+                        <!-- Dog city input-->
                         <div class="form-group col-6">
                             <label for="city_input">City</label>
                             <input type="text" class="form-control" id="city_input" placeholder="City">
                         </div>
-                        <!-- Dog state input -->
+                        <!-- Dog state input-->
                         <div class="form-group col-3">
                             <label for="state_select">State</label>
                             <select class="form-control" id="state_select">
-                                <!-- TO-DO: Populate with states via script -->
+                                <!-- TO-DO: Populate with states via script-->
                                 <option>-</option>
-                                <option>MA</option>
                             </select>
                         </div>
-                        <!-- Dog zip code input -->
+                        <!-- Dog zip code input-->
                         <div class="form-group col-3">
                             <label for="zip_input">Zip Code</label>
                             <input type="text" class="form-control" id="zip_input" placeholder="Zip">
                         </div>
-                        <!-- Distance from location input -->
+                        <!-- Distance from location input-->
                         <div class="form-group col-4">
                             <label for="distance_select">Distance</label>
                             <select class="form-control" id="distance_select">
-                                <!-- TO-DO: Populate with distances via script -->
+                                <!-- TO-DO: Populate with distances via script-->
                                 <option>-</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <!-- Owner fields -->
+                <!-- Owner fields-->
                 <div class="col-4" id="owner_fields">
                     <div class="form-row">
                         <!-- Owner name input-->
@@ -155,6 +154,7 @@
             <button type="submit" class="btn btn-primary" id="search_btn">Search</button>
         </form>
     </div>
+
 </body>
 
 </html>
