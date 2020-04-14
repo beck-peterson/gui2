@@ -2,13 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
 
     <title>Sign Up | Canine Connection</title>
     <!-- Latest compiled and minified CSS -->
@@ -16,7 +18,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/SignUp.css">
-    <script src="js/Sign_up.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/SignUp.js"> </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-to">
@@ -38,9 +41,14 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <form class="navbar-form">
-                <a href="../login/LogIn.html" class="btn btn-primary active">Log In</a>
+                <a href="../login/LogIn.html" id="login" class="btn btn-primary active">Log In</a>
               </form>
             </li>
+            <li>
+              <form class="navbar-form">
+                <a href="../landing/LandingOut.html" id="logout" class="btn btn-primary active">Log Out</a>
+              </form>
+          </li>
           </ul>
         </div>
       </div>
@@ -91,10 +99,14 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       // global for easy access to db
-      const db = firebase.firestore()
+      const db = firebase.firestore();
+
+      const auth = firebase.auth();
       // db.settings({ timestampsInSnapshots: true });
       firebase.analytics();
     </script>
-    <script src="Database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>
+    <script src="js/SignUp.js"></script>
   </body>
 </html>
