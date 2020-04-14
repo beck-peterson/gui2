@@ -10,7 +10,7 @@ function signInWithGoogle(){
     alert("log in successful");
   }).catch(function(error) {
     // Handle Errors here.
-    alet("log in unsuccessful");
+    alert("log in unsuccessful");
     var errorCode = error.code;
     var errorMessage = error.message;
     // The email of the user's account used.
