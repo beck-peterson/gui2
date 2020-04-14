@@ -136,14 +136,25 @@ function AddressInfo(address, city, state, zip) {
 /// Public Infos
 //
 
+function GeneralDogInfo(breeds, color, pattern, height, weight) {
+    Info.call(this, "General", "public");
+    this.map.set("Breeds", breeds);
+    this.map.set("Color", color);
+    this.map.set("Pattern", pattern);
+    this.map.set("Height", height);
+    this.map.set("Weight", weight);
+}
+
 function OrganizationInfo(oranization) {
     Info.call(this, "Organization", "public");
     this.map.set("Organization", organization);
 }
 
-function HealthInfo(health) {
+function HealthInfo(disease, injury, vaccines) {
     Info.call(this, "Health", "public");
-    this.map.set("Health", health);
+    this.map.set("Disease", disease);
+    this.map.set("Injury", injury);
+    this.map.set("Vaccines", vaccines);
 }
 
 function BreedingInfo(breeding) {
