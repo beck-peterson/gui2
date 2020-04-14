@@ -16,7 +16,7 @@ var postsInfo = new PostsInfo();
 postsInfo.array.push(new Post("Hey, this is a test post to my wall"));
 postsInfo.array.push(new Post("This is a second post about my dog"));
 var info = new Map();
-info.set(dogsInfo.title, dogsInfo); 
+info.set(dogsInfo.title, dogsInfo);
 info.set(contactInfo.title, contactInfo);
 info.set(addressInfo.title, addressInfo);
 info.set(postsInfo.title, postsInfo);
@@ -80,8 +80,8 @@ function Person(personDisplay = null, photos = null, info = null) {
     Account.call(this, personDisplay, photos, info, null);
 }
 
-function PersonDisplay(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", age = "", organisation = "", location = "", summary = "") {
-    Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, age, location, organisation, summary);
+function PersonDisplay(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", age = "", organization = "", location = "", summary = "") {
+    Display.call(this, photo, prefix, firstName, middleName, lastName, suffix, firstName + " " + lastName, age, location, organization, summary);
 }
 
 function Dog(owner, dogDisplay = null, photos = null, info = null) {
@@ -107,6 +107,7 @@ function PostsInfo() {
     this.array = new Array();
 }
 
+// list of dogs owner owns
 function DogsInfo() {
     Info.call(this, "Dogs", "private");
 }
@@ -133,25 +134,14 @@ function AddressInfo(address, city, state, zip) {
 /// Public Infos
 //
 
-function GeneralDogInfo(breeds, color, pattern, height, weight) {
-    Info.call(this, "General", "public");
-    this.map.set("Breeds", breeds);
-    this.map.set("Color", color);
-    this.map.set("Pattern", pattern);
-    this.map.set("Height", height);
-    this.map.set("Weight", weight);
-}
-
 function OrganizationInfo(oranization) {
     Info.call(this, "Organization", "public");
     this.map.set("Organization", organization);
 }
 
-function HealthInfo(disease, injury, vaccines) {
+function HealthInfo(health) {
     Info.call(this, "Health", "public");
-    this.map.set("Disease", disease);
-    this.map.set("Injury", injury);
-    this.map.set("Vaccines", vaccines);
+    this.map.set("Health", health);
 }
 
 function BreedingInfo(breeding) {
