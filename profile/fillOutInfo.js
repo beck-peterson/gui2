@@ -73,8 +73,10 @@ function loadAccount(account, selectedTab = "profile") {
                 }
                 break;
             case "moreInfo":
+                var hasMoreInfo = false;
                 for (let info of account.info.values()) {
                     if (info.visibility == "public") {
+                        hasMoreInfo = true;
                         $(this).append("<div id=\"" + info.title + "\" class=\"panel panel-primary\"></div>");
                         $("#content #" + info.title).append("<div class=\"panel-heading\">" + info.title + "</div>");
                         var contents = "";
@@ -85,10 +87,16 @@ function loadAccount(account, selectedTab = "profile") {
                         $("#content #" + info.title).append("<div class=\"panel-body\">" + contents + "</div>");
                     }
                 }
+                if (!hasMoreInfo) {
+                    $(this).append("<div id=\"warning\" class=\"panel panel-secondary\"></div>");
+                    $("#content #warning").append("<div class=\"panel-body\">This account doesn't have more infomation available.</div>");
+                }
                 break;
             case "settings":
+                var hasSettings = false;
                 for (let info of account.info.values()) {
                     if (info.visibility == "public" || info.visibility == "protected") {
+                        hasSettings = true;
                         $(this).append("<div id=\"" + info.title + "\" class=\"panel panel-primary\"></div>");
                         $("#content #" + info.title).each(function() {
                             $(this).append("<div class=\"panel-heading\">" + info.title + "</div>");
@@ -105,7 +113,12 @@ function loadAccount(account, selectedTab = "profile") {
                         });
                     }
                 }
-                $(this).append("<div class=\"col-sm-2\"><button id=\"save\" class=\"btn btn-block btn-primary\">Save</button></div>")
+                if (!hasSettings) {
+                    $(this).append("<div id=\"warning\" class=\"panel panel-secondary\"></div>");
+                    $("#content #warning").append("<div class=\"panel-body\">This account doesn't have settings available.</div>");
+                } else {
+                    $(this).append("<div class=\"col-sm-2\"><button id=\"save\" class=\"btn btn-block btn-primary\">Save</button></div>")
+                }
                 break;
         }
     });
