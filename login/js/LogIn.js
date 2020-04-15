@@ -1,5 +1,24 @@
+$(document).ready(function() {
+// login the user
+const loginForm = document.querySelector("#login");
+loginForm.addEventListener("click", (e) => {
+  e.preventDefault();
+  // get user Info
+  const email = loginForm['email'].value;
+  const password = loginForm['password'].value;
+
+  auth.signInWithEmailAndPassword(email, password).then( cred => {
+    console.log(cred.user);
+  }).catch(function(error) {
+    // Handle Errors here. Password must be > 6 characters
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+    });
+})
+
 function signInWithGoogle(){
-  var provider = new firebase.auth.GoogleAuthProvider();
+  var provider = new auth.GoogleAuthProvider();
 
   firebase.auth().signInWithPopup(provider).then(function(result) {
     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -22,7 +41,7 @@ function signInWithGoogle(){
 }
 
 function signInWithFacebook(){
-  var provider = new firebase.auth.FacebookAuthProvider();
+  var provider = new auth.FacebookAuthProvider();
 
   firebase.auth().signInWithPopup(provider).then(function(result) {
   // This gives you a Facebook Access Token. You can use it to access the Facebook API.
@@ -44,3 +63,4 @@ function signInWithFacebook(){
   // ...
 });
 }
+});

@@ -7,7 +7,6 @@ $(document).ready(function() {
     const email = signupForm['email'].value;
     const password = signupForm['password'].value;
 
-
     // sign up the user
     auth.createUserWithEmailAndPassword(email, password).then( cred => {
       //console.log(cred)
@@ -19,7 +18,6 @@ $(document).ready(function() {
       });
     });
 
-
     const logout = document.querySelector("#logout");
     logout.addEventListener("click", (e) => {
       e.preventDefault();
@@ -30,7 +28,7 @@ $(document).ready(function() {
 
 
 
-  });
+
 
 function signUpWithGoogle(){
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -77,3 +75,4 @@ function signUpWithFacebook(){
   // ...
 });
 }
+});
