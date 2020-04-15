@@ -38,6 +38,7 @@ var dog = new Dog(window.testPerson, dogDisplay, dogPhotos, dogInfo);
 window.testPerson.info.get("Dogs").map.set(dog.display.firstName, dog);
 
 window.testPerson.info.get("Dogs").map.set("Test", new Dog(window.testPerson, new DogDisplay(null, "", "Test")));
+window.testPerson = new Person(new PersonDisplay(null, "", "First"));
 
 window.loggedInPerson = window.testPerson;
 

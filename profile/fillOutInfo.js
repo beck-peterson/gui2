@@ -27,8 +27,10 @@ function loadAccount(account, selectedTab = "profile") {
         $(this).append("<ul class=\"nav nav-tabs nav-stacked\"></ul>");
         $("#information #subProfiles ul").each(function() {
             $(this).append("<li id=\"" + person.display.firstName + "\" class=\"col-sm-12\"><a href=\"#\" onclick=\"changeProfile('" + person.display.firstName + "')\">" + person.display.firstName + " " + person.display.lastName + "</a></li>");
-            for (let dog of person.info.get("Dogs").map.values()) {
-                $(this).append("<li id=\"" + dog.display.firstName + "\" class=\"col-sm-10\" onclick=\"changeProfile('" + dog.display.firstName + "')\"><a href=\"#\">" + dog.display.firstName + "</a></li>");
+            if (person.info.get("Dogs") != null) {
+                for (let dog of person.info.get("Dogs").map.values()) {
+                    $(this).append("<li id=\"" + dog.display.firstName + "\" class=\"col-sm-10\" onclick=\"changeProfile('" + dog.display.firstName + "')\"><a href=\"#\">" + dog.display.firstName + "</a></li>");
+                }
             }
         });
 
