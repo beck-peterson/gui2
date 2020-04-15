@@ -17,6 +17,16 @@ loginForm.addEventListener("click", (e) => {
     });
 })
 
+// listen for auth state changes - user logs in/out
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log('user logged in: ', user);
+    console.log(user.uid)
+  } else {
+    console.log('user logged out');
+  }
+});
+
 function signInWithGoogle(){
   var provider = new auth.GoogleAuthProvider();
 

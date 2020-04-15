@@ -1,15 +1,36 @@
 $(document).ready(function() {
+
   const signupForm = document.querySelector('#signup');
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     // get user Info
-    const email = signupForm['email'].value;
-    const password = signupForm['password'].value;
+    var name = signupForm['name'].value;
+    name = name.split(' ');
+    var fName = name[0];
+    var lName = name[1];
+    var email = signupForm['email'].value;
+    var password = signupForm['password'].value;
 
     // sign up the user
     auth.createUserWithEmailAndPassword(email, password).then( cred => {
-      //console.log(cred)
+      console.log(cred.user.uid);
+      db.collection('Person').doc(cred.user.uid).set({
+          PersonDisplay: {
+              firstName: fName,
+              lastName: lName,
+              location: "",
+              middleName: "",
+              organization: "",
+              photo: "",
+              prefix: "",
+              suffix: "",
+              summary: ""
+              },
+          info: "",
+          photos: "",
+          userID: cred.user.uid
+      });
     }).catch(function(error) {
       // Handle Errors here. Password must be > 6 characters
       var errorCode = error.code;
@@ -18,13 +39,18 @@ $(document).ready(function() {
       });
     });
 
-    const logout = document.querySelector("#logout");
-    logout.addEventListener("click", (e) => {
-      e.preventDefault();
-      auth.signOut().then(() => {
-        console.log("user signed out");
-      })
+  const logout = document.querySelector("#logout");
+  logout.addEventListener("click", (e) => {
+    e.preventDefault();
+    auth.signOut().then(() => {
+      console.log("user signed out");
     })
+  })
+
+  // listen for auth state changes - user logs in/out
+  auth.onAuthStateChanged(user => {
+    //console.log(user);
+  })
 
 
 
