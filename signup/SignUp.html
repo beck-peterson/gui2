@@ -18,8 +18,6 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/SignUp.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/SignUp.js"> </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-to">
@@ -44,11 +42,6 @@
                 <a href="../login/LogIn.html" id="login" class="btn btn-primary active">Log In</a>
               </form>
             </li>
-            <li>
-              <form class="navbar-form">
-                <a href="../landing/LandingOut.html" id="logout" class="btn btn-primary active">Log Out</a>
-              </form>
-          </li>
           </ul>
         </div>
       </div>
@@ -60,29 +53,25 @@
       <form id = signup>
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Full Name">
+          <input name = "signUpName" type="text" class="form-control" id="signUpName" placeholder="Full Name">
         </div>
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Email">
+          <input name = "signUpEmail" type="email" class="form-control" id="signUpEmail" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password">
+          <input name = "signUpPassword" type="password" class="form-control" id="signUpPassword" placeholder="Password">
         </div>
-        <div>
+        <div class="form-group">
+          <label for="phone">Mobile Number</label>
+          <input name = "signUpPhone" type="number" class="form-control" id="signUpPhone" placeholder="xxx-xxx-xxxx">
+        </div>
           <button type="submit" class="btn btn-success optional_signup">Sign up</button>
-        </div>
-        <div>
           <button type="button" class="btn btn-primary optional_signup" onclick="signUpWithFacebook()">Sign up with Facebook</button>
-        </div>
-        <div>
           <button type="button" class="btn btn-primary optional_signup" onclick="signUpWithGoogle()">Sign up with Google</button>
-        </div>
       </form>
     </div>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
@@ -104,8 +93,12 @@
       // db.settings({ timestampsInSnapshots: true });
       firebase.analytics();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>
+    <!-- Jquery javascript along with bootstrap's version of javascript -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- JQuery plugin for validation along with the additional methods -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/additional-methods.js"></script>
     <script src="js/SignUp.js"></script>
   </body>
 </html>

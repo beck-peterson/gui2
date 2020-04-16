@@ -21,3 +21,11 @@ body{
 .optional_login{
   margin-top: 15px;
 }
+#loginInfo{
+  color: red;
+  font-size: 16px;
+}
+.error{
+  color: red;
+  font-size: 16px;
+}
