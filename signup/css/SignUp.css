@@ -21,3 +21,17 @@ body{
 .optional_signup{
   margin-top: 15px;
 }
+.error{
+  color: red;
+  font-size: 16px;
+}
+/* Removes the upward arrow and downward arrow from the input field of type number*/
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+/* Same as the selector above but for firefox browser*/
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}

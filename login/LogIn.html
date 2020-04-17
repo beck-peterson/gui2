@@ -18,8 +18,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/LogIn.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/LogIn.js"> </script>
+
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-to">
@@ -55,21 +54,17 @@
       <form id = "login">
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Email">
+          <input name = "signInEmail" type="email" class="form-control" id="signInEmail" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password">
+          <input name = "signInPassword" type="password" class="form-control" id="signInPassword" placeholder="Password">
         </div>
-        <div>
+        <div id = "loginInfo">
+        </div>
           <button type="submit" class="btn btn-success optional_login">Sign In</button>
-        </div>
-        <div>
           <button type="button" class="btn btn-primary optional_login" onclick="signInWithFacebook()">Continue with Facebook</button>
-        </div>
-        <div>
           <button type="button" class="btn btn-primary optional_login" onclick="signInWithGoogle()">Continue with Google</button>
-        </div>
       </form>
     </div>
     <script>
@@ -93,5 +88,12 @@
       // db.settings({ timestampsInSnapshots: true });
       firebase.analytics();
     </script>
+    <!-- Jquery javascript along with bootstrap's version of javascript -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- JQuery plugin for validation along with the additional methods -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/additional-methods.js"></script>
+    <script src="js/LogIn.js"> </script>
   </body>
 </html>
