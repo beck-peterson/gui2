@@ -38,7 +38,7 @@ var dog = new Dog(window.testPerson, dogDisplay, dogPhotos, dogInfo);
 window.testPerson.info.get("Dogs").map.set(dog.display.firstName, dog);
 
 window.testPerson.info.get("Dogs").map.set("Test", new Dog(window.testPerson, new DogDisplay(null, "", "Test")));
-window.testPerson = new Person(new PersonDisplay(null, "", "First"));
+//window.testPerson = new Person(new PersonDisplay(null, "", "First"));
 
 window.loggedInPerson = window.testPerson;
 
@@ -47,11 +47,18 @@ window.loggedInPerson = window.testPerson;
 function Account(display = null, photos = null, info = null, parent = null) {
     this.display = display != null ? display : new Display();
     this.photos = photos != null ? photos : new Array();
+    if (info != null) {
+        this.info = info;
+    } else {
+        this.info = new Map();
+        this.info.set("test", "entry");
+    }
     this.info = info != null ? info : new Map();
     this.parent = parent;
+    this.userID = null;
 }
 
-function Display(photo = null, prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", firstLine = "", secondLine = "", thirdLine = "", fourthLine = "", summary = "") {
+function Display(photo = "", prefix = "", firstName = "", middleName = "", lastName = "", suffix = "", firstLine = "", secondLine = "", thirdLine = "", fourthLine = "", summary = "") {
     this.photo = photo;
     this.prefix = prefix;
     this.firstName = firstName;
