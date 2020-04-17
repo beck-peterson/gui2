@@ -5,7 +5,35 @@
 
 body {
     background: #b6d7a8;
-    font-family: "Tahoma, Geneva, sans-serif";
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    padding-top: 70px;
+}
+
+/* ul that lists site navigation buttons to the navbar.*/
+#navbar_btns {
+    border: 1px solid black;
+}
+
+/* Float navbar buttons to prevent navbar row collapse
+ * when page width is <=768px */
+#navbar_btns, #navbar_btns>li {
+    float: right;
+}
+
+/* Navbar link */
+.navbar_btn {
+    background-color: #b1adad;
+}
+.navbar_btn>span{
+    color:black;
+}
+
+/* Invert navbar button background and text colors when hovered */
+#navbar_btns>li:hover {
+    background-color:black;
+}
+.navbar_btn:hover>span{
+    color:white;
 }
 
 img.img-md-cropped {
