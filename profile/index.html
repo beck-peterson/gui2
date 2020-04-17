@@ -1,75 +1,62 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <title>Template</title>
-  <!-- Bootstrap CSS-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
-    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-  <!-- Global site CSS-->
-  <link rel="stylesheet" href="./css/CanineConnection.css">
-  <!-- JQuery-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- Bootstrap JS-->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-    crossorigin="anonymous"></script>
-    <script src="../js/DataStructures.js"></script>
-    <script src="../profile/fillOutInfo.js"></script>
-</head>
-
-<body>
-  <!-- Top-static navigation bar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile | Canine Connection</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/CanineConnection.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/DataStructures.js"> </script>
+    <script src="../profile/fillOutInfo.js"> </script>
+  </head>
+  <body>
     <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-xs-4 justify-content-start">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="./template.html">CanineConnection</a>
-          </div>
+      <div class="row">
+        <div id="navigation" class="col-sm-12"> <!-- top -->
+          <nav class="navbar navbar-default navbar-fixed-to">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="About_page.html"><b>CanineConnection</b></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <!-- <li><a href="index.html">Home</a></li> -->
+                <!-- <li><a href="#about">About</a></li> -->
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <form class="navbar-form">
+                    <a href="Sign_up.html" class="btn btn-primary active">Sign Up</a>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
-        <div class="col-xs-8">
-          <!--Nav icons listed in order from right to left in navbar;
-            icons floated right to prevent navbar collapse on resize-->
-          <ul class="nav navbar-nav navbar-right" id="site_nav_btns">
-            <li><a class="site_nav_btn" href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
-            <li><a class="site_nav_btn" href="#"><span class="glyphicon glyphicon-user"></span></a></li>
-            <li><a class="site_nav_btn" href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
-            <li><a class="site_nav_btn" href="#"><span class="glyphicon glyphicon-search"></span></a></li>
-          </ul>
-          <!--Authetnication buttons replace nav icons if user is not signed in-->
-          <ul class="nav navbar-nav navbar-right" id="auth_btns">
-            <li><a class="btn btn-primary" href="SignIn.html" >Sign In</a></li>
-            <li><a class="btn btn-primary" href="SignUp.html" >Sign Up</a></li>
-          </ul>
+      </div>
+      <div class="row">
+        <div id="information" class="col-sm-2"> <!-- left -->
+          <div id="subProfiles"><!-- Populated by javascript --></div>
+        </div>
+        <div id="content" class="col-sm-8"> <!-- center, Populated by javascript --></div>
+        <div id="action" class="col-sm-2"> <!-- right -->
+          <button id="profile" class="btn btn-block btn-outline-primary actionButton">Profile</button>
+          <button id="photos" class="btn btn-block btn-primary actionButton">Photos</button>
+          <button id="moreInfo" class="btn btn-block btn-primary actionButton">More Info</button>
+          <button id="settings" class="btn btn-block btn-primary actionButton">Settings</button>
         </div>
       </div>
     </div>
-  </nav>
-  <!--Main content wrapper-->
-  <div class="container-fluid">
-    <div class="row">
-      <div id="information" class="col-sm-2">
-        <!-- left -->
-        <div id="subProfiles">
-          <!-- Populated by javascript -->
-        </div>
-      </div>
-      <div id="content" class="col-sm-8">
-        <!-- center, Populated by javascript -->
-      </div>
-      <div id="action" class="col-sm-2">
-        <!-- right -->
-        <button id="profile" class="btn btn-block btn-outline-primary actionButton">Profile</button>
-        <button id="photos" class="btn btn-block btn-primary actionButton">Photos</button>
-        <button id="moreInfo" class="btn btn-block btn-primary actionButton">More Info</button>
-        <button id="settings" class="btn btn-block btn-primary actionButton">Settings</button>
-      </div>
-    </div>
-  </div>
-</body>
-
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
 </html>
