@@ -1,7 +1,7 @@
 body{
   background-image: url("../images/About.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
 }
 
 #statement{
