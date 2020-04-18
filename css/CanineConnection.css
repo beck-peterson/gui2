@@ -9,30 +9,26 @@ body {
     padding-top: 70px;
 }
 
-/* ul that lists site navigation buttons to the navbar.*/
-#navbar_btns {
-    border: 1px solid black;
-}
-
-/* Float navbar buttons to prevent navbar row collapse
- * when page width is <=768px */
-#navbar_btns, #navbar_btns>li {
+/* ul of navbar navigation pills.
+ * Floating prevents collapse to new flex row when page width is <=768px */
+#navbar_pills {
     float: right;
 }
 
-/* Navbar link */
-.navbar_btn {
+/* Navbar pill link */
+.navbar_pill {
     background-color: #b1adad;
+    border-radius: 4px;
 }
-.navbar_btn>span{
+.navbar_pill>a>.glyphicon {
     color:black;
 }
 
-/* Invert navbar button background and text colors when hovered */
-#navbar_btns>li:hover {
+/* Invert navbar pill colors when hovered */
+.navbar_pill:hover {
     background-color:black;
 }
-.navbar_btn:hover>span{
+.navbar_pill:hover>a>.glyphicon {
     color:white;
 }
 
