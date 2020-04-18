@@ -1,71 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>About | Canine Connection</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./about/css/About.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <script src="./about/js/About.js"> </script>
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html"><b>CanineConnection</b></a>
+
+<head>
+  <meta charset="utf-8">
+  <title>Template</title>
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+  <!-- Global site CSS-->
+  <link rel="stylesheet" href="./css/CanineConnection.css">
+  <!-- About Page CSS-->
+  <link rel="stylesheet" href="./about/css/About.css">
+  <!-- JQuery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap JS-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Top-static navigation bar-->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="./template.html">CanineConnection</a>
+          </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <!-- <li><a href="index.html">Home</a></li> -->
-            <!-- <li><a href="#about">About</a></li> -->
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <form class="navbar-form">
-                <a href="login/LogIn.html" class="btn btn-primary active">Log In</a>
-              </form>
-            </li>
-            <li>
-              <form class="navbar-form">
-                <a href="signup/SignUp.html" class="btn btn-primary active">Sign Up</a>
-              </form>
-            </li>
+        <div class="col-xs-8 navbar-right">
+          <!--Nav icons listed in order from right to left in navbar;
+                      icons floated right to prevent navbar collapse on resize-->
+          <ul class="nav navbar-nav nav-pills" id="navbar_pills">
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
           </ul>
         </div>
-      </div>
-    </nav>
-    <div class ="container" id = "wrapper">
-      <div id = "statement">
-        <p id = "p1">-Our Mission-</p>
-        <p id = "p2">To bring mankind one step closer to dogs</p>
-      </div>
-      <div id = "about">
-        <p>About Our Organization</p>
-      </div>
-      <div id = "content">
-        <p>Untoward and illegitimate breeding operations lure dog owners from proper breeding channels. Puppy mills have led to an abundance in unadopted, ownerless offspring.
-        Canine Connection strives to remove mystery from the breeding process by requiring necessary information of a purchased or partnered dog.
-        By revealing the reputations of the owner/breeder as evaluated by previous clients, we can create a transparent community between owner and breeder.
-        By requiring pedigree, age, health and other fields impactful to litter. It will be made transparent to users browsing for the next parent of the newest member of the family.
-        <br><br>
-        What's the problem right now?<br>
-        Breeders are lacking legitimate documentation that promotes health risks and unanticipated breed mixing. Our own experiences in breeding have revealed the absence of a consolidated portal to answer such concerns.  , pressuring owners to travel to prospective breeders before a deal is broken. Our mission with Canine Connection is to reduce puppy farm business and the lack of transparency social media marketplaces facilitate for illegitimate breeders. By offering a straightforward
-        breeding experience we will slowly erase the inhumane puppy mill operations and misleading marketplace offers.
-        <br><br>
-        What's special about Canine Connection?<br>
-        Existing, similar services focus are concerned with listing dog profiles from stores and shelters - Petfinder.com, GetPet, etc. Others focus solely on showcasing professional breeders and their businesses - Gespet, Perfect Dog, etc. Canine connection is an intersection of both types of services.
-        </p>
       </div>
     </div>
-  </body>
+  </nav>
+  <!--Main content wrapper-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3">
+        <div class="jumbotron">
+          <h1>-Our Mission-</h1>
+          <p>To bring mankind one step closer to dogs</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+        <div class="info_section">
+          <h2>About Our Organization</h2>
+          <p>Untoward and illegitimate breeding operations lure dog owners from proper breeding channels. Puppy mills
+            have
+            led
+            to an abundance in unadopted, ownerless offspring.
+            Canine Connection strives to remove mystery from the breeding process by requiring necessary information of
+            a
+            purchased or partnered dog.
+            By revealing the reputations of the owner/breeder as evaluated by previous clients, we can create a
+            transparent
+            community between owner and breeder.
+            By requiring pedigree, age, health and other fields impactful to litter. It will be made transparent to
+            users
+            browsing for the next parent of the newest member of the family.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+        <div class="info_section">
+          <h2>What's the problem right now?</h2>
+          <p>
+            Breeders are lacking legitimate documentation that promotes health risks and unanticipated breed mixing. Our
+            own
+            experiences in breeding have revealed the absence of a consolidated portal to answer such concerns. ,
+            pressuring
+            owners to travel to prospective breeders before a deal is broken. Our mission with Canine Connection is to
+            reduce
+            puppy farm business and the lack of transparency social media marketplaces facilitate for illegitimate
+            breeders.
+            By offering a straightforward
+            breeding experience we will slowly erase the inhumane puppy mill operations and misleading marketplace
+            offers.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+        <div class="info_section">
+          <h2>What's special about Canine Connection?</h2>
+          <p>
+            Existing, similar services focus are concerned with listing dog profiles from stores and shelters -
+            Petfinder.com,
+            GetPet, etc. Others focus solely on showcasing professional breeders and their businesses - Gespet, Perfect
+            Dog,
+            etc. Canine connection is an intersection of both types of services.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
