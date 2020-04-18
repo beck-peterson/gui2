@@ -18,19 +18,54 @@ $(document).ready(function() {
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
         console.log(cred.user.uid);
         db.collection('Person').doc(cred.user.uid).set({
-            PersonDisplay: {
+            display: {
+                photo: null,
                 firstName: fName,
-                lastName: lName,
-                location: "",
                 middleName: "",
-                organization: "",
-                photo: "",
-                prefix: "",
-                suffix: "",
+                lastName: lName,
+                age: "",
                 summary: ""
                 },
-            info: "",
-            photos: "",
+            photos: [],
+            info: {
+                "Posts": {
+                    title: "Posts",
+                    visibility: "private",
+                    map: {},
+                    array: []
+                },
+                "Dogs": {
+                    title: "Dogs",
+                    visibility: "private",
+                    map: {}
+                },
+                "Contact": {
+                    title: "Contact",
+                    visibility: "protected",
+                    map: {
+                        "Email": email,
+                        "Phone": ""
+                    }
+                },
+                "Address": {
+                    title: "Address",
+                    visibility: "protected",
+                    map: {
+                        "Address": "",
+                        "City": "",
+                        "State": "",
+                        "Zip": ""
+                    }
+                },
+                "Organization": {
+                    title: "Organization",
+                    visibility: "public",
+                    map: {
+                        "Organization": ""
+                    }
+                }
+            },
+            parent: null,
             userID: cred.user.uid
         });
       }).catch(function(error) {
