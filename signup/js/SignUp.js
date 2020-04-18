@@ -86,6 +86,7 @@ $(document).ready(function() {
 
   // listen for auth state changes - user logs in/out
   auth.onAuthStateChanged(user => {
+      window.location.href = (window.location + "").replace(/signup\/SignUp.html.*$/, "profile/index.html");
     //console.log(user);
   })
 
