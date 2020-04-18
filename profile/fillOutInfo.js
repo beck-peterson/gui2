@@ -52,7 +52,7 @@ $(document).ready(function() {
 });
 
 // This function can accept person or dog accounts
-function loadAccount(person, account, selectedTab = 'profile') {
+function loadAccount(person = window.currentPerson, account = window.currentAccount, selectedTab = window.currentTab) {
     window.currentPerson = person;
     window.currentAccount = account;
     window.currentTab = selectedTab;
@@ -67,20 +67,21 @@ function loadAccount(person, account, selectedTab = 'profile') {
     $('#information #subProfiles').each(function() {
         $(this).append('<ul class="nav nav-tabs nav-stacked"></ul>');
         $('#information #subProfiles ul').each(function() {
-            $(this).append('<li id="' + person.info['Display'].map['First_Name'] + '" class="col-sm-12"><a href="#" onclick="changeProfile(\'' + person.info['Display'].map['First_Name'] + '\')">' + person.info['Display'].map['First_Name'] + ' ' + person.info['Display'].map['Last_Name'] + '</a></li>');
+            $(this).append('<li id="' + person.uid + '" class="col-sm-12"><a href="#" onclick="changeProfile(\'' + person.uid + '\')">' + person.info['Display'].map['First_Name'] + ' ' + person.info['Display'].map['Last_Name'] + '</a></li>');
             if (person.info['Dogs'] != null) {
                 for (i in person.info['Dogs'].map) {
                     var dog = person.info['Dogs'].map[i];
-                    $(this).append('<li id="' + dog.info['Display'].map['First_Name'] + '" class="col-sm-10"><a href="#" onclick="changeProfile(\'' + dog.info['Display'].map['First_Name'] + '\')">' + dog.info['Display'].map['First_Name'] + '</a></li>');
+                    $(this).append('<li id="' + dog.uid + '" class="col-sm-10"><a href="#" onclick="changeProfile(\'' + dog.uid + '\')">' + dog.info['Display'].map['First_Name'] + '</a></li>');
                 }
             }
         });
 
     });
-    $('#information #subProfiles ul #' + account.info['Display'].map['First_Name']).addClass('active');
+    $('#information #subProfiles ul #' + account.uid).addClass('active');
     $('#information').append('<button id="addDog" class="btn btn-block btn-primary">Add Dog</button>');
     $('#information #addDog').click(function() {
-        person.info['Dogs'].map['new'] = {
+        var uid = generateUUID();
+        person.info['Dogs'].map[uid] = {
             photos: [],
             info: {
                 "Display": {
@@ -136,9 +137,11 @@ function loadAccount(person, account, selectedTab = 'profile') {
                     array: []
                 }
             },
-            isHuman: false
+            isHuman: false,
+            uid: uid
         };
-        window.db.collection('Person').doc(person.userID).set(JSON.parse('{"info": {"Dogs": {"map": {"new": ' + JSON.stringify(person.info['Dogs'].map['new']) + '}}}}'), { merge: true });
+        window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"map": {"' + uid + '": ' + JSON.stringify(person.info['Dogs'].map[uid]) + '}}}}'), { merge: true });
+        loadAccount();
     });
 
     // Action
@@ -177,9 +180,9 @@ function loadAccount(person, account, selectedTab = 'profile') {
                         $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3">' + window.loggedInPerson.info['Display'].map['First_Name'] + ' ' + window.loggedInPerson.info['Display'].map['Last_Name'] + '</div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
                         var wall = account.info['Posts'].array;
                         wall.unshift(JSON.parse('{"poster": "' + window.loggedInPerson.info['Display'].map['First_Name'] + ' ' + window.loggedInPerson.info['Display'].map['Last_Name'] + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
-                        var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"map": {"' + account.info['Display'].map['First_Name'] + '": ') + '{"info": {"Posts": {"array": ' + JSON.stringify(wall) + '}}}' + (account.isHuman ? '' : '}}}}'));
+                        var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"map": {"' + account.uid + '": ') + '{"info": {"Posts": {"array": ' + JSON.stringify(wall) + '}}}' + (account.isHuman ? '' : '}}}}'));
                         $('#content #comment textarea').val('');
-                        window.db.collection('Person').doc(person.userID).set(update, { merge: true });
+                        window.db.collection('Person').doc(person.uid).set(update, { merge: true });
                     });
                 });
                 $(this).append('<div id="wall"></div>');
@@ -267,9 +270,10 @@ function loadAccount(person, account, selectedTab = 'profile') {
                         });
                         updatedEntries = updatedEntries.replace(/, $/, '');
                         if (updatedEntries != '') {
-                            var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"map": {"' + account.info['Display'].map['First_Name'] + '": ') + '{"info": {' + updatedEntries + '}}' + (account.isHuman ? '' : '}}}}'));
-                            window.db.collection('Person').doc(person.userID).set(update, { merge: true });
+                            var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"map": {"' + account.uid + '": ') + '{"info": {' + updatedEntries + '}}' + (account.isHuman ? '' : '}}}}'));
+                            window.db.collection('Person').doc(person.uid).set(update, { merge: true });
                         }
+                        loadAccount();
                     });
                 }
                 break;
@@ -277,7 +281,14 @@ function loadAccount(person, account, selectedTab = 'profile') {
     });
 }
 
-function changeProfile(name) {
-    var account = window.currentPerson.info['Display'].map['First_Name'] == name ? window.currentPerson : window.currentPerson.info['Dogs'].map[name];
+function changeProfile(uid) {
+    var account = window.currentPerson.uid == uid ? window.currentPerson : window.currentPerson.info['Dogs'].map[uid];
     loadAccount(window.currentPerson, account, window.currentTab);
+}
+
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }

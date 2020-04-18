@@ -71,7 +71,7 @@ $(document).ready(function() {
                 }
             },
             isHuman: true,
-            userID: cred.user.uid
+            uid: cred.user.uid
         });
       }).catch(function(error) {
         // Handle Errors here. Password must be > 6 characters
