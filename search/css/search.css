@@ -1,26 +1,12 @@
-body {
+#search_row{
+    margin-top: -24px;
     background: #93c47d;
 }
-
-#search_pane {
-    border: solid black 2px;
+#search_field_form {
+    padding-top: 16px;
+}
+.search_field_group {
 }
 
-#results_pane {
+#results_row {
 }
-
-
-#dog_fields {
-}
-
-#location_fields {
-    
-}
-#owner_fields {
-
-}
-
-#results_pane {
-    background: #b6d7a8;
-}
-
