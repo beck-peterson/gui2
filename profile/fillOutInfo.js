@@ -177,14 +177,34 @@ function loadAccount(account, selectedTab = "profile") {
                         });
                     }
                 }
+                $("#content .panel .panel-body .form-group div input").each(function() {
+                    $(this).on("input", function() {
+                        $(this).addClass("edited");
+                    });
+                });
                 if (!hasSettings) {
                     $(this).append("<div id=\"warning\" class=\"panel panel-secondary\"></div>");
                     $("#content #warning").append("<div class=\"panel-body\">This account doesn't have settings available.</div>");
                 } else {
                     $(this).append("<div class=\"col-sm-2\"><button id=\"save\" class=\"btn btn-block btn-primary\">Save</button></div>");
                     $("#save").click(function() {
-                        var update = JSON.parse('{"info": {"Organization": {"map":{"Organization": "Waffle"}}}}');
-                        window.db.collection("Person").doc(person.userID).set(update, { merge: true });
+                        var updatedEntries = "";
+                        $("#content .panel").each(function() {
+                            var info = $(this).attr("id");
+                            updatedEntries += '"' + info + '": {"map": {';
+                            $("#content #" + info + " .panel-body .form-group").each(function() {
+                                var key = $(this).attr("id");
+                                $("#content #" + info + " .panel-body #" + key + " div .edited").each(function() {
+                                    updatedEntries += '"' + key + '": "' + $(this).val() + '", ';
+                                });
+                            });
+                            updatedEntries = updatedEntries.replace(/, $/, "}}, ").replace(/"[^"]+": {"map": {$/, "");
+                        });
+                        updatedEntries = updatedEntries.replace(/, $/, "");
+                        if (updatedEntries != "") {
+                            var update = JSON.parse((account.paarent == null ? '' : '{"info": {"Dogs": {"map": {"' + account.display.firstName + '": ') + '{"info": {' + updatedEntries + '}}');
+                            window.db.collection("Person").doc(person.userID).set(update, { merge: true });
+                        }
                     });
                 }
                 break;

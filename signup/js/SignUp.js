@@ -13,6 +13,7 @@ $(document).ready(function() {
       var lName = name[1];
       var email = signupForm['signUpEmail'].value;
       var password = signupForm['signUpPassword'].value;
+      var phone = signupForm['signUpPhone'].value;
 
       // sign up the user
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
@@ -44,7 +45,7 @@ $(document).ready(function() {
                     visibility: "protected",
                     map: {
                         "Email": email,
-                        "Phone": ""
+                        "Phone": phone
                     }
                 },
                 "Address": {
