@@ -19,16 +19,20 @@ $(document).ready(function() {
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
         console.log(cred.user.uid);
         db.collection('Person').doc(cred.user.uid).set({
-            display: {
-                photo: null,
-                firstName: fName,
-                middleName: "",
-                lastName: lName,
-                age: "",
-                summary: ""
-                },
             photos: [],
             info: {
+                "Display": {
+                    title: "Display",
+                    visibility: "protected",
+                    map: {
+                        "Photo_URL": "",
+                        "First_Name": fName,
+                        "Middle_Name": "",
+                        "Last_Name": lName,
+                        "Age": "",
+                        "Summary": ""
+                    }
+                },
                 "Posts": {
                     title: "Posts",
                     visibility: "private",
