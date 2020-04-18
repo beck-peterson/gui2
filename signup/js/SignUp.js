@@ -70,7 +70,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            parent: null,
+            isHuman: true,
             userID: cred.user.uid
         });
       }).catch(function(error) {
