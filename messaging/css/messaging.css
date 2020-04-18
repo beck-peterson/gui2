@@ -1,263 +1,201 @@
-body {background-color: coral;}
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-.container{
-    max-width:900px;
+ html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-.inbox_people {
-	background: #8FBC8F;
-	float: left;
-	overflow: hidden;
-	width: 30%;
-	border-right: 1px solid #ddd;
+main, #messages-card {
+  height: 100%;
+  padding-bottom: 0;
 }
-
-.inbox_msg {
-	border: 1px solid #ddd;
-	clear: both;
-	overflow: hidden;
+#messages-card-container {
+  height: calc(100% - 35px);
+  padding-bottom: 0;
 }
-
-.top_spac {
-	margin: 20px 0 0;
+#messages-card {
+  margin-top: 15px;
 }
-
-.conversations_heading {
-	float: left;
-	width: 40%;
+.mdl-layout__header-row span {
+  margin-left: 15px;
+  margin-top: 17px;
 }
-
-.srch_bar {
-	display: inline-block;
-	text-align: right;
-	width: 60%;
-	padding:
+.mdl-grid {
+  max-width: 1024px;
+  margin: auto;
 }
-
-.headind_srch {
-	padding: 10px 29px 10px 20px;
-	overflow: hidden;
-	border-bottom: 1px solid #c4c4c4;
+.material-icons {
+  font-size: 36px;
+  top: 8px;
+  position: relative;
 }
-
-.conversations_heading h4 {
-	color: black;
-    font-size: 16px;
-    margin: auto;
-    line-height: 29px;
+.mdl-layout__header-row {
+  padding: 0;
+  margin: 0 auto;
 }
-
-.srch_bar input {
-	outline: none;
-	border: 1px solid #cdcdcd;
-	border-width: 0 0 1px 0;
-	width: 80%;
-	padding: 2px 0 4px 6px;
-	background: white;
+.mdl-card__supporting-text {
+  width: auto;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
-
-.srch_bar .input-group-addon button {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	border: medium none;
-	padding: 0;
-	color: #707070;
-	font-size: 18px;
+#messages {
+  overflow-y: auto;
+  margin-bottom: 10px;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
 }
-
-.srch_bar .input-group-addon {
-	margin: 0 0 0 -27px;
+#message-filler {
+  flex-grow: 1;
 }
-
-.chat_ib h5 {
-	font-size: 15px;
-	color: #464646;
-	margin: 0 0 8px 0;
+.message-container:first-of-type {
+  border-top-width: 0;
 }
-
-.chat_ib h5 span {
-	font-size: 13px;
-	float: right;
+.message-container {
+  display: block;
+  margin-top: 10px;
+  border-top: 1px solid #f3f3f3;
+  padding-top: 10px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
-
-.chat_ib p {
-    font-size: 12px;
-    color: #989898;
-    margin: auto;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.message-container.visible {
+  opacity: 1;
 }
-
-.chat_img {
-	float: left;
-	width: 11%;
+.message-container .pic {
+  background-image: url('/images/profile_placeholder.png');
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  border-radius: 20px;
 }
-
-.chat_img img {
-	width: 100%
+.message-container .spacing {
+  display: table-cell;
+  vertical-align: top;
 }
-
-.chat_ib {
-	float: left;
-	padding: 0 0 0 15px;
-	width: 88%;
+.message-container .message {
+  display: table-cell;
+  width: calc(100% - 40px);
+  padding: 5px 0 5px 10px;
 }
-
-.chat_people {
-	overflow: hidden;
-	clear: both;
+.message-container .name {
+  display: inline-block;
+  width: 100%;
+  padding-left: 40px;
+  color: #bbb;
+  font-style: italic;
+  font-size: 12px;
+  box-sizing: border-box;
 }
-
-.chat_list {
-	border-bottom: 1px solid #ddd;
-	margin: 0;
-	padding: 18px 16px 10px;
+#message-form {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 48px);
+  float: left;
 }
-
-.inbox_chat {
-	height: 550px;
-	overflow-y: scroll;
+#image-form {
+  display: flex;
+  flex-direction: row;
+  width: 48px;
+  float: right;
 }
-
-.active_chat {
-	background: #e8f6ff;
+#message-form .mdl-textfield {
+  width: calc(100% - 100px);
 }
-
-.incoming_msg_img {
-	display: inline-block;
-	width: 6%;
+#message-form button, #image-form button {
+  width: 100px;
+  margin: 15px 0 0 10px;
 }
-
-.incoming_msg_img img {
-	width: 100%;
+.mdl-card {
+  min-height: 0;
 }
-
-.received_msg {
-	display: inline-block;
-	padding: 0 0 0 10px;
-	vertical-align: top;
-	width: 92%;
+.mdl-card {
+  background: linear-gradient(white, #f9f9f9);
+  justify-content: space-between;
 }
-
-.received_withd_msg p {
-	background: #ebebeb none repeat scroll 0 0;
-	border-radius: 0 15px 15px 15px;
-	color: #646464;
-	font-size: 14px;
-	margin: 0;
-	padding: 5px 10px 5px 12px;
-	width: 100%;
-}
-
-.time_date {
-	color: #747474;
-	display: block;
-	font-size: 12px;
-	margin: 8px 0 0;
-}
-
-.received_withd_msg {
-	width: 57%;
-}
-
-.mesgs{
-	float: left;
-	padding: 30px 15px 5px 25px;
-	width:58%;
-  background-color: #8FBC8F;
-}
-
-.sent_msg p {
-	background:#0465ac;
-	border-radius: 12px 15px 15px 0;
-	font-size: 14px;
-	margin: 0;
-	color: #fff;
-	padding: 5px 10px 5px 12px;
-	width: 100%;
-}
-
-.outgoing_msg {
-	overflow: hidden;
-	margin: 26px 0 26px;
-}
-
-.sent_msg {
-	float: right;
-	width: 46%;
-}
-
-.input_msg_write input {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	border: medium none;
-	color: #4c4c4c;
-	font-size: 15px;
-	min-height: 48px;
-	width: 100%;
-	outline:none;
-}
-
-.type_msg {
-	border: 1px solid black;
-	position: relative;
-  background-color: white;
-
-}
-
-.msg_send_btn {
-	background: #05728f none repeat scroll 0 0;
-	border:none;
-	border-radius: 50%;
-	color: #fff;
-	cursor: pointer;
-	font-size: 15px;
-	height: 33px;
-	position: absolute;
-	right: 10px;
-	top: 11px;
-	width: 33px;
-}
-
-.messaging {
-	padding-bottom: 40px;
-}
-
-.msg_history {
-	height: 516px;
-	overflow-y: auto;
-}
-
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-  height: 550px;
-  width: 160px;
-  position: fixed;
-  top: 0;
+#user-container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 22px;
+  width: 100%;
   right: 0;
-  background-color: #8FBC8F;
-  padding-top: 20px;
+  padding-left: 10px;
+  justify-content: flex-end;
+  padding-right: 10px;
 }
-
-
-
-.btn-group button {
-  background-color: #D3D3D3; /* Green background */
-  border: 1px solid black; /* Green border */
-  color: black; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  width: 90%; /* Set a width if needed */
-  display: block; /* Make the buttons appear below each other */
+#user-container #user-pic {
+  top: -3px;
+  position: relative;
+  display: inline-block;
+  background-image: url('/images/profile_placeholder.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  border-radius: 20px;
 }
-
-.btn-group button:not(:last-child) {
-  border-bottom: none; /* Prevent double borders */
+#user-container #user-name {
+  font-size: 16px;
+  line-height: 36px;
+  padding-right: 10px;
+  padding-left: 20px;
 }
-
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
+#image-form #submitImage {
+  width: auto;
+  padding: 0 6px 0 1px;
+  min-width: 0;
+}
+#image-form #submitImage .material-icons {
+  top: -1px;
+}
+.message img {
+  max-width: 300px;
+  max-height: 200px;
+}
+#mediaCapture {
+  display: none;
+}
+@media screen and (max-width: 610px) {
+  header {
+    height: 113px;
+    padding-bottom: 80px !important;
+  }
+  #user-container {
+    top: 72px;
+    background-color: rgb(3,155,229);
+    height: 38px;
+    padding-top: 3px;
+    padding-right: 2px;
+  }
+  #user-container #user-pic {
+    top: 2px;
+    width: 33px;
+    height: 33px;
+    background-size: 33px;
+  }
+}
+.mdl-textfield__label:after {
+  background-color: #0288D1;
+}
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+  color: #0288D1;
+}
+.mdl-button .material-icons {
+  top: -1px;
+  margin-right: 5px;
 }
