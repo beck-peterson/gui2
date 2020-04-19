@@ -1,103 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
 
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Log In | Canine Connection</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+  <!-- Global site CSS-->
+  <link rel="stylesheet" href="../css/CanineConnection.css">
+  <!-- LogIn CSS-->
+  <link rel="stylesheet" href="css/LogIn.css">
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+  <!-- JQuery-->
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+  <!-- JQuery plugin for validation along with the additional methods-->
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/additional-methods.js"></script>
 
-    <title>Log In | Canine Connection</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/LogIn.css">
+  <!-- Bootstrap JS-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-to">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="../index.html"><b>CanineConnection</b></a>
+  <!-- Firebase SDK-->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+  <!-- Firebase Analytics SDK-->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+  <!-- Firebase Auth -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+  <!-- Firestore-->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+  
+  <!-- Initalize Firebase for Navbar authentication check-->
+  <script src="../js/FirebaseInitialize.js"></script>
+  <!-- Navbar JS-->
+  <script src="../js/Navbar.js"></script>
+</head>
+
+<body>
+  <!-- Top-static navigation bar-->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="./template.html">CanineConnection</a>
+          </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <!-- <li><a href="index.html">Home</a></li> -->
-            <!-- <li><a href="#about">About</a></li> -->
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <form class="navbar-form">
-                <a href="../signup/SignUp.html" class="btn btn-primary active">Sign Up</a>
-              </form>
-            </li>
+        <div class="col-xs-8 navbar-right">
+          <!--Nav icons listed in order from right to left in navbar;
+                        icons floated right to prevent navbar collapse on resize-->
+          <ul class="nav navbar-nav nav-pills" id="navbar_pills">
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
+            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
           </ul>
         </div>
       </div>
-    </nav>
-    <div class ="container" id = "content">
-      <div id = "welcome">
-        <p>Log in to your Account</p>
-      </div>
-      <form id = "login">
-        <div class="row">
-          <div class="form-group col-lg-5">
-            <label for="email">Email address</label>
-            <input name = "signInEmail" type="email" class="form-control" id="signInEmail" placeholder="Email">
-          </div>
-        </div>
-        <div class ="row">
-          <div class="form-group col-lg-5">
-            <label for="password">Password</label>
-            <input name = "signInPassword" type="password" class="form-control" id="signInPassword" placeholder="Password">
-          </div>
-        </div>
-        <div id = "loginInfo">
-        </div>
-          <button type="submit" class="btn btn-success optional_login">Sign In</button>
-          <button type="button" class="btn btn-primary optional_login" onclick="signInWithFacebook()">Continue with Facebook</button>
-          <button type="button" class="btn btn-primary optional_login" onclick="signInWithGoogle()">Continue with Google</button>
-      </form>
     </div>
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY",
-        authDomain: "canine-connection-b2414.firebaseapp.com",
-        databaseURL: "https://canine-connection-b2414.firebaseio.com",
-        projectId: "canine-connection-b2414",
-        storageBucket: "canine-connection-b2414.appspot.com",
-        messagingSenderId: "841972379358",
-        appId: "1:841972379358:web:1653668eee22a73bc95c4f",
-        measurementId: "G-QYRPTG50Z3"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      // global for easy access to db
-      const db = firebase.firestore();
+  </nav>
+  <div class="container" id="content">
+    <div id="welcome">
+      <p>Log in to your Account</p>
+    </div>
+    <form id="login">
+      <div class="row">
+        <div class="form-group col-lg-5">
+          <label for="email">Email address</label>
+          <input name="signInEmail" type="email" class="form-control" id="signInEmail" placeholder="Email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-lg-5">
+          <label for="password">Password</label>
+          <input name="signInPassword" type="password" class="form-control" id="signInPassword" placeholder="Password">
+        </div>
+      </div>
+      <div id="loginInfo">
+      </div>
+      <button type="submit" class="btn btn-success optional_login">Sign In</button>
+      <button type="button" class="btn btn-primary optional_login" onclick="signInWithFacebook()">Continue with
+        Facebook</button>
+      <button type="button" class="btn btn-primary optional_login" onclick="signInWithGoogle()">Continue with
+        Google</button>
+    </form>
+  </div>
+  <script>
+    // global for easy access to db
+    const db = firebase.firestore();
 
-      const auth = firebase.auth();
-      // db.settings({ timestampsInSnapshots: true });
-      firebase.analytics();
-    </script>
-    <!-- Jquery javascript along with bootstrap's version of javascript -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- JQuery plugin for validation along with the additional methods -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/additional-methods.js"></script>
-    <script src="js/LogIn.js"> </script>
-  </body>
+    const auth = firebase.auth();
+    // db.settings({ timestampsInSnapshots: true });
+    firebase.analytics();
+  </script>
+  <!-- Login page JS-->
+  <script src="js/LogIn.js"></script>
+</body>
+
 </html>
