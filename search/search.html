@@ -29,11 +29,13 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
     <!-- Search JS-->
     <script src="./js/search.js"></script>
+    <!-- Navbar JS-->
+    <script src="../js/Navbar.js"></script>
 </head>
 
 <body>
     <!-- Top-static navigation bar-->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top id=site_navbar">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4">
@@ -95,9 +97,9 @@
                                 </div>
                             </div>
                             <!-- Dog heritage input-->
-                            <div class="form-group col-xs-12">
+                            <div class="form-group col-xs-8">
                                 <label for="heritage_input">Heritage</label>
-                                <div class="input-group">
+                                <div class="input-group" id="heritage_input_group">
                                     <!-- Selecting a breed in dropdown appends that breed to text input-->
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-secondary dropdown-toggle"
@@ -112,7 +114,7 @@
                                 </div>
                             </div>
                             <!-- Dog listing purpose checkboxes-->
-                            <div class="form-group col-xs-12">
+                            <div class="form-group col-xs-4">
                                 <label for="breeding_checkbox">Availability</label></br>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" id="breeding_checkbox">Breeding
