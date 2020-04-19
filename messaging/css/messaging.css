@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+ body {
+     background: #b6d7a8;
+     font-family: "Tahoma", "Geneva", "sans-serif";
+     padding-top: 70px;
+ }
+
  html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
@@ -82,6 +88,7 @@ main, #messages-card {
   height: 30px;
   background-size: 30px;
   border-radius: 20px;
+
 }
 .message-container .spacing {
   display: table-cell;
@@ -122,6 +129,7 @@ main, #messages-card {
 }
 .mdl-card {
   min-height: 0;
+  margin: auto;
 }
 .mdl-card {
   background: linear-gradient(white, #f9f9f9);
