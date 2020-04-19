@@ -267,7 +267,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 break;
             case 'photos':
                 for (i in account.photos) {
-                    var photo = account.photos[i].value;
+                    var photo = account.photos[i];
                     $(this).append('<img src="' + photo + '" class="img-thumbnail img-lg-cropped">');
                 }
                 break;
