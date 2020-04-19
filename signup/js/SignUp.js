@@ -132,7 +132,7 @@ $(document).ready(function() {
                     order: i++
                 }
             },
-            isHuman: true,
+            owner: null,
             uid: cred.user.uid
         });
       }).catch(function(error) {

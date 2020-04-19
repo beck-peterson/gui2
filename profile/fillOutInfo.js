@@ -205,11 +205,12 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         order: i++
                     }
                 },
-                isHuman: false,
+                owner: person.uid,
                 uid: uid
             },
             order: Object.getOwnPropertyNames(person.info['Dogs'].value.map).length
         };
+        window.db.collection('Dog').doc(uid).set(person.info['Dogs'].value.map[uid].value);
         window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + uid + '": {"value": ' + JSON.stringify(person.info['Dogs'].value.map[uid].value) + '}}}}}}'), { merge: true });
         loadAccount(person, person.info['Dogs'].value.map[uid].value, "settings");
     });
@@ -229,7 +230,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 $('#content #displayInfo').each(function() {
                     var photo = account.info['Display'].value.map['Photo_URL'].value != '' ? account.info['Display'].value.map['Photo_URL'].value : 'https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png';
                     $(this).append('<div id="photo" style="float:left"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
-                    if (account.isHuman) {
+                    if (account.owner == null) {
                         $(this).append('<div id="firstLine">' + account.info['Display'].value.map['First_Name'].value + ' ' + account.info['Display'].value.map['Last_Name'].value + '</div>');
                         $(this).append('<div id="secondLine">' + account.info['Display'].value.map['Age'].value + '</div>');
                         $(this).append('<div id="thirdLine">' + account.info['Address'].value.map['City'].value + ', ' + account.info['Address'].value.map['State'].value + '</div>');
@@ -250,7 +251,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3">' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '</div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
                         var wall = account.info['Posts'].value.array;
                         wall.unshift(JSON.parse('{"poster": "' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
-                        var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {"Posts": {"value": {"array": ' + JSON.stringify(wall) + '}}}}' + (account.isHuman ? '' : '}}}}}}'));
+                        var update = JSON.parse((account.owner == null ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {"Posts": {"value": {"array": ' + JSON.stringify(wall) + '}}}}' + (account.owner == null ? '' : '}}}}}}'));
                         $('#content #comment textarea').val('');
                         console.log(update);
                         console.log(wall);
@@ -342,9 +343,18 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         });
                         updatedEntries = updatedEntries.replace(/, $/, '');
                         if (updatedEntries != '') {
-                            var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {' + updatedEntries + '}}' + (account.isHuman ? '' : '}}}}}}'));
-                            console.log(JSON.stringify(update));
-                            window.db.collection('Person').doc(person.uid).set(update, { merge: true });
+                            if (account.owner == null) {
+                                var update = JSON.parse('{"info": {' + updatedEntries + '}}');
+                                console.log(JSON.stringify(update));
+                                window.db.collection('Person').doc(account.uid).set(update, { merge: true });
+                            } else {
+                                var update = JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": {"info": {' + updatedEntries + '}}}}}}}}');
+                                console.log(JSON.stringify(update));
+                                window.db.collection('Person').doc(account.uid).set(update, { merge: true });
+                                var update = JSON.parse('{"info": {' + updatedEntries + '}}');
+                                console.log(JSON.stringify(update));
+                                window.db.collection('Dog').doc(account.uid).set(update, { merge: true });
+                            }
                         }
                         loadAccount();
                     });
