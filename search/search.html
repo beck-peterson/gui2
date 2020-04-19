@@ -19,6 +19,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
+    <!-- Firebase SDK-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <!-- Firebase Analytics SDK-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+    <!-- Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <!-- Firestore-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <!-- Search JS-->
+    <script src="./js/search.js"></script>
 </head>
 
 <body>
@@ -129,6 +139,7 @@
                                     <label for="state_select">State</label>
                                     <!-- TO-DO: Populate list with states-->
                                     <select class="form-control" id="state_select">
+                                        <option>-</option>
                                     </select>
                                 </div>
                                 <!-- Zip input-->
@@ -137,7 +148,7 @@
                                     <input type="text" class="form-control" id="zip_input" placeholder="Zip">
                                 </div>
                             </div>
-                            <label for="name_input_row">Name</label>
+                            <label for="name_input_row">Owner Name</label>
                             <div class="row" id="name_input_row">
                                 <!-- Owner name input-->
                                 <div class="form-group col-xs-6">
@@ -156,7 +167,9 @@
                         </div>
                     </div>
                     <div class="row">
-
+                        <div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">
+                            <button type="submit" id="search_submit_btn" class="btn btn-primary btn-block">Search</button>
+                        </div>
                     </div>
                 </form>
             </div>
