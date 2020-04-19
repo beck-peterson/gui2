@@ -20,6 +20,8 @@ loginForm.addEventListener("submit", (e) => {
       // Handle Errors here. Password must be > 6 characters
       var errorCode = error.code;
       var errorMessage = error.message;
+      console.log(errorCode)
+      console.log(errorMessage)
       element.innerHTML = "[Email Address or Password is incorrect]";
       });
   }else{
@@ -53,6 +55,8 @@ function signInWithGoogle(){
     alert("log in unsuccessful");
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
     // The email of the user's account used.
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.
@@ -77,6 +81,8 @@ function signInWithFacebook(){
     alert("log in unsuccesful");
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
     // The email of the user's account used.
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.

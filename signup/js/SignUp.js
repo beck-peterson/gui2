@@ -170,6 +170,8 @@ function signUpWithGoogle(){
     alert("sign up unsuccessful")
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
     // The email of the user's account used.
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.
@@ -193,6 +195,8 @@ function signUpWithFacebook(){
     alert("sign up unsuccessful")
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
     // The email of the user's account used.
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.
