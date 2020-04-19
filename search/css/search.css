@@ -10,3 +10,13 @@
 
 #results_row {
 }
+
+.search_field_err {
+    float: left;
+    height: 0px;
+    color: #be4a4a;
+}
+
+.form-group{
+    margin-bottom: 24px;
+}
