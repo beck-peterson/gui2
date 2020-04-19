@@ -78,7 +78,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
 
     });
     $('#information #subProfiles ul #' + account.uid).addClass('active');
-    $('#information').append('<button id="addDog" class="btn btn-block btn-primary">Add Dog</button>');
+    $('#information').append('<div class="col-sm-12"><button id="addDog" class="btn btn-block btn-primary" style="width:2.5em">+</button></div>');
     $('#information #addDog').click(function() {
         var uid = generateUUID();
         person.info['Dogs'].map[uid] = {
@@ -89,9 +89,9 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     visibility: "protected",
                     map: {
                         "Photo_URL": "",
-                        "First_Name": "new",
+                        "First_Name": "",
                         "Middle_Name": "",
-                        "Last_Name": "dog",
+                        "Last_Name": "",
                         "Age": "",
                         "Summary": ""
                     }
@@ -141,7 +141,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
             uid: uid
         };
         window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"map": {"' + uid + '": ' + JSON.stringify(person.info['Dogs'].map[uid]) + '}}}}'), { merge: true });
-        loadAccount();
+        loadAccount(person, person.info['Dogs'].map[uid], "settings");
     });
 
     // Action
