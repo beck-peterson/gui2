@@ -348,9 +348,9 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                                 console.log(JSON.stringify(update));
                                 window.db.collection('Person').doc(account.uid).set(update, { merge: true });
                             } else {
-                                var update = JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": {"info": {' + updatedEntries + '}}}}}}}}');
+                                var update = JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + person.uid + '": {"value": {"info": {' + updatedEntries + '}}}}}}}}');
                                 console.log(JSON.stringify(update));
-                                window.db.collection('Person').doc(account.uid).set(update, { merge: true });
+                                window.db.collection('Person').doc(person.uid).set(update, { merge: true });
                                 var update = JSON.parse('{"info": {' + updatedEntries + '}}');
                                 console.log(JSON.stringify(update));
                                 window.db.collection('Dog').doc(account.uid).set(update, { merge: true });
