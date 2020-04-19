@@ -5,16 +5,20 @@ $(document).ready(function() {
     e.preventDefault();
 
     //before Authentication, check if the fields are valid first before making auth
-    if($("#signUpName").valid() && $("#signUpEmail").valid() && $("#signUpPassword").valid() && $("#signUpPhone").valid()){
+    if($("#signUpFname").valid() && $("#signUpLname").valid() && $("#signUpEmail").valid() && $("#signUpPassword").valid() && $("#signUpAge").valid() && $("#signUpPhone").valid()){
     // get user Info
-      var name = signupForm['signUpName'].value;
-      name = name.split(' ');
-      var fName = name[0];
-      var lName = name[1];
       var email = signupForm['signUpEmail'].value;
       var password = signupForm['signUpPassword'].value;
+      var fname = signupForm['signUpFname'].value;
+      var mname = signupForm['signUpMname'].value;
+      var lname = signupForm['signUpLname'].value;
+      var age = signupForm['signUpAge'].value;
       var phone = signupForm['signUpPhone'].value;
-
+      var org = signupForm['signUpOrg'].value;
+      var address = signupForm['signUpAddress'].value;
+      var city = signupForm['signUpCity'].value;
+      var state = signupForm['signUpState'].value;
+      var zip = signupForm['signUpZip'].value;
       // sign up the user
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
         console.log(cred.user.uid);
@@ -36,7 +40,7 @@ $(document).ready(function() {
                                 order: i++
                             },
                             "Middle_Name": {
-                                value: "",
+                                value: mName,
                                 order: i++
                             },
                             "Last_Name": {
@@ -44,7 +48,7 @@ $(document).ready(function() {
                                 order: i++
                             },
                             "Age": {
-                                value: "",
+                                value: age,
                                 order: i++
                             },
                             "Summary": {
@@ -95,19 +99,19 @@ $(document).ready(function() {
                         visibility: "protected",
                         map: {
                             "Address": {
-                                value: "",
+                                value: address,
                                 order: i++
                             },
                             "City": {
-                                value: "",
+                                value: city,
                                 order: i++
                             },
                             "State": {
-                                value: "",
+                                value: state,
                                 order: i++
                             },
                             "Zip": {
-                                value: "",
+                                value: zip,
                                 order: i++
                             }
                         }
@@ -120,7 +124,7 @@ $(document).ready(function() {
                         visibility: "public",
                         map: {
                             "Organization": {
-                                value: "",
+                                value: org,
                                 order: i++
                             }
                         }
@@ -135,7 +139,7 @@ $(document).ready(function() {
         // Handle Errors here. Password must be > 6 characters
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log("Either the same credential existed or something broke")
+        console.log("Either the same credential existed or something broke or You are running on local")
         });
     }else{
       console.log("Sign up fields are not filled out")
@@ -197,9 +201,6 @@ function signUpWithFacebook(){
 
 $("#signup").validate({
   rules:{
-    signUpName:{
-      required: true
-    },
     signUpEmail: {
       required: true,
       email: true
@@ -208,15 +209,24 @@ $("#signup").validate({
       required: true,
       property: true
     },
+    signUpFname:{
+      required: true
+    },
+    signUpLname:{
+      required: true
+    },
+    signUpAge:{
+      required: true
+    },
     signUpPhone:{
       required: true,
       phoneUS: true
+    },
+    signUpZip:{
+      zipcodeUS: true
     }
   },
   messages:{
-    signUpName:{
-      required: "Please enter a Name"
-    },
     signUpEmail:{
       required: "Please enter an Email",
       email: "Invalid Email Address"
@@ -224,24 +234,53 @@ $("#signup").validate({
     signUpPassword:{
       required: "Please enter a Password",
     },
+    signUpFname:{
+      required: "Please enter First Name"
+    },
+    signUpLname:{
+      required: "Please enter Last Name"
+    },
+    signUpAge:{
+      required: "Required"
+    },
     signUpPhone:{
-      required: "Please enter a mobile number",
+      required: "Required",
       phoneUS: "Please specify a valid US mobile number"
     }
   },
   onkeyup: function(element) {
-    var list = $("input");
+    var list = $("input");/*
+0: input#signUpEmail.form-control
+1: input#signUpPassword.form-control
+2: input#signUpFname.form-control
+3: input#signUpMname.form-control
+4: input#signUpLname.form-control
+5: input#signUpAge.form-control
+6: input#signUpPhone.form-control
+7: input#signUpOrg.form-control
+8: input#signUpAddress.form-control
+9: input#signUpCity.form-control
+10: input#signUpZip.form-control*/
     if(element == list[0]){
-      $("#signUpName").valid();
-    }
-    if(element == list[1]){
       $("#signUpEmail").valid();
     }
-    if(element == list[2]){
+    if(element == list[1]){
       $("#signUpPassword").valid();
     }
-    if(element == list[3]){
+    if(element == list[2]){
+      $("#signUpFname").valid();
+    }
+    if(element == list[4]){
+      $("#signUpLname").valid();
+    }
+    if(element == list[5]){
+      $("#signUpAge").valid();
+    }
+    if(element == list[6]){
       $("#signUpPhone").valid();
+    }
+    if(element == list[10]){
+      $("#signUpZip").valid();
     }
   }
 });
