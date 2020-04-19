@@ -36,15 +36,15 @@ $(document).ready(function() {
                                 order: i++
                             },
                             "First_Name": {
-                                value: fName,
+                                value: fname,
                                 order: i++
                             },
                             "Middle_Name": {
-                                value: mName,
+                                value: mname,
                                 order: i++
                             },
                             "Last_Name": {
-                                value: lName,
+                                value: lname,
                                 order: i++
                             },
                             "Age": {
@@ -139,6 +139,8 @@ $(document).ready(function() {
         // Handle Errors here. Password must be > 6 characters
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorCode)
+        console.log(errorMessage)
         console.log("Either the same credential existed or something broke or You are running on local")
         });
     }else{
