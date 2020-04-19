@@ -67,11 +67,11 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
     $('#information #subProfiles').each(function() {
         $(this).append('<ul class="nav nav-tabs nav-stacked"></ul>');
         $('#information #subProfiles ul').each(function() {
-            $(this).append('<li id="' + person.uid + '" class="col-sm-12"><a href="#" onclick="changeProfile(\'' + person.uid + '\')">' + person.info['Display'].map['First_Name'] + ' ' + person.info['Display'].map['Last_Name'] + '</a></li>');
-            if (person.info['Dogs'] != null) {
-                for (i in person.info['Dogs'].map) {
-                    var dog = person.info['Dogs'].map[i];
-                    $(this).append('<li id="' + dog.uid + '" class="col-sm-10"><a href="#" onclick="changeProfile(\'' + dog.uid + '\')">' + dog.info['Display'].map['First_Name'] + '</a></li>');
+            $(this).append('<li id="' + person.uid + '" class="col-sm-12"><a href="#" onclick="changeProfile(\'' + person.uid + '\')">' + person.info['Display'].value.map['First_Name'].value + ' ' + person.info['Display'].value.map['Last_Name'].value + '</a></li>');
+            if (person.info['Dogs'].value != null) {
+                for (let i of Array.from(Object.getOwnPropertyNames(person.info['Dogs'].value.map)).sort((a, b) => person.info['Dogs'].value.map[a].order - person.info['Dogs'].value.map[b].order)) {
+                    var dog = person.info['Dogs'].value.map[i].value;
+                    $(this).append('<li id="' + dog.uid + '" class="col-sm-10"><a href="#" onclick="changeProfile(\'' + dog.uid + '\')">' + dog.info['Display'].value.map['First_Name'].value + '</a></li>');
                 }
             }
         });
@@ -81,67 +81,137 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
     $('#information').append('<div class="col-sm-12"><button id="addDog" class="btn btn-block btn-primary" style="width:2.5em">+</button></div>');
     $('#information #addDog').click(function() {
         var uid = generateUUID();
-        person.info['Dogs'].map[uid] = {
-            photos: [],
-            info: {
-                "Display": {
-                    title: "Display",
-                    visibility: "protected",
-                    map: {
-                        "Photo_URL": "",
-                        "First_Name": "",
-                        "Middle_Name": "",
-                        "Last_Name": "",
-                        "Age": "",
-                        "Summary": ""
+        var i = 0;
+        person.info['Dogs'].value.map[uid] = {
+            value: {
+                photos: [],
+                info: {
+                    "Display": {
+                        value: {
+                            title: "Display",
+                            visibility: "protected",
+                            map: {
+                                "Photo_URL": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "First_Name": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Middle_Name": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Last_Name": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Age": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Summary": {
+                                    value: "",
+                                    order: i++
+                                }
+                            }
+                        },
+                        order: i++
+                    },
+                    "General": {
+                        value: {
+                            title: "General",
+                            visibility: "public",
+                            map: {
+                                "Breeds": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Colors": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Pattern": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Height": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Weight": {
+                                    value: "",
+                                    order: i++
+                                }
+                            }
+                        },
+                        order: i++
+                    },
+                    "Health": {
+                        value: {
+                            title: "Health",
+                            visibility: "public",
+                            map: {
+                                "Disease": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Injury": {
+                                    value: "",
+                                    order: i++
+                                },
+                                "Vaccines": {
+                                    value: "",
+                                    order: i++
+                                }
+                            }
+                        },
+                        order: i++
+                    },
+                    "Breeding": {
+                        value: {
+                            title: "Breeding",
+                            visibility: "public",
+                            map: {
+                                "Breeding": {
+                                    value: "",
+                                    order: i++
+                                }
+                            }
+                        },
+                        order: i++
+                    },
+                    "Selling": {
+                        value: {
+                            title: "Selling",
+                            visibility: "public",
+                            map: {
+                                "Selling": {
+                                    value: "",
+                                    order: i++
+                                }
+                            }
+                        },
+                        order: i++
+                    },
+                    "Posts": {
+                        value: {
+                            title: "Posts",
+                            visibility: "private",
+                            map: {},
+                            array: []
+                        },
+                        order: i++
                     }
                 },
-                "General": {
-                    title: "General",
-                    visibility: "public",
-                    map: {
-                        "Breeds": "",
-                        "Colors": "",
-                        "Pattern": "",
-                        "Height": "",
-                        "Weight": ""
-                    }
-                },
-                "Health": {
-                    title: "Health",
-                    visibility: "public",
-                    map: {
-                        "Disease": "",
-                        "Injury": "",
-                        "Vaccines": ""
-                    }
-                },
-                "Breeding": {
-                    title: "Breeding",
-                    visibility: "public",
-                    map: {
-                        "Breeding": ""
-                    }
-                },
-                "Selling": {
-                    title: "Selling",
-                    visibility: "public",
-                    map: {
-                        "Selling": ""
-                    }
-                },
-                "Posts": {
-                    title: "Posts",
-                    visibility: "private",
-                    map: {},
-                    array: []
-                }
+                isHuman: false,
+                uid: uid
             },
-            isHuman: false,
-            uid: uid
+            order: Object.getOwnPropertyNames(person.info['Dogs'].value.map).length
         };
-        window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"map": {"' + uid + '": ' + JSON.stringify(person.info['Dogs'].map[uid]) + '}}}}'), { merge: true });
-        loadAccount(person, person.info['Dogs'].map[uid], "settings");
+        window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + uid + '": {"value": ' + JSON.stringify(person.info['Dogs'].value.map[uid].value) + '}}}}}}'), { merge: true });
+        loadAccount(person, person.info['Dogs'].value.map[uid].value, "settings");
     });
 
     // Action
@@ -157,59 +227,61 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
             case 'profile':
                 $(this).append('<div id="displayInfo"></div>');
                 $('#content #displayInfo').each(function() {
-                    var photo = account.info['Display'].map['Photo_URL'] != '' ? account.info['Display'].map['Photo_URL'] : 'https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png';
+                    var photo = account.info['Display'].value.map['Photo_URL'].value != '' ? account.info['Display'].value.map['Photo_URL'].value : 'https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png';
                     $(this).append('<div id="photo" style="float:left"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
                     if (account.isHuman) {
-                        $(this).append('<div id="firstLine">' + account.info['Display'].map['First_Name'] + ' ' + account.info['Display'].map['Last_Name'] + '</div>');
-                        $(this).append('<div id="secondLine">' + account.info['Display'].map['Age'] + '</div>');
-                        $(this).append('<div id="thirdLine">' + account.info['Address'].map['City'] + ', ' + account.info['Address'].map['State'] + '</div>');
-                        $(this).append('<div id="fourthLine">' + account.info['Organization'].map['Organization'] + '</div>');
+                        $(this).append('<div id="firstLine">' + account.info['Display'].value.map['First_Name'].value + ' ' + account.info['Display'].value.map['Last_Name'].value + '</div>');
+                        $(this).append('<div id="secondLine">' + account.info['Display'].value.map['Age'].value + '</div>');
+                        $(this).append('<div id="thirdLine">' + account.info['Address'].value.map['City'].value + ', ' + account.info['Address'].value.map['State'].value + '</div>');
+                        $(this).append('<div id="fourthLine">' + account.info['Organization'].value.map['Organization'].value + '</div>');
                     } else {
-                        $(this).append('<div id="firstLine">' + account.info['Display'].map['First_Name'] + ' ' + account.info['Display'].map['Last_Name'] + '</div>');
-                        $(this).append('<div id="secondLine">' + account.info['General'].map['Breeds'] + ', ' + account.info['Display'].map['Age'] + '</div>');
+                        $(this).append('<div id="firstLine">' + account.info['Display'].value.map['First_Name'].value + ' ' + account.info['Display'].value.map['Last_Name'].value + '</div>');
+                        $(this).append('<div id="secondLine">' + account.info['General'].value.map['Breeds'].value + ', ' + account.info['Display'].value.map['Age'].value + '</div>');
                         $(this).append('<div id="thirdLine"></div>'); // nothing on third line yet
                         $(this).append('<div id="fourthLine"></div>'); // nothing on fourth line yet
                     }
-                    $(this).append('<div id="summary" style="float:right">' + account.info['Display'].map['Summary'] + '</div>');
+                    $(this).append('<div id="summary" style="float:right">' + account.info['Display'].value.map['Summary'].value + '</div>');
                 });
                 $(this).append('<div id="comment" class="form-group"></div>');
                 $('#content #comment').each(function() {
                     $(this).append('<textarea class="form-control" rows="3" style="resize:none" placeholder="Share something!"></textarea>');
                     $(this).append('<button id="post" class="btn btn-block btn-primary">Post</button>');
                     $('#content #comment #post').click(function() {
-                        $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3">' + window.loggedInPerson.info['Display'].map['First_Name'] + ' ' + window.loggedInPerson.info['Display'].map['Last_Name'] + '</div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
-                        var wall = account.info['Posts'].array;
-                        wall.unshift(JSON.parse('{"poster": "' + window.loggedInPerson.info['Display'].map['First_Name'] + ' ' + window.loggedInPerson.info['Display'].map['Last_Name'] + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
-                        var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"map": {"' + account.uid + '": ') + '{"info": {"Posts": {"array": ' + JSON.stringify(wall) + '}}}' + (account.isHuman ? '' : '}}}}'));
+                        $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3">' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '</div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
+                        var wall = account.info['Posts'].value.array;
+                        wall.unshift(JSON.parse('{"poster": "' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
+                        var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {"Posts": {"value": {"array": ' + JSON.stringify(wall) + '}}}}' + (account.isHuman ? '' : '}}}}}}'));
                         $('#content #comment textarea').val('');
+                        console.log(update);
+                        console.log(wall);
                         window.db.collection('Person').doc(person.uid).set(update, { merge: true });
                     });
                 });
                 $(this).append('<div id="wall"></div>');
-                if (account.info['Posts'] != null) {
-                    for (i in account.info['Posts'].array) {
-                        var post = account.info['Posts'].array[i];
+                if (account.info['Posts'].value != null) {
+                    for (i in account.info['Posts'].value.array) {
+                        var post = account.info['Posts'].value.array[i];
                         $('#content #wall').append('<div class="panel panel-primary"><div class="panel-heading col-sm-3">' + post.poster + '</div><br><br><div class="post panel-body">' + post.text + '</div></div>');
                     }
                 }
                 break;
             case 'photos':
                 for (i in account.photos) {
-                    var photo = account.photos[i];
+                    var photo = account.photos[i].value;
                     $(this).append('<img src="' + photo + '" class="img-thumbnail img-lg-cropped">');
                 }
                 break;
             case 'moreInfo':
                 var hasMoreInfo = false;
-                for (i in account.info) {
-                    var info = account.info[i];
+                for (let i of Array.from(Object.getOwnPropertyNames(account.info)).sort((a, b) => account.info[a].order - account.info[b].order)) {
+                    var info = account.info[i].value;
                     if (info.visibility == 'public') {
                         hasMoreInfo = true;
                         $(this).append('<div id="' + info.title + '" class="panel panel-primary"></div>');
                         $('#content #' + info.title).append('<div class="panel-heading">' + info.title + '</div>');
                         var contents = '';
-                        for (key in info.map) {
-                            var value = info.map[key];
+                        for (let key of Array.from(Object.getOwnPropertyNames(info.map)).sort((a, b) => info.map[a].order - info.map[b].order)) {
+                            var value = info.map[key].value;
                             contents += key + ': ' + value + '<br>';
                         }
                         contents = contents.replace(/<br>$/, '');
@@ -223,8 +295,8 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 break;
             case 'settings':
                 var hasSettings = false;
-                for (i in account.info) {
-                    var info = account.info[i];
+                for (let i of Array.from(Object.getOwnPropertyNames(account.info)).sort((a, b) => account.info[a].order - account.info[b].order)) {
+                    var info = account.info[i].value;
                     if (info.visibility == 'public' || info.visibility == 'protected') {
                         hasSettings = true;
                         $(this).append('<div id="' + info.title + '" class="panel panel-primary"></div>');
@@ -232,8 +304,8 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                             $(this).append('<div class="panel-heading">' + info.title + '</div>');
                             $(this).append('<div id="' + info.title + '" class="panel-body"></div>');
                             $('#content #' + info.title + ' .panel-body').each(function() {
-                                for (key in info.map) {
-                                    var value = info.map[key];
+                                for (let key of Array.from(Object.getOwnPropertyNames(info.map)).sort((a, b) => info.map[a].order - info.map[b].order)) {
+                                    var value = info.map[key].value;
                                     $(this).append('<div id="' + key + '" class="form-group"></div>');
                                     $('#content #' + info.title + ' .panel-body #' + key).each(function() {
                                         $(this).append('<label class="control-label col-sm-2">' + key + ':</label>');
@@ -258,19 +330,20 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         var updatedEntries = '';
                         $('#content .panel').each(function() {
                             var info = $(this).attr('id');
-                            updatedEntries += '"' + info + '": {"map": {';
+                            updatedEntries += '"' + info + '": {"value": {"map": {';
                             $('#content #' + info + ' .panel-body .form-group').each(function() {
                                 var key = $(this).attr('id');
                                 $('#content #' + info + ' .panel-body #' + key + ' div .edited').each(function() {
-                                    updatedEntries += '"' + key + '": "' + $(this).val() + '", ';
-                                    account.info[info].map[key] = $(this).val();
+                                    updatedEntries += '"' + key + '": {"value": "' + $(this).val() + '"}, ';
+                                    account.info[info].value.map[key].value = $(this).val();
                                 });
                             });
-                            updatedEntries = updatedEntries.replace(/, $/, '}}, ').replace(/"[^"]+": {"map": {$/, '');
+                            updatedEntries = updatedEntries.replace(/, $/, '}}}, ').replace(/"[^"]+": {"value": {"map": {$/, '');
                         });
                         updatedEntries = updatedEntries.replace(/, $/, '');
                         if (updatedEntries != '') {
-                            var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"map": {"' + account.uid + '": ') + '{"info": {' + updatedEntries + '}}' + (account.isHuman ? '' : '}}}}'));
+                            var update = JSON.parse((account.isHuman ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {' + updatedEntries + '}}' + (account.isHuman ? '' : '}}}}}}'));
+                            console.log(JSON.stringify(update));
                             window.db.collection('Person').doc(person.uid).set(update, { merge: true });
                         }
                         loadAccount();
@@ -282,7 +355,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
 }
 
 function changeProfile(uid) {
-    var account = window.currentPerson.uid == uid ? window.currentPerson : window.currentPerson.info['Dogs'].map[uid];
+    var account = window.currentPerson.uid == uid ? window.currentPerson : window.currentPerson.info['Dogs'].value.map[uid].value;
     loadAccount(window.currentPerson, account, window.currentTab);
 }
 

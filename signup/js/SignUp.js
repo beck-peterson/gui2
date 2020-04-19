@@ -18,56 +18,114 @@ $(document).ready(function() {
       // sign up the user
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
         console.log(cred.user.uid);
+        var i = 0;
         db.collection('Person').doc(cred.user.uid).set({
             photos: [],
             info: {
                 "Display": {
-                    title: "Display",
-                    visibility: "protected",
-                    map: {
-                        "Photo_URL": "",
-                        "First_Name": fName,
-                        "Middle_Name": "",
-                        "Last_Name": lName,
-                        "Age": "",
-                        "Summary": ""
-                    }
+                    value: {
+                        title: "Display",
+                        visibility: "protected",
+                        map: {
+                            "Photo_URL": {
+                                value: "",
+                                order: i++
+                            },
+                            "First_Name": {
+                                value: fName,
+                                order: i++
+                            },
+                            "Middle_Name": {
+                                value: "",
+                                order: i++
+                            },
+                            "Last_Name": {
+                                value: lName,
+                                order: i++
+                            },
+                            "Age": {
+                                value: "",
+                                order: i++
+                            },
+                            "Summary": {
+                                value: "",
+                                order: i++
+                            }
+                        }
+                    },
+                    order: i++
                 },
                 "Posts": {
-                    title: "Posts",
-                    visibility: "private",
-                    map: {},
-                    array: []
+                    value: {
+                        title: "Posts",
+                        visibility: "private",
+                        map: {},
+                        array: []
+                    },
+                    order: i++
                 },
                 "Dogs": {
-                    title: "Dogs",
-                    visibility: "private",
-                    map: {}
+                    value: {
+                        title: "Dogs",
+                        visibility: "private",
+                        map: {}
+                    },
+                    order: i++
                 },
                 "Contact": {
-                    title: "Contact",
-                    visibility: "protected",
-                    map: {
-                        "Email": email,
-                        "Phone": phone
-                    }
+                    value: {
+                        title: "Contact",
+                        visibility: "protected",
+                        map: {
+                            "Phone": {
+                                value: phone,
+                                order: i++
+                            },
+                            "Email": {
+                                value: email,
+                                order: i++
+                            },
+                        }
+                    },
+                    order: i++
                 },
                 "Address": {
-                    title: "Address",
-                    visibility: "protected",
-                    map: {
-                        "Address": "",
-                        "City": "",
-                        "State": "",
-                        "Zip": ""
-                    }
+                    value: {
+                        title: "Address",
+                        visibility: "protected",
+                        map: {
+                            "Address": {
+                                value: "",
+                                order: i++
+                            },
+                            "City": {
+                                value: "",
+                                order: i++
+                            },
+                            "State": {
+                                value: "",
+                                order: i++
+                            },
+                            "Zip": {
+                                value: "",
+                                order: i++
+                            }
+                        }
+                    },
+                    order: i++
                 },
                 "Organization": {
-                    title: "Organization",
-                    visibility: "public",
-                    map: {
-                        "Organization": ""
-                    }
+                    value: {
+                        title: "Organization",
+                        visibility: "public",
+                        map: {
+                            "Organization": {
+                                value: "",
+                                order: i++
+                            }
+                        }
+                    },
+                    order: i++
                 }
             },
             isHuman: true,
