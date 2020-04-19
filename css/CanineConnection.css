@@ -20,7 +20,7 @@ body {
     background-color: #b1adad;
     border-radius: 4px;
 }
-.navbar_pill>a>.glyphicon {
+.navbar_pill>a>span {
     color:black;
 }
 
@@ -28,7 +28,7 @@ body {
 .navbar_pill:hover {
     background-color:black;
 }
-.navbar_pill:hover>a>.glyphicon {
+.navbar_pill:hover>a>span {
     color:white;
 }
 
