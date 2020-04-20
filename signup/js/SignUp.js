@@ -138,6 +138,17 @@ $(document).ready(function() {
             owner: null,
             uid: cred.user.uid
         });
+        auth.signInWithEmailAndPassword(email, password).then( cred => {
+          console.log(cred.user);
+          window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+        }).catch(function(error) {
+          // Handle Errors here. Password must be > 6 characters
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode)
+          console.log(errorMessage)
+        });
+
       }).catch(function(error) {
         // Handle Errors here. Password must be > 6 characters
         var errorCode = error.code;
