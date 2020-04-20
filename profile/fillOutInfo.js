@@ -11,7 +11,7 @@ $(document).ready(function() {
         measurementId: 'G-QYRPTG50Z3'
     };
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    //firebase.initializeApp(firebaseConfig);
     // global for easy access to db
     window.db = firebase.firestore();
 
