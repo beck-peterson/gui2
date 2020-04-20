@@ -12,121 +12,176 @@
   limitations under the License
 -->
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Learn how to use the Firebase platform on the Web">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
-
-  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
-
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
-  <title>Messaging</title>
-
-
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Friendly Chat">
   <meta name="theme-color" content="#303F9F">
-
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Friendly Chat">
   <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
-
   <!-- Tile icon for Win8 -->
   <meta name="msapplication-TileColor" content="#3372DF">
   <meta name="msapplication-navbutton-color" content="#303F9F">
+  <title>Friendly Chat</title>
+
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+  <!-- Global site CSS-->
+  <link rel="stylesheet" href="../css/CanineConnection.css">
+
+  <!-- Messaging CSS-->
+  <link rel="stylesheet" href="css/messaging.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 
   <!-- Material Design Lite -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
   <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
-  <!-- App Styling -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-  <link rel="stylesheet" href="css/messaging.css">
+  <!-- JQuery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap JS-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
 
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY",
+      authDomain: "canine-connection-b2414.firebaseapp.com",
+      databaseURL: "https://canine-connection-b2414.firebaseio.com",
+      projectId: "canine-connection-b2414",
+      storageBucket: "canine-connection-b2414.appspot.com",
+      messagingSenderId: "841972379358",
+      appId: "1:841972379358:web:1653668eee22a73bc95c4f",
+      measurementId: "G-QYRPTG50Z3"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // global for easy access to db
+    const db = firebase.firestore();
+
+    const auth = firebase.auth();
+    // db.settings({ timestampsInSnapshots: true });
+    firebase.analytics();
+  </script>
+  <!--Navbar JS-->
+  <script src="../js/Navbar.js"></script>
   <!-- TODO: Enable First Input Delay polyfill library. -->
   <!--  <script type="text/javascript">!function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);</script> -->
-
 </head>
 <body>
 
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
-
-
-  <main class="mdl-layout__content mdl-color--#b6d7a8-100">
-    <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
-
-      <!-- Messages container -->
-      <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
-        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-          <div id="messages">
-          </div>
-          <form id="message-form" action="#">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="message" autocomplete="off">
-              <label class="mdl-textfield__label" for="message">Message...</label>
-            </div>
-            <button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-              Send
-            </button>
-          </form>
-          <form id="image-form" action="#">
-            <input id="mediaCapture" type="file" accept="image/*" capture="camera">
-            <button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
-              <i class="material-icons">image</i>
-            </button>
-          </form>
+<!-- Top-static navigation bar-->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./template.html">CanineConnection</a>
         </div>
       </div>
-
-      <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button class="mdl-snackbar__action" type="button"></button>
+      <div class="col-xs-8 navbar-right">
+        <!--Nav icons listed in order from right to left in navbar;
+                    icons floated right to prevent navbar collapse on resize-->
+        <ul class="nav navbar-nav nav-pills" id="navbar_pills">
+          <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+          <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+          <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
+          <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+        </ul>
       </div>
-
     </div>
-  </main>
-</div>
+  </div>
+</nav>
 
-<!-- Import and configure the Firebase SDK -->
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <!-- Header section containing logo -->
+    <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+          <h3><i class="material-icons">chat_bubble_outline</i> Friendly Chat</h3>
+        </div>
+        <div id="user-container">
+          <div hidden id="user-pic"></div>
+          <div hidden id="user-name"></div>
+          <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+            Sign-out
+          </button>
+          <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+            <i class="material-icons">account_circle</i>Sign-in with Google
+          </button>
+        </div>
+      </div>
+    </header>
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY",
-    authDomain: "canine-connection-b2414.firebaseapp.com",
-    databaseURL: "https://canine-connection-b2414.firebaseio.com",
-    projectId: "canine-connection-b2414",
-    storageBucket: "canine-connection-b2414.appspot.com",
-    messagingSenderId: "841972379358",
-    appId: "1:841972379358:web:1653668eee22a73bc95c4f",
-    measurementId: "G-QYRPTG50Z3"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  // global for easy access to db
-  const db = firebase.firestore();
+    <main class="mdl-layout__content mdl-color--grey-100">
+      <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
 
-  const auth = firebase.auth();
-  // db.settings({ timestampsInSnapshots: true });
-  firebase.analytics();
-</script>
-<!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
-<!-- If you do not want to serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-<!-- <script src="/__/firebase/7.14.0/firebase-app.js"></script>
+        <!-- Messages container -->
+        <div id="messages-card"
+          class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <div id="messages">
+            </div>
+            <form id="message-form" action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="message" autocomplete="off">
+                <label class="mdl-textfield__label" for="message">Message...</label>
+              </div>
+              <button id="submit" disabled type="submit"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Send
+              </button>
+            </form>
+            <form id="image-form" action="#">
+              <input id="mediaCapture" type="file" accept="image/*" capture="camera">
+              <button id="submitImage" title="Add an image"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+                <i class="material-icons">image</i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button class="mdl-snackbar__action" type="button"></button>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Import and configure the Firebase SDK -->
+
+
+  <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+  <!-- If you do not want to serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+  <!-- <script src="/__/firebase/7.14.0/firebase-app.js"></script>
 <script src="/__/firebase/7.14.0/firebase-auth.js"></script>
 <script src="/__/firebase/7.14.0/firebase-storage.js"></script>
 <script src="/__/firebase/7.14.0/firebase-messaging.js"></script>
@@ -134,6 +189,7 @@
 <script src="/__/firebase/7.14.0/firebase-performance.js"></script>
 <script src="/__/firebase/init.js"></script> -->
 
-<script src="js/messaging.js"></script>
+  <script src="js/messaging.js"></script>
 </body>
+
 </html>
