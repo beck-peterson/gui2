@@ -16,6 +16,7 @@ loginForm.addEventListener("submit", (e) => {
     auth.signInWithEmailAndPassword(email, password).then( cred => {
       console.log(cred.user);
       element.innerHTML = "";
+      window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
     }).catch(function(error) {
       // Handle Errors here. Password must be > 6 characters
       var errorCode = error.code;
