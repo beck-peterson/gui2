@@ -28,18 +28,17 @@
   <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
-  <title>Friendly Chat</title>
-
+  <title>Messaging</title>
 
   >>>>>>> 98bf8a49fa2a7256a6a9b703e12d17d3a3c14cfe
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Friendly Chat">
+  <meta name="application-name" content="Messaging">
   <meta name="theme-color" content="#303F9F">
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Friendly Chat">
+  <meta name="apple-mobile-web-app-title" content="Messaging">
   <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
   <!-- Tile icon for Win8 -->
   <meta name="msapplication-TileColor" content="#3372DF">
@@ -190,20 +189,35 @@
     </main>
   </div>
 
-  <!-- Import and configure the Firebase SDK -->
+    </div>
+  </main>
+</div>
 
+<!-- Import and configure the Firebase SDK -->
 
-  <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
-  <!-- If you do not want to serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-  <!-- <script src="/__/firebase/7.14.0/firebase-app.js"></script>
-<script src="/__/firebase/7.14.0/firebase-auth.js"></script>
-<script src="/__/firebase/7.14.0/firebase-storage.js"></script>
-<script src="/__/firebase/7.14.0/firebase-messaging.js"></script>
-<script src="/__/firebase/7.14.0/firebase-firestore.js"></script>
-<script src="/__/firebase/7.14.0/firebase-performance.js"></script>
-<script src="/__/firebase/init.js"></script> -->
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY",
+    authDomain: "canine-connection-b2414.firebaseapp.com",
+    databaseURL: "https://canine-connection-b2414.firebaseio.com",
+    projectId: "canine-connection-b2414",
+    storageBucket: "canine-connection-b2414.appspot.com",
+    messagingSenderId: "841972379358",
+    appId: "1:841972379358:web:1653668eee22a73bc95c4f",
+    measurementId: "G-QYRPTG50Z3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // global for easy access to db
+  const db = firebase.firestore();
 
-  <script src="js/messaging.js"></script>
+  const auth = firebase.auth();
+  // db.settings({ timestampsInSnapshots: true });
+  firebase.analytics();
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/messaging.js"></script>
 </body>
 
 </html>

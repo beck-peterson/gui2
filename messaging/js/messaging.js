@@ -15,12 +15,40 @@
  */
 'use strict';
 
-// Signs-in Friendly Chat.
-function signIn() {
-  // Sign into Firebase using popup auth & Google as the identity provider.
-  var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider);
-}
+$(document).ready(function() {
+    // Your web app's Firebase configuration
+    // var firebaseConfig = {
+    //     apiKey: 'AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY',
+    //     authDomain: 'canine-connection-b2414.firebaseapp.com',
+    //     databaseURL: 'https://canine-connection-b2414.firebaseio.com/',
+    //     projectId: 'canine-connection-b2414',
+    //     storageBucket: 'canine-connection-b2414.appspot.com',
+    //     messagingSenderId: '841972379358',
+    //     appId: '1:841972379358:web:1653668eee22a73bc95c4f',
+    //     measurementId: 'G-QYRPTG50Z3'
+    // };
+    // // Initialize Firebase
+    // firebase.initializeApp(firebaseConfig);
+    // global for easy access to db
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+// // Signs-in Friendly Chat.
+// function signIn() {
+//   // Sign into Firebase using popup auth & Google as the identity provider.
+//   var provider = new firebase.auth.GoogleAuthProvider();
+//   firebase.auth().signInWithPopup(provider);
+// }
+
+// listen for auth state changes - user logs in/out
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log('user logged in: ', user);
+    console.log(user.uid)
+  } else {
+    console.log('user logged out');
+  }
+});
 
 // Signs-out of Friendly Chat.
 function signOut() {
@@ -53,7 +81,7 @@ function isUserSignedIn() {
 // Saves a new message to your Cloud Firestore database.
 function saveMessage(messageText) {
   // Add a new message entry to the database.
-  return firebase.firestore().collection('messages').add({
+  return db.collection('messages').add({
     name: getUserName(),
     text: messageText,
     profilePicUrl: getProfilePicUrl(),
@@ -66,7 +94,7 @@ function saveMessage(messageText) {
 // Loads chat messages history and listens for upcoming ones.
 function loadMessages() {
   // Create the query to load the last 12 messages and listen for new ones.
-  var query = firebase.firestore()
+  var query = db
                   .collection('messages')
                   .orderBy('timestamp', 'desc')
                   .limit(12);
@@ -89,7 +117,7 @@ function loadMessages() {
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
   // 1 - We add a message with a loading icon that will get updated with the shared image.
-  firebase.firestore().collection('messages').add({
+  db.collection('messages').add({
     name: getUserName(),
     imageUrl: LOADING_IMAGE_URL,
     profilePicUrl: getProfilePicUrl(),
@@ -350,7 +378,6 @@ var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
 signOutButtonElement.addEventListener('click', signOut);
-signInButtonElement.addEventListener('click', signIn);
 
 // Toggle for the button.
 messageInputElement.addEventListener('keyup', toggleButton);
@@ -370,3 +397,4 @@ initFirebaseAuth();
 
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
+});

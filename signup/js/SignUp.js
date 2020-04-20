@@ -19,6 +19,9 @@ $(document).ready(function() {
       var city = signupForm['signUpCity'].value;
       var state = signupForm['signUpState'].value;
       var zip = signupForm['signUpZip'].value;
+      console.log(auth.user.displayName);
+      console.log(fname + " " + lname);
+      auth.user.displayName = fname + " " + lname;
       // sign up the user
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
         console.log(cred.user.uid);
