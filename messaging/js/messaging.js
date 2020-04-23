@@ -17,38 +17,45 @@
 
 $(document).ready(function() {
     // Your web app's Firebase configuration
-    // var firebaseConfig = {
-    //     apiKey: 'AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY',
-    //     authDomain: 'canine-connection-b2414.firebaseapp.com',
-    //     databaseURL: 'https://canine-connection-b2414.firebaseio.com/',
-    //     projectId: 'canine-connection-b2414',
-    //     storageBucket: 'canine-connection-b2414.appspot.com',
-    //     messagingSenderId: '841972379358',
-    //     appId: '1:841972379358:web:1653668eee22a73bc95c4f',
-    //     measurementId: 'G-QYRPTG50Z3'
-    // };
-    // // Initialize Firebase
-    // firebase.initializeApp(firebaseConfig);
+    var firebaseConfig = {
+        apiKey: 'AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY',
+        authDomain: 'canine-connection-b2414.firebaseapp.com',
+        databaseURL: 'https://canine-connection-b2414.firebaseio.com/',
+        projectId: 'canine-connection-b2414',
+        storageBucket: 'canine-connection-b2414.appspot.com',
+        messagingSenderId: '841972379358',
+        appId: '1:841972379358:web:1653668eee22a73bc95c4f',
+        measurementId: 'G-QYRPTG50Z3'
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
     // global for easy access to db
-    const db = firebase.firestore();
+    window.db = firebase.firestore();
     const auth = firebase.auth();
-
-// // Signs-in Friendly Chat.
-// function signIn() {
-//   // Sign into Firebase using popup auth & Google as the identity provider.
-//   var provider = new firebase.auth.GoogleAuthProvider();
-//   firebase.auth().signInWithPopup(provider);
-// }
-
-// listen for auth state changes - user logs in/out
-auth.onAuthStateChanged(user => {
-  if (user) {
-    console.log('user logged in: ', user);
-    console.log(user.uid)
-  } else {
-    console.log('user logged out');
-  }
-});
+    // db.settings({ timestampsInSnapshots: true });
+    firebase.analytics();
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            console.log('user logged in: ', user);
+            console.log(user.displayName);
+            var docRef = window.db.collection('Person').doc(user.uid);
+            docRef.get().then(function(doc) {
+                if (doc.exists) {
+                    console.log('Document data:', doc.data());
+                    window.loggedInPerson = doc.data();
+                    loadAccount(window.loggedInPerson, window.loggedInPerson, 'profile');
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log('No such document!');
+                }
+            }).catch(function(error) {
+                console.log('Error getting document:', error);
+            });
+        } else {
+            console.log('user logged out');
+            window.location.href = "https://beck-peterson.github.io/gui2/landing/LandingOut.html";
+        }
+    });
 
 // Signs-out of Friendly Chat.
 function signOut() {
@@ -65,11 +72,11 @@ function initFirebaseAuth() {
 // Returns the signed-in user's profile pic URL.
 function getProfilePicUrl() {
   return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
+
 }
 
 // Returns the signed-in user's display name.
 function getUserName() {
-  console.log(firebase.auth().currentUser);
   return firebase.auth().currentUser.displayName;
 }
 
@@ -81,6 +88,7 @@ function isUserSignedIn() {
 // Saves a new message to your Cloud Firestore database.
 function saveMessage(messageText) {
   // Add a new message entry to the database.
+  console.log(getProfilePicUrl());
   return db.collection('messages').add({
     name: getUserName(),
     text: messageText,

@@ -25,6 +25,9 @@ $(document).ready(function() {
       // sign up the user
       auth.createUserWithEmailAndPassword(email, password).then( cred => {
         console.log(cred.user.uid);
+        auth.currentUser.updateProfile({
+          displayName: fname + " " + lname
+        });
         var i = 0;
         db.collection('Person').doc(cred.user.uid).set({
             photos: [],

@@ -237,6 +237,10 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 $(this).append('<div id="displayInfo"></div>');
                 $('#content #displayInfo').each(function() {
                     var photo = account.info['Display'].value.map['Photo_URL'].value != '' ? account.info['Display'].value.map['Photo_URL'].value : 'https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png';
+                    const auth = firebase.auth();
+                    auth.currentUser.updateProfile({
+                       photoURL: photo
+                    });
                     $(this).append('<div id="photo" style="float:left"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
                     if (account.owner == null) {
                         $(this).append('<div id="firstLine">' + account.info['Display'].value.map['First_Name'].value + ' ' + account.info['Display'].value.map['Last_Name'].value + '</div>');
@@ -364,6 +368,9 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     });
                 }
                 break;
+            case 'messages':
+              window.location.href = "../messaging/messaging.html";
+              break;
         }
     });
 }
