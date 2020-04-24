@@ -67,6 +67,7 @@ function randomUser() {
     var docRef = window.db.collection('TEMP').doc("People");
     docRef.get().then(function(doc) {
         if (doc.exists) {
+            console.log(JSON.stringify(doc.data()));
             var docRef = window.db.collection('Person').doc(doc.data()[Math.random(doc.data().length)]);
             docRef.get().then(function(user) {
                 if (user.exists) {
