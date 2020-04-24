@@ -68,7 +68,7 @@ function randomUser() {
     docRef.get().then(function(doc) {
         if (doc.exists) {
             console.log(JSON.stringify(doc.data()));
-            var docRef = window.db.collection('Person').doc(doc.data().array[Math.random(doc.data().array.length)]);
+            var docRef = window.db.collection('Person').doc(doc.data().array[Math.floor(Math.random() * doc.data().array.length)]);
             docRef.get().then(function(user) {
                 if (user.exists) {
                     loadAccount(user.data(), user.data(), "profile");
