@@ -63,6 +63,12 @@ function messages() {
     window.location.href = "../messaging/messaging.html";
 }
 
+function settingsMessage() {
+    if (window.loggedInPerson == window.currentPerson) {
+        message();
+    }
+}
+
 function randomUser() {
     var docRef = window.db.collection('TEMP').doc("People");
     docRef.get().then(function(doc) {
@@ -253,13 +259,8 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
     });
 
     // Action
-    if (window.loggedInPerson == window.currentPerson) {
-        $('#action #settings').css('visibility', 'visible');
-        $('#action #message').css('visibility', 'hidden');
-    } else {
-        $('#action #message').css('visibility', 'visible');
-        $('#action #settings').css('visibility', 'hidden');
-    }
+    console.log((window.loggedInPerson == window.currentPerson) + " " + window.loggedInPerson + " " + window.currentPerson);
+    $('#action #settingsMessage').html(window.loggedInPerson == window.currentPerson ? "Settings" : "Message");
 
     $('#content').each(function() {
         $(this).empty();
