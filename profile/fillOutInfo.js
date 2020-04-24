@@ -52,11 +52,39 @@ $(document).ready(function() {
     });
 });
 
-function logout(){
+function logout() {
   const auth = firebase.auth();
   auth.signOut().then(() => {
-    console.log("user pressed the log out button")
-  })
+      console.log("user pressed the log out button");
+  });
+}
+
+function messages() {
+    window.location.href = "../messaging/messaging.html";
+}
+
+function randomUser() {
+    var docRef = window.db.collection('TEMP').doc("People");
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            var docRef = window.db.collection('Person').doc(doc.data()[Math.random(doc.data().size())]);
+            docRef.get().then(function(user) {
+                if (user.exists) {
+                    loadAccount(user.data(), user.data(), "profile");
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log('No such document!');
+                }
+            }).catch(function(error) {
+                console.log('Error getting document:', error);
+            });
+        } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+        }
+    }).catch(function(error) {
+        console.log('Error getting document:', error);
+    });
 }
 
 // This function can accept person or dog accounts
@@ -226,7 +254,9 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
     // Action
     if (window.loggedInPerson == window.currentPerson) {
         $('#action #settings').css('visibility', 'visible');
+        $('#action #message').css('visibility', 'hidden');
     } else {
+        $('#action #message').css('visibility', 'visible');
         $('#action #settings').css('visibility', 'hidden');
     }
 
@@ -368,9 +398,6 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     });
                 }
                 break;
-            case 'messages':
-              window.location.href = "../messaging/messaging.html";
-              break;
         }
     });
 }
