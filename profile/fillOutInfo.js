@@ -64,8 +64,8 @@ function messages() {
 }
 
 function settingsMessage() {
-    if (window.loggedInPerson == window.currentPerson) {
-        message();
+    if (!deepEqual(window.loggedInPerson, window.currentPerson)) {
+        messages();
     }
 }
 
@@ -259,8 +259,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
     });
 
     // Action
-    console.log((window.loggedInPerson == window.currentPerson) + " " + window.loggedInPerson + " " + window.currentPerson);
-    $('#action #settingsMessage').html(window.loggedInPerson == window.currentPerson ? "Settings" : "Message");
+    $('#action #settingsMessage').html(deepEqual(window.loggedInPerson, window.currentPerson) ? "Settings" : "Message");
 
     $('#content').each(function() {
         $(this).empty();
@@ -338,7 +337,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     $('#content #warning').append('<div class="panel-body">This account doesn\'t have more infomation available.</div>');
                 }
                 break;
-            case 'settings':
+            case 'settingsMessage':
                 var hasSettings = false;
                 for (let i of Array.from(Object.getOwnPropertyNames(account.info)).sort((a, b) => account.info[a].order - account.info[b].order)) {
                     var info = account.info[i].value;
