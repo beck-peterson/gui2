@@ -114,14 +114,14 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
             if (person.info['Dogs'].value != null) {
                 for (let i of Array.from(Object.getOwnPropertyNames(person.info['Dogs'].value.map)).sort((a, b) => person.info['Dogs'].value.map[a].order - person.info['Dogs'].value.map[b].order)) {
                     var dog = person.info['Dogs'].value.map[i].value;
-                    $(this).append('<li id="' + dog.uid + '" class="col-sm-10"><a href="#" onclick="changeProfile(\'' + dog.uid + '\')">' + dog.info['Display'].value.map['First_Name'].value + '</a></li>');
+                    $(this).append('<li id="' + dog.uid + '" class="col-sm-10 dogLI"><a href="#" onclick="changeProfile(\'' + dog.uid + '\')"><i class="fa fa-lg fa-paw"></i> ' + dog.info['Display'].value.map['First_Name'].value + '</a></li>');
                 }
             }
         });
 
     });
     $('#information #subProfiles ul #' + account.uid).addClass('active');
-    $('#information').append('<div class="col-sm-12"><button id="addDog" class="btn btn-block btn-primary" style="width:2.5em">+</button></div>');
+    $('#information').append('<div class="col-sm-12"><button id="addDog" class="btn btn-block btn-primary" style="width:7.65em"><i class="fa fa-lg fa-paw"></i> Add Dog</button></div>');
     $('#information #addDog').click(function() {
         var uid = generateUUID();
         var i = 0;
@@ -139,7 +139,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                                     order: i++
                                 },
                                 "First_Name": {
-                                    value: "",
+                                    value: "NEW",
                                     order: i++
                                 },
                                 "Middle_Name": {
@@ -255,7 +255,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
         };
         window.db.collection('Dog').doc(uid).set(person.info['Dogs'].value.map[uid].value);
         window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + uid + '": {"value": ' + JSON.stringify(person.info['Dogs'].value.map[uid].value) + '}}}}}}'), { merge: true });
-        loadAccount(person, person.info['Dogs'].value.map[uid].value, "settings");
+        loadAccount(person, person.info['Dogs'].value.map[uid].value, "settingsMessage");
     });
 
     // Action
@@ -363,6 +363,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 $('#content .panel .panel-body .form-group div input').each(function() {
                     $(this).on('input', function() {
                         $(this).addClass('edited');
+                        $('#save').prop('disabled', false);
                     });
                 });
                 if (!hasSettings) {
@@ -370,6 +371,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     $('#content #warning').append('<div class="panel-body">This account doesn\'t have settings available.</div>');
                 } else {
                     $(this).append('<div class="col-sm-2"><button id="save" class="btn btn-block btn-primary">Save</button></div>');
+                    $('#save').prop('disabled', true);
                     $('#save').click(function() {
                         var updatedEntries = '';
                         $('#content .panel').each(function() {
@@ -396,6 +398,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                             }
                         }
                         loadAccount();
+                        $(this).prop('disabled', true);
                     });
                 }
                 break;
