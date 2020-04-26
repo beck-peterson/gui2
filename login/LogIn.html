@@ -34,7 +34,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
   <!-- Firestore-->
   <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
-  
+
   <!-- Initalize Firebase for Navbar authentication check-->
   <script src="../js/FirebaseInitialize.js"></script>
   <!-- Navbar JS-->
@@ -43,27 +43,24 @@
 
 <body>
   <!-- Top-static navigation bar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top id=site_navbar">
     <div class="container-fluid">
       <div class="row">
+        <!-- Navbar logo header-->
         <div class="col-xs-4">
           <div class="navbar-header">
-            <a class="navbar-brand" href="./template.html">CanineConnection</a>
+            <a class="navbar-brand" href="#">CanineConnection</a>
           </div>
         </div>
+        <!-- Nav links inserted by Navbar.js based on user auth status-->
         <div class="col-xs-8 navbar-right">
-          <!--Nav icons listed in order from right to left in navbar;
-                        icons floated right to prevent navbar collapse on resize-->
           <ul class="nav navbar-nav nav-pills" id="navbar_pills">
-            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
-            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
-            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
-            <li class="navbar_pill"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
+
   <div class="container" id="content">
     <div id="welcome">
       <p>Log in to your Account</p>

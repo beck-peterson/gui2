@@ -35,11 +35,15 @@ $(document).ready(function () {
     // Populate nav bar with nav links contextual to user's log-in status
     $(jQueryNavPills).empty();
     firebase.auth().onAuthStateChanged(function (user) {
-        // List authentication-required links when user is logged in
+        // When user is logged in, list authentication-required links
         if (user) {
-
+            $(jQueryNavPills).append(genNavPill("glyphicon-search", "#"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-envelope", "#"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-user", "#"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-cog", "#"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-log-out", "#"));
         }
-        // List Log-In and Sign-Up links when user is not logged in
+        // When user is unauthenticated, list Log-In and Sign-Up links
         else {
             $(jQueryNavPills).append(genNavPill("glyphicon-log-in", "#", "Log-In"));
             $(jQueryNavPills).append(genNavPill("glyphicon-copy", "#", "Sign-Up"));
