@@ -7,6 +7,18 @@
  *  - Firebase 7.14.0
 */
 
+// Site URL
+var siteURL = "https://beck-peterson.github.io/gui2"
+
+// Nav destinations shown to logged in users
+var searchLink = siteURL + "/search/search.html"
+var messagingLink = siteURL + "/messaging/messaging.html"
+var profileLink = siteURL + "/profile/index.html"
+
+// Nav destinations shown to logged out users
+var loginLink = siteURL + "/login/LogIn.html"
+var signupLink = siteURL + "/signup/SignUp.html"
+
 $(document).ready(function () {
     // Site navbar ul to contain navigation links
     var jQueryNavPills = $("#navbar_pills");
@@ -37,16 +49,16 @@ $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         // When user is logged in, list authentication-required links
         if (user) {
-            $(jQueryNavPills).append(genNavPill("glyphicon-search", "#"));
-            $(jQueryNavPills).append(genNavPill("glyphicon-envelope", "#"));
-            $(jQueryNavPills).append(genNavPill("glyphicon-user", "#"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-search", searchLink));
+            $(jQueryNavPills).append(genNavPill("glyphicon-envelope", messagingLink));
+            $(jQueryNavPills).append(genNavPill("glyphicon-user", profileLink));
             $(jQueryNavPills).append(genNavPill("glyphicon-cog", "#"));
             $(jQueryNavPills).append(genNavPill("glyphicon-log-out", "#"));
         }
         // When user is unauthenticated, list Log-In and Sign-Up links
         else {
-            $(jQueryNavPills).append(genNavPill("glyphicon-log-in", "#", "Log-In"));
-            $(jQueryNavPills).append(genNavPill("glyphicon-copy", "#", "Sign-Up"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-log-in", "#", loginLink));
+            $(jQueryNavPills).append(genNavPill("glyphicon-copy", "#", signupLink));
         }
     });
 });
