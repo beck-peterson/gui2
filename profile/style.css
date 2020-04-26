@@ -5,3 +5,8 @@
 button.actionButton {
   margin-bottom: 10px;
 }
+
+a.noDeco {
+    color: inherit;
+    text-decoration: inherit;
+}
