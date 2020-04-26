@@ -7,6 +7,17 @@
  *  - Firebase 7.14.0
 */
 
+// Site URL
+var siteURL = "https://beck-peterson.github.io/gui2"
+// Links of nav pills displayed to logged out users
+var loginLink = siteURL + "/login/LogIn.html"
+var signupLink = siteURL + "/signup/SignUp.html"
+
+// Links of nav pills displayed to logged out users
+var searchLink = siteURL + "/search/search.html"
+var profileLink = siteURL + "/profile/index.html"
+var messagingLink = siteURL + "/messaging/messaging.html"
+
 $(document).ready(function () {
     // Site navbar ul to contain navigation links
     var jQueryNavPills = $("#navbar_pills");
