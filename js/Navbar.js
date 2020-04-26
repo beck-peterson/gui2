@@ -57,8 +57,8 @@ $(document).ready(function () {
         }
         // When user is unauthenticated, list Log-In/Sign-Up links
         else {
-            $(jQueryNavPills).append(genNavPill("glyphicon-log-in", "#", loginLink));
-            $(jQueryNavPills).append(genNavPill("glyphicon-copy", "#", signupLink));
+            $(jQueryNavPills).append(genNavPill("glyphicon-log-in", loginLink, "Log-In"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-copy", signupLink, "Sign-Up"));
         }
     });
 });
