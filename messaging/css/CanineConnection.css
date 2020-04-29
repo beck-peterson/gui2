@@ -1,0 +1,45 @@
+/* File: CanineConnection.css
+ * Creation Date: 3-26-2020
+ * Description: Global CSS stylesheet of CanineConnection.
+*/
+
+body {
+    background: #b6d7a8;
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    padding-top: 70px;
+}
+
+/* ul of navbar navigation pills.
+ * Floating prevents collapse to new flex row when page width is <=768px */
+#navbar_pills {
+    float: right;
+}
+
+/* Navbar pill link */
+.navbar_pill {
+    background-color: #b1adad;
+    border-radius: 4px;
+}
+.navbar_pill>a>span {
+    color:black;
+}
+
+/* Invert navbar pill colors when hovered */
+.navbar_pill:hover {
+    background-color:black;
+}
+.navbar_pill:hover>a>span {
+    color:white;
+}
+
+img.img-md-cropped {
+    width: 164px;
+    height: 164px;
+    object-fit: cover;
+}
+
+img.img-lg-cropped {
+    width: 328px;
+    height: 328px;
+    object-fit: cover;
+}
