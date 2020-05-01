@@ -313,6 +313,11 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         }
                     });
                     $(this).append('<div class="form-check" style="float:right"><label class="form-check-label" for="check" style="padding:5px">Private</label><input class="form-check-input" type="checkbox" value="" id="check"></div>');
+                    $('#content #comment div input').click(function() {
+                        $('#content #comment #post').removeClass('btn-primary');
+                        $('#content #comment #post').removeClass('btn-warning');
+                        $('#content #comment #post').addClass(!$('#content #comment div input').is(":checked") ? 'btn-primary' : 'btn-default');
+                    });
                     $(this).append('<textarea class="form-control" rows="3" style="resize:none" placeholder="Share something!"></textarea>');
                     $(this).append('<button id="post" class="btn btn-block btn-primary">Post</button>');
                     $('#content #comment #post').click(function() {
@@ -329,7 +334,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     for (i in account.info['Posts'].value.array) {
                         var post = account.info['Posts'].value.array[i];
                         if (!post.private || (window.loggedInPerson.uid == person.uid) || (window.loggedInPerson.uid == post.ownerUID)) {
-                            $('#content #wall').append('<div class="panel panel-primary"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + post.ownerUID + '\', \'' + post.accountUID + '\')">' + post.name + '</a></div><br><br><div class="post panel-body">' + post.text + '</div></div>');
+                            $('#content #wall').append('<div class="panel ' + (!post.private ? 'panel-primary' : 'panel-default') + '"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + post.ownerUID + '\', \'' + post.accountUID + '\')">' + post.name + '</a></div><br><br><div class="post panel-body">' + post.text + '</div></div>');
                         }
                     }
                 }
