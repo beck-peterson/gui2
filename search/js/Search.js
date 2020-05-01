@@ -8,53 +8,58 @@ const stateAbbrvs = [
 ];
 
 $(document).ready(function () {
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: 'AIzaSyCeN7ffDFm4ldcV_b77vHtmp69ecLdnNcY',
-        authDomain: 'canine-connection-b2414.firebaseapp.com',
-        databaseURL: 'https://canine-connection-b2414.firebaseio.com/',
-        projectId: 'canine-connection-b2414',
-        storageBucket: 'canine-connection-b2414.appspot.com',
-        messagingSenderId: '841972379358',
-        appId: '1:841972379358:web:1653668eee22a73bc95c4f',
-        measurementId: 'G-QYRPTG50Z3'
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
     // global for easy access to db
     window.db = firebase.firestore();
-
-    const auth = firebase.auth();
-    // db.settings({ timestampsInSnapshots: true });
+    // collect analyics metrics
     firebase.analytics();
 
-    /* Populate age range selects with supported age options */
+
+    /* Dog fields */
+
+    // Configure Breeds input field from supported breeds, queried from db
+    db.collection('Breed').get().then(function (snapshot) {
+        // Breeds field text input
+        var jQueryBreedsInput = $("#breeds_input");
+        // Bootstrap dropdown add-on for breeds input
+        var jQueryBreedsDropdown = $("#breeds_dropdown_ul");
+
+        // List each supported breed to the dropdown add-on
+        snapshot.docs.forEach(function (breed) {
+            var jQueryBreedItem = $(
+                "<li><a href=\"#\">" + breed.data().name + "</a></li>"
+            );
+            $(jQueryBreedsDropdown).append(jQueryBreedItem);
+        });
+
+        // Append clicked dropdown breed's text to breed input
+        $(jQueryBreedsDropdown).find("li").click(function () {
+            var breed_input_val = $(jQueryBreedsInput).val();
+            $(jQueryBreedsInput).val(breed_input_val + "[" + $(this).text() + "] ");
+        });
+    });
+
+    // Populate age range selects with supported age values
     var i;
     $("#age_min_select, #age_max_select").each(function (index, age_select) {
         for (i = 1; i <= 16; i++) {
             $(age_select).append("<option>" + i + "</option>");
         }
     });
-    /* TO-DO: Populate heritage dropdown with dog breeds from db*/
 
-    /* Populate owner state select with U.S. states*/
+
+    /* Owner fields */
+
+    // Populate owner state select with U.S. states
     jQueryStateSelect = $("#state_select");
     for (i = 0; i < stateAbbrvs.length; i++) {
         $(jQueryStateSelect).append("<option>" + stateAbbrvs[i] + "</option>");
     }
-    db.collection('Dog').get().then((snapshot) => {
-        // cycle through each document in the Dog collection and print to console
-        snapshot.docs.forEach(doc => {
-            console.log(doc.data())
-        })
-    })
+
     $("#search_submit_btn").on("click", function () {
         /* Validate search fields*/
         //To-do
 
         /* Query Firebase using search field input*/
-
-        // asynchronus call, fires then() when .get() has retrieved a snapshot of the database
 
         /* Report queries to page*/
     });
