@@ -389,7 +389,14 @@ function signUpWithGoogle(){
         },
         owner: null,
         uid: user.uid
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
     });
+
     console.log(user);
     window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
@@ -535,6 +542,12 @@ function signUpWithFacebook(){
         },
         owner: null,
         uid: user.uid
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
     });
     console.log(user);
     window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
