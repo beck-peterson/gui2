@@ -288,7 +288,7 @@ function signUpWithGoogle(){
     var phone = user.phoneNumber;
 
     var i = 0;
-    db.collection('Person').doc(user.uid).set({
+    db.collection('Person').doc(result.user.uid).set({
         photos: [],
         info: {
             "Display": {
@@ -398,7 +398,7 @@ function signUpWithGoogle(){
             }
         },
         owner: null,
-        uid: user.uid
+        uid: result.user.uid
     })
     .then(function() {
         console.log("Document successfully written!");
@@ -408,7 +408,7 @@ function signUpWithGoogle(){
     });
 
     console.log(user);
-    window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+    //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
     // Handle Errors here.
     alert("sign up unsuccessful")
@@ -441,7 +441,7 @@ function signUpWithFacebook(){
     var phone = user.phoneNumber;
 
     var i = 0;
-    db.collection('Person').doc(user.uid).set({
+    db.collection('Person').doc(result.user.uid).set({
         photos: [],
         info: {
             "Display": {
@@ -551,7 +551,7 @@ function signUpWithFacebook(){
             }
         },
         owner: null,
-        uid: user.uid
+        uid: result.user.uid
     })
     .then(function() {
         console.log("Document successfully written!");
@@ -560,7 +560,7 @@ function signUpWithFacebook(){
       console.error("Error writing document: ", error);
     });
     console.log(user);
-    window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+    //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
     // Handle Errors here.
     alert("sign up unsuccessful")
