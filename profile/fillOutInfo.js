@@ -250,12 +250,12 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
             console.log(deepEqual(window.loggedInPerson, window.currentPerson));
             window.db.collection('Dog').doc(uid).set(person.info['Dogs'].value.map[uid].value);
             window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + uid + '": {"value": ' + JSON.stringify(person.info['Dogs'].value.map[uid].value) + '}}}}}}'), { merge: true });
-            loadAccount(person, person.info['Dogs'].value.map[uid].value, "settingsMessage");
+            loadAccount(person, person.info['Dogs'].value.map[uid].value, 'settingsMessage');
         });
     }
 
     // Action
-    $('#action #settingsMessage').html(deepEqual(window.loggedInPerson, window.currentPerson) ? "Settings" : "Message");
+    $('#action #settingsMessage').html(deepEqual(window.loggedInPerson, window.currentPerson) ? 'Settings' : 'Message');
     $('#action button').each(function() {
         $(this).removeClass('btn-outline-primary');
         $(this).addClass('btn-primary');
@@ -404,6 +404,24 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         loadAccount();
                         $(this).prop('disabled', true);
                     });
+                    if (account.owner != null) {
+                        $(this).append('<div class="col-sm-8"></div>');
+                        $(this).append('<div class="col-sm-2"><button id="delete" class="btn btn-block btn-danger">Delete</button></div>');
+                        $('#delete').click(function() {
+                            if ($(this).hasClass('confirm')) {
+                                window.db.collection('Dog').doc(account.uid).delete().then(function() {
+                                    console.log("Document successfully deleted!");
+                                }).catch(function(error) {
+                                    console.error("Error removing document: ", error);
+                                });
+                                window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": "' + JSON.stringify(person.info['Dogs'].value.map) + '}}}}'), { merge: true });
+                                loadAccount(person, person, 'profile');
+                            } else {
+                                $(this).assClass('confirm');
+                                $(this).html('Confirm');
+                            }
+                        });
+                    }
                 }
                 break;
         }
