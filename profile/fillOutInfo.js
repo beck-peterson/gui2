@@ -414,8 +414,12 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                                 }).catch(function(error) {
                                     console.error("Error removing document: ", error);
                                 });
-                                person.info['Dogs'].value.map.delete(account.uid);
-                                window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": "' + JSON.stringify(person.info['Dogs'].value.map) + '}}}}'), { merge: true });
+                                delete person.info['Dogs'].value.map[account.uid];
+                                //window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": ' + JSON.stringify(person.info['Dogs'].value.map) + '}}}}'), { merge: true });
+                                //window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": ' + JSON.stringify(firebase.firestore.FieldValue.delete()) + '}}}}}'), { merge: true });
+
+                                // I ultimately went with this because the first option changed nothing, and the second option added '"aa": "FieldValue.delete"' into the dog in the database rather than actually deleting it
+                                window.db.collection('Person').doc(person.uid).set({info: {Dogs: {value: {map: {[account.uid]: firebase.firestore.FieldValue.delete()}}}}}, { merge: true });
                                 loadAccount(person, person, 'profile');
                             } else {
                                 $(this).addClass('confirm');
@@ -462,6 +466,7 @@ function changeProfile(uid) {
     loadAccount(window.currentPerson, account, window.currentTab);
 }
 
+// Function grabbed from online
 function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
