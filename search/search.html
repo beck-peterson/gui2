@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>CanineConnection - Search</title>
+
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -13,12 +14,14 @@
     <link rel="stylesheet" href="../css/CanineConnection.css">
     <!-- Search Page CSS-->
     <link rel="stylesheet" href="./css/search.css">
+
     <!-- JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
+
     <!-- Firebase SDK-->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <!-- Firebase Analytics SDK-->
@@ -27,10 +30,13 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
     <!-- Firestore-->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
-    <!-- Search JS-->
-    <script src="./js/search.js"></script>
+    <!-- Initalize Firebase for Navbar authentication check-->
+    <script src="../js/FirebaseInitialize.js"></script>
+
     <!-- Navbar JS-->
     <script src="../js/Navbar.js"></script>
+    <!-- Search JS-->
+    <script src="./js/search.js"></script>
 </head>
 
 <body>
@@ -52,7 +58,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Main content wrapper-->
     <div class="container-fluid">
         <div class="row" id="search_row">
@@ -93,21 +99,20 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- Dog heritage input-->
+                            <!-- Dog breeds input-->
                             <div class="form-group col-xs-8">
-                                <label for="heritage_input">Heritage</label>
-                                <div class="input-group" id="heritage_input_group">
-                                    <!-- Selecting a breed in dropdown appends that breed to text input-->
+                                <label for="breeds_input">Breeds</label>
+                                <div class="input-group" id="breeds_input_group">
+                                    <!-- Selecting a breed from dropdown appends that breed to text input-->
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-toggle="dropdown">
                                             Add Breed <span class="caret"></span>
                                         </button>
-                                        <!-- TO-DO: Populate list with supported breeds via script-->
-                                        <ul class="dropdown-menu" id="breed_dropdown_list">
+                                        <ul class="dropdown-menu" id="breeds_dropdown_ul">
                                         </ul>
                                     </div>
-                                    <input type="text" class="form-control" id="heritage_input">
+                                    <input type="text" class="form-control" id="breeds_input">
                                 </div>
                             </div>
                             <!-- Dog listing purpose checkboxes-->
