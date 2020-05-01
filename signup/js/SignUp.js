@@ -269,6 +269,127 @@ function signUpWithGoogle(){
     var token = result.credential.accessToken;
     // The signed-in user info.
     var user = result.user;
+
+    var str = user.displayName;
+    var name = str.split(" ");
+    var fname = name[0];
+    var lname = name[1];
+    var email = user.email;
+    var phone = user.phoneNumber;
+
+    var i = 0;
+    db.collection('Person').doc(user.uid).set({
+        photos: [],
+        info: {
+            "Display": {
+                value: {
+                    title: "Display",
+                    visibility: "protected",
+                    map: {
+                        "Photo_URL": {
+                            value: "",
+                            order: i++
+                        },
+                        "First_Name": {
+                            value: fname,
+                            order: i++
+                        },
+                        "Middle_Name": {
+                            value: "",
+                            order: i++
+                        },
+                        "Last_Name": {
+                            value: lname,
+                            order: i++
+                        },
+                        "Age": {
+                            value: "",
+                            order: i++
+                        },
+                        "Summary": {
+                            value: "",
+                            order: i++
+                        }
+                    }
+                },
+                order: i++
+            },
+            "Posts": {
+                value: {
+                    title: "Posts",
+                    visibility: "private",
+                    map: {},
+                    array: []
+                },
+                order: i++
+            },
+            "Dogs": {
+                value: {
+                    title: "Dogs",
+                    visibility: "private",
+                    map: {}
+                },
+                order: i++
+            },
+            "Contact": {
+                value: {
+                    title: "Contact",
+                    visibility: "protected",
+                    map: {
+                        "Phone": {
+                            value: phone,
+                            order: i++
+                        },
+                        "Email": {
+                            value: email,
+                            order: i++
+                        },
+                    }
+                },
+                order: i++
+            },
+            "Address": {
+                value: {
+                    title: "Address",
+                    visibility: "protected",
+                    map: {
+                        "Address": {
+                            value: "",
+                            order: i++
+                        },
+                        "City": {
+                            value: "",
+                            order: i++
+                        },
+                        "State": {
+                            value: "",
+                            order: i++
+                        },
+                        "Zip": {
+                            value: "",
+                            order: i++
+                        }
+                    }
+                },
+                order: i++
+            },
+            "Organization": {
+                value: {
+                    title: "Organization",
+                    visibility: "public",
+                    map: {
+                        "Organization": {
+                            value: "",
+                            order: i++
+                        }
+                    }
+                },
+                order: i++
+            }
+        },
+        owner: null,
+        uid: user.uid
+    });
     console.log(user);
     window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
@@ -294,6 +415,127 @@ function signUpWithFacebook(){
     var token = result.credential.accessToken;
     // The signed-in user info.
     var user = result.user;
+
+    var str = user.displayName;
+    var name = str.split(" ");
+    var fname = name[0];
+    var lname = name[1];
+    var email = user.email;
+    var phone = user.phoneNumber;
+
+    var i = 0;
+    db.collection('Person').doc(user.uid).set({
+        photos: [],
+        info: {
+            "Display": {
+                value: {
+                    title: "Display",
+                    visibility: "protected",
+                    map: {
+                        "Photo_URL": {
+                            value: "",
+                            order: i++
+                        },
+                        "First_Name": {
+                            value: fname,
+                            order: i++
+                        },
+                        "Middle_Name": {
+                            value: "",
+                            order: i++
+                        },
+                        "Last_Name": {
+                            value: lname,
+                            order: i++
+                        },
+                        "Age": {
+                            value: "",
+                            order: i++
+                        },
+                        "Summary": {
+                            value: "",
+                            order: i++
+                        }
+                    }
+                },
+                order: i++
+            },
+            "Posts": {
+                value: {
+                    title: "Posts",
+                    visibility: "private",
+                    map: {},
+                    array: []
+                },
+                order: i++
+            },
+            "Dogs": {
+                value: {
+                    title: "Dogs",
+                    visibility: "private",
+                    map: {}
+                },
+                order: i++
+            },
+            "Contact": {
+                value: {
+                    title: "Contact",
+                    visibility: "protected",
+                    map: {
+                        "Phone": {
+                            value: phone,
+                            order: i++
+                        },
+                        "Email": {
+                            value: email,
+                            order: i++
+                        },
+                    }
+                },
+                order: i++
+            },
+            "Address": {
+                value: {
+                    title: "Address",
+                    visibility: "protected",
+                    map: {
+                        "Address": {
+                            value: "",
+                            order: i++
+                        },
+                        "City": {
+                            value: "",
+                            order: i++
+                        },
+                        "State": {
+                            value: "",
+                            order: i++
+                        },
+                        "Zip": {
+                            value: "",
+                            order: i++
+                        }
+                    }
+                },
+                order: i++
+            },
+            "Organization": {
+                value: {
+                    title: "Organization",
+                    visibility: "public",
+                    map: {
+                        "Organization": {
+                            value: "",
+                            order: i++
+                        }
+                    }
+                },
+                order: i++
+            }
+        },
+        owner: null,
+        uid: user.uid
+    });
     console.log(user);
     window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
