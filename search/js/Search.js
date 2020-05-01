@@ -11,6 +11,8 @@ const stateAbbrvs = [
     'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
 ];
 
+var collection = [];
+
 $(document).ready(function () {
     // global for easy access to db
     window.db = firebase.firestore();
@@ -53,17 +55,44 @@ $(document).ready(function () {
 
     /* Owner fields */
 
+
+
     // Populate owner state select with U.S. states
     jQueryStateSelect = $("#state_select");
     for (i = 0; i < stateAbbrvs.length; i++) {
         $(jQueryStateSelect).append("<option>" + stateAbbrvs[i] + "</option>");
     }
 
-    $("#search_submit_btn").on("click", function () {
+    search_field_form.addEventListener('submit' , (e) => {
+      // want to prevent default because otherwise it reloads the page
+        e.preventDefault()
         /* Validate search fields*/
         //To-do
-
+        //info.Display.value.First_Name.value
         /* Query Firebase using search field input*/
+
+        var OwnerFName = search_field_form["firstname_input"].value;
+        var OwnerLName = search_field_form["lastname_input"].value;
+        var OwnerOrg = search_field_form["company_input"].value;
+
+
+        console.log(OwnerFName);
+
+        db.collection("Person").where("info.Display.value.map.First_Name.value", "==", OwnerFName)
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+           console.log(doc.id, " => ", doc.data());
+            //collection.push(doc.data());
+            $("#search_results").append(doc.data());
+            });
+          })
+          .catch(function(error) {
+            console.log("Error getting documents: ", error);
+          });
+
+
 
         /* Report queries to page*/
     });

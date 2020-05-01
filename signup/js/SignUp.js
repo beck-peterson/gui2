@@ -140,6 +140,12 @@ $(document).ready(function() {
             },
             owner: null,
             uid: cred.user.uid
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
         });
         auth.signInWithEmailAndPassword(email, password).then( cred => {
           console.log(cred.user);
@@ -158,6 +164,10 @@ $(document).ready(function() {
         var errorMessage = error.message;
         console.log(errorCode)
         console.log(errorMessage)
+        if(errorCode == "auth/email-already-in-use")
+        {
+          alert("This email address is already in use by another account.");
+        }
         console.log("Either the same credential existed or something broke or You are running on local")
         });
     }else{
@@ -278,7 +288,7 @@ function signUpWithGoogle(){
     var phone = user.phoneNumber;
 
     var i = 0;
-    db.collection('Person').doc(user.uid).set({
+    db.collection('Person').doc(result.user.uid).set({
         photos: [],
         info: {
             "Display": {
@@ -388,7 +398,7 @@ function signUpWithGoogle(){
             }
         },
         owner: null,
-        uid: user.uid
+        uid: result.user.uid
     })
     .then(function() {
         console.log("Document successfully written!");
@@ -431,7 +441,7 @@ function signUpWithFacebook(){
     var phone = user.phoneNumber;
 
     var i = 0;
-    db.collection('Person').doc(user.uid).set({
+    db.collection('Person').doc(result.user.uid).set({
         photos: [],
         info: {
             "Display": {
@@ -541,7 +551,7 @@ function signUpWithFacebook(){
             }
         },
         owner: null,
-        uid: user.uid
+        uid: result.user.uid
     })
     .then(function() {
         console.log("Document successfully written!");
