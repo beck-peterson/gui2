@@ -164,6 +164,10 @@ $(document).ready(function() {
         var errorMessage = error.message;
         console.log(errorCode)
         console.log(errorMessage)
+        if(errorCode == "auth/email-already-in-use")
+        {
+          alert("This email address is already in use by another account.");
+        }
         console.log("Either the same credential existed or something broke or You are running on local")
         });
     }else{
