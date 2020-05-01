@@ -140,6 +140,12 @@ $(document).ready(function() {
             },
             owner: null,
             uid: cred.user.uid
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
         });
         auth.signInWithEmailAndPassword(email, password).then( cred => {
           console.log(cred.user);
