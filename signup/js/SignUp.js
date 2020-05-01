@@ -408,8 +408,12 @@ function signUpWithGoogle(){
     });
 
     console.log(user);
+<<<<<<< HEAD
     alert("Google Account Sign Up Successful.")
     //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+=======
+    window.location.href = "https://beck-peterson.github.io/gui2/login/LogIn.html";
+>>>>>>> 2de1bf1e2cd4819e66ddec848067df5e5d4aada5
   }).catch(function(error) {
     // Handle Errors here.
     alert("sign up unsuccessful")
@@ -561,8 +565,12 @@ function signUpWithFacebook(){
       console.error("Error writing document: ", error);
     });
     console.log(user);
+<<<<<<< HEAD
     alert("Google Account Sign Up Successful.")
     //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+=======
+    window.location.href = "https://beck-peterson.github.io/gui2/login/LogIn.html";
+>>>>>>> 2de1bf1e2cd4819e66ddec848067df5e5d4aada5
   }).catch(function(error) {
     // Handle Errors here.
     alert("sign up unsuccessful")
