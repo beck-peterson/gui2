@@ -276,7 +276,8 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     auth.currentUser.updateProfile({
                        photoURL: photo
                     });
-                    $(this).append('<div id="photo" style="float:left"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
+                    $(this).append('<div id="photo" style="float:left; margin-bottom:15px; margin-right:15px;"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
+                    $(this).append('<div id="summary" style="float:right">' + account.info['Display'].value.map['Summary'].value + '</div>');
                     if (account.owner == null) {
                         var firstName = account.info['Display'].value.map['First_Name'].value;
                         var lastName = account.info['Display'].value.map['Last_Name'].value;
@@ -298,7 +299,6 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         $(this).append('<div id="thirdLine"></div>'); // nothing on third line yet
                         $(this).append('<div id="fourthLine"></div>'); // nothing on fourth line yet
                     }
-                    $(this).append('<div id="summary" style="float:right">' + account.info['Display'].value.map['Summary'].value + '</div>');
                 });
                 $(this).append('<div id="comment" class="form-group"></div>');
                 $('#content #comment').each(function() {
