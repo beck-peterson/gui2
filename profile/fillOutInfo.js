@@ -414,6 +414,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                                 }).catch(function(error) {
                                     console.error("Error removing document: ", error);
                                 });
+                                person.info['Dogs'].value.map.delete(account.uid);
                                 window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": "' + JSON.stringify(person.info['Dogs'].value.map) + '}}}}'), { merge: true });
                                 loadAccount(person, person, 'profile');
                             } else {
