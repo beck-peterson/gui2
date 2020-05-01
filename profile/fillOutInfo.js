@@ -247,7 +247,6 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 },
                 order: Object.getOwnPropertyNames(person.info['Dogs'].value.map).length
             };
-            console.log(deepEqual(window.loggedInPerson, window.currentPerson));
             window.db.collection('Dog').doc(uid).set(person.info['Dogs'].value.map[uid].value);
             window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + uid + '": {"value": ' + JSON.stringify(person.info['Dogs'].value.map[uid].value) + '}}}}}}'), { merge: true });
             loadAccount(person, person.info['Dogs'].value.map[uid].value, 'settingsMessage');
@@ -313,16 +312,15 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                             }
                         }
                     });
+                    $(this).append('<div class="form-check" style="float:right"><label class="form-check-label" for="check" style="padding:5px">Private</label><input class="form-check-input" type="checkbox" value="" id="check"></div>');
                     $(this).append('<textarea class="form-control" rows="3" style="resize:none" placeholder="Share something!"></textarea>');
                     $(this).append('<button id="post" class="btn btn-block btn-primary">Post</button>');
                     $('#content #comment #post').click(function() {
                         $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + window.loggedInPerson.uid + '\', \'' + $('#content #comment div select').val() + '\')">' + $('#content #comment div select option:selected').text() + '</a></div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
                         var wall = account.info['Posts'].value.array;
-                        wall.unshift(JSON.parse('{"ownerUID": "' + window.loggedInPerson.uid + '", "accountUID": "' + $('#content #comment div select').val() + '", "name": "' + $('#content #comment div select option:selected').text() + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
+                        wall.unshift(JSON.parse('{"ownerUID": "' + window.loggedInPerson.uid + '", "accountUID": "' + $('#content #comment div select').val() + '", "name": "' + $('#content #comment div select option:selected').text() + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "private": ' + $('#content #comment div input').is(":checked") + ', "photo": null, "file": null}'));
                         var update = JSON.parse((account.owner == null ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {"Posts": {"value": {"array": ' + JSON.stringify(wall) + '}}}}' + (account.owner == null ? '' : '}}}}}}'));
                         $('#content #comment textarea').val('');
-                        console.log(update);
-                        console.log(wall);
                         window.db.collection('Person').doc(person.uid).set(update, { merge: true });
                     });
                 });
@@ -330,7 +328,9 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                 if (account.info['Posts'].value != null) {
                     for (i in account.info['Posts'].value.array) {
                         var post = account.info['Posts'].value.array[i];
-                        $('#content #wall').append('<div class="panel panel-primary"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + post.ownerUID + '\', \'' + post.accountUID + '\')">' + post.name + '</a></div><br><br><div class="post panel-body">' + post.text + '</div></div>');
+                        if (!post.private || (window.loggedInPerson.uid == person.uid) || (window.loggedInPerson.uid == post.ownerUID)) {
+                            $('#content #wall').append('<div class="panel panel-primary"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + post.ownerUID + '\', \'' + post.accountUID + '\')">' + post.name + '</a></div><br><br><div class="post panel-body">' + post.text + '</div></div>');
+                        }
                     }
                 }
                 break;
@@ -415,7 +415,6 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         if (updatedEntries != '') {
                             if (account.owner == null) {
                                 var update = JSON.parse('{"info": {' + updatedEntries + '}}');
-                                console.log(JSON.stringify(update));
                                 window.db.collection('Person').doc(account.uid).set(update, { merge: true });
                             } else {
                                 window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": {"info": {' + updatedEntries + '}}}}}}}}'), { merge: true });
