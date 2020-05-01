@@ -278,13 +278,23 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                     });
                     $(this).append('<div id="photo" style="float:left"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
                     if (account.owner == null) {
-                        $(this).append('<div id="firstLine">' + account.info['Display'].value.map['First_Name'].value + ' ' + account.info['Display'].value.map['Last_Name'].value + '</div>');
-                        $(this).append('<div id="secondLine">' + account.info['Display'].value.map['Age'].value + '</div>');
-                        $(this).append('<div id="thirdLine">' + account.info['Address'].value.map['City'].value + ', ' + account.info['Address'].value.map['State'].value + '</div>');
-                        $(this).append('<div id="fourthLine">' + account.info['Organization'].value.map['Organization'].value + '</div>');
+                        var firstName = account.info['Display'].value.map['First_Name'].value;
+                        var lastName = account.info['Display'].value.map['Last_Name'].value;
+                        var age = account.info['Display'].value.map['Age'].value;
+                        var city = account.info['Address'].value.map['City'].value;
+                        var state = account.info['Address'].value.map['State'].value;
+                        var organization = account.info['Organization'].value.map['Organization'].value;
+                        $(this).append('<div id="firstLine">' + firstName + ' ' + lastName + '</div>');
+                        $(this).append('<div id="secondLine">' + age + '</div>');
+                        $(this).append('<div id="thirdLine">' + city + (city == '' || state == '' ? '' : ', ') + state + '</div>');
+                        $(this).append('<div id="fourthLine">' + organization + '</div>');
                     } else {
-                        $(this).append('<div id="firstLine">' + account.info['Display'].value.map['First_Name'].value + ' ' + account.info['Display'].value.map['Last_Name'].value + '</div>');
-                        $(this).append('<div id="secondLine">' + account.info['General'].value.map['Breeds'].value + ', ' + account.info['Display'].value.map['Age'].value + '</div>');
+                        var firstName = account.info['Display'].value.map['First_Name'].value;
+                        var lastName = account.info['Display'].value.map['Last_Name'].value;
+                        var breeds = account.info['General'].value.map['Breeds'].value;
+                        var age = account.info['Display'].value.map['Age'].value;
+                        $(this).append('<div id="firstLine">' + firstName + ' ' + lastName + '</div>');
+                        $(this).append('<div id="secondLine">' + breeds + (breeds == '' || age == '' ? '' : ', ') + age + '</div>');
                         $(this).append('<div id="thirdLine"></div>'); // nothing on third line yet
                         $(this).append('<div id="fourthLine"></div>'); // nothing on fourth line yet
                     }
