@@ -300,14 +300,25 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         $(this).append('<div id="fourthLine"></div>'); // nothing on fourth line yet
                     }
                 });
+                $(this).append('<div class="col-sm-12"></div>');
                 $(this).append('<div id="comment" class="form-group"></div>');
                 $('#content #comment').each(function() {
+                    $(this).append('<div class="col-sm-3" style="padding-left:0px; padding-right:0px;"><select class="form-control form-control-lg"></select></div>');
+                    $('#content #comment div select').each(function() {
+                        $(this).append('<option selected="" value="' + window.loggedInPerson.uid + '">' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '</option>');
+                        if (window.loggedInPerson.info['Dogs'].value != null) {
+                            for (let i of Array.from(Object.getOwnPropertyNames(window.loggedInPerson.info['Dogs'].value.map)).sort((a, b) => window.loggedInPerson.info['Dogs'].value.map[a].order - window.loggedInPerson.info['Dogs'].value.map[b].order)) {
+                                var dog = window.loggedInPerson.info['Dogs'].value.map[i].value;
+                                $(this).append('<option value="' + dog.uid + '">' + dog.info['Display'].value.map['First_Name'].value + ' ' + dog.info['Display'].value.map['Last_Name'].value + '</option>');
+                            }
+                        }
+                    });
                     $(this).append('<textarea class="form-control" rows="3" style="resize:none" placeholder="Share something!"></textarea>');
                     $(this).append('<button id="post" class="btn btn-block btn-primary">Post</button>');
                     $('#content #comment #post').click(function() {
-                        $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + window.loggedInPerson.uid + '\', \'' + window.loggedInPerson.uid + '\')">' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '</a></div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
+                        $('#content #wall').prepend('<div class="panel panel-primary"><div class="panel-heading col-sm-3"><a href="#" class="noDeco" onclick="loadAccountFromUID(\'' + window.loggedInPerson.uid + '\', \'' + $('#content #comment div select').val() + '\')">' + $('#content #comment div select option:selected').text() + '</a></div><br><br><div class="post panel-body">' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '</div></div>');
                         var wall = account.info['Posts'].value.array;
-                        wall.unshift(JSON.parse('{"ownerUID": "' + window.loggedInPerson.uid + '", "accountUID": "' + window.loggedInPerson.uid + '", "name": "' + window.loggedInPerson.info['Display'].value.map['First_Name'].value + ' ' + window.loggedInPerson.info['Display'].value.map['Last_Name'].value + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
+                        wall.unshift(JSON.parse('{"ownerUID": "' + window.loggedInPerson.uid + '", "accountUID": "' + $('#content #comment div select').val() + '", "name": "' + $('#content #comment div select option:selected').text() + '", "text": "' + $('#content #comment textarea').val().replace(/\n/g, '<br>') + '", "photo": null, "file": null}'));
                         var update = JSON.parse((account.owner == null ? '' : '{"info": {"Dogs": {"value": {"map": {"' + account.uid + '": {"value": ') + '{"info": {"Posts": {"value": {"array": ' + JSON.stringify(wall) + '}}}}' + (account.owner == null ? '' : '}}}}}}'));
                         $('#content #comment textarea').val('');
                         console.log(update);
