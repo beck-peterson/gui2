@@ -1,4 +1,8 @@
-
+/* File: Search.js
+ * Date Created: 4-12-2020
+ * Description: Scripted configurations and functionality for
+ * the CanineConnection Search Page.
+*/
 const stateAbbrvs = [
     'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA',
     'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA',
@@ -34,7 +38,7 @@ $(document).ready(function () {
         // Append clicked dropdown breed's text to breed input
         $(jQueryBreedsDropdown).find("li").click(function () {
             var breed_input_val = $(jQueryBreedsInput).val();
-            $(jQueryBreedsInput).val(breed_input_val + "[" + $(this).text() + "] ");
+            $(jQueryBreedsInput).val(breed_input_val + $(this).text() + ", ");
         });
     });
 
