@@ -418,7 +418,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                                 window.db.collection('Person').doc(person.uid).set(JSON.parse('{"info": {"Dogs": {"value": {"map": "' + JSON.stringify(person.info['Dogs'].value.map) + '}}}}'), { merge: true });
                                 loadAccount(person, person, 'profile');
                             } else {
-                                $(this).assClass('confirm');
+                                $(this).addClass('confirm');
                                 $(this).html('Confirm');
                             }
                         });
