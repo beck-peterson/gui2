@@ -408,7 +408,7 @@ function signUpWithGoogle(){
     });
 
     console.log(user);
-    //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+    window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
     // Handle Errors here.
     alert("sign up unsuccessful")
@@ -560,7 +560,7 @@ function signUpWithFacebook(){
       console.error("Error writing document: ", error);
     });
     console.log(user);
-    //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+    window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
     // Handle Errors here.
     alert("sign up unsuccessful")
