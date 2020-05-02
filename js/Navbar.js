@@ -53,10 +53,12 @@ $(document).ready(function () {
             $(jQueryNavPills).append(genNavPill("glyphicon-envelope", messagingLink));
             $(jQueryNavPills).append(genNavPill("glyphicon-user", profileLink));
             $(jQueryNavPills).append("<li class=\"navbar_pill\"><a href=\"\" onclick=\"logout(); return false\">"
-            + "<span>" + text + "</span>"
-            + "<span class=\"glyphicon " + glyphClass + "\">"
+            + "<span></span>"
+            + "<span class=\"glyphicon glyphicon-log-out\">"
             + "</span></a></li>");
         }
+        $(jQueryNavPills).append(genNavPill("glyphicon-cog", "#"));
+        $(jQueryNavPills).append(genNavPill("glyphicon-log-out", "#"));
         // When user is unauthenticated, list Log-In/Sign-Up links
         else {
             $(jQueryNavPills).append(genNavPill("glyphicon-log-in", loginLink, "Log-In"));
