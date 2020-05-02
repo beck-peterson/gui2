@@ -14,7 +14,6 @@ var siteURL = "https://beck-peterson.github.io/gui2"
 var searchLink = siteURL + "/search/search.html"
 var messagingLink = siteURL + "/messaging/messaging.html"
 var profileLink = siteURL + "/profile/index.html"
-var logoutlink = "logout()"
 
 // Nav destinations shown to logged out users
 var loginLink = siteURL + "/login/LogIn.html"
@@ -53,7 +52,10 @@ $(document).ready(function () {
             $(jQueryNavPills).append(genNavPill("glyphicon-search", searchLink));
             $(jQueryNavPills).append(genNavPill("glyphicon-envelope", messagingLink));
             $(jQueryNavPills).append(genNavPill("glyphicon-user", profileLink));
-            $(jQueryNavPills).append(genNavPill("glyphicon-log-out", logoutlink, "Logout"));
+            $(jQueryNavPills).append("<li class=\"navbar_pill\"><a href=\"\" onclick=\"logout(); return false\">"
+            + "<span>" + text + "</span>"
+            + "<span class=\"glyphicon " + glyphClass + "\">"
+            + "</span></a></li>");
         }
         // When user is unauthenticated, list Log-In/Sign-Up links
         else {
