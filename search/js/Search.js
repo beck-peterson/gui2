@@ -90,9 +90,34 @@ $(document).ready(function () {
           .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            //collection.push(doc.data());
-            $("#search_results").append(doc.data());
+           console.log(doc.id, " => ", doc.data());
+            $('#searchResults').append('<div id="' + doc.id + '" style="height:169px; margin-left:15px"></div>');
+            $('#searchResults #' + doc.id).each(function () {
+                var account = doc.data();
+                var photo = account.info['Display'].value.map['Photo_URL'].value != '' ? account.info['Display'].value.map['Photo_URL'].value : 'https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png';
+                $(this).append('<div style="float:left; margin-bottom:15px; margin-right:15px;"><img src="' + photo + '" class="img-thumbnail img-md-cropped"></div>');
+                if (account.owner == null) {
+                    var firstName = account.info['Display'].value.map['First_Name'].value;
+                    var lastName = account.info['Display'].value.map['Last_Name'].value;
+                    var age = account.info['Display'].value.map['Age'].value;
+                    var city = account.info['Address'].value.map['City'].value;
+                    var state = account.info['Address'].value.map['State'].value;
+                    var organization = account.info['Organization'].value.map['Organization'].value;
+                    $(this).append('<div id="firstLine"><h4 style="font-weight:bold">' + firstName + ' ' + lastName + '</h4></div>');
+                    $(this).append('<div id="secondLine"><h4 style="font-weight:bold">' + age + '</h4></div>');
+                    $(this).append('<div id="thirdLine"><h4 style="font-weight:bold">' + city + (city == '' || state == '' ? '' : ', ') + state + '</h4></div>');
+                    $(this).append('<div id="fourthLine"><h4 style="font-weight:bold">' + organization + '</h4></div>');
+                } else {
+                    var firstName = account.info['Display'].value.map['First_Name'].value;
+                    var lastName = account.info['Display'].value.map['Last_Name'].value;
+                    var breeds = account.info['General'].value.map['Breeds'].value;
+                    var age = account.info['Display'].value.map['Age'].value;
+                    $(this).append('<div id="firstLine"><h4 style="font-weight:bold">' + firstName + ' ' + lastName + '</h4></div>');
+                    $(this).append('<div id="secondLine"><h4 style="font-weight:bold">' + breeds + (breeds == '' || age == '' ? '' : ', ') + age + '</h4></div>');
+                    $(this).append('<div id="thirdLine"><h4 style="font-weight:bold"></h4></div>'); // nothing on third line yet
+                    $(this).append('<div id="fourthLine"><h4 style="font-weight:bold"></h4></div>'); // nothing on fourth line yet
+                }
+            });
             });
           })
           .catch(function(error) {
