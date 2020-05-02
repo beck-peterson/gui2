@@ -71,19 +71,26 @@ $(document).ready(function () {
         //info.Display.value.First_Name.value
         /* Query Firebase using search field input*/
 
-        var OwnerFName = search_field_form["firstname_input"].value;
-        var OwnerLName = search_field_form["lastname_input"].value;
-        var OwnerOrg = search_field_form["company_input"].value;
 
+        var ownerFName = search_field_form["firstname_input"].value;
+        var ownerLName = search_field_form["lastname_input"].value;
+        var ownerOrg = search_field_form["company_input"].value;
+        var dogName = search_field_form["dog_name_input"].value;
 
-        console.log(OwnerFName);
+        console.log(ownerFName);
+        console.log(ownerLName);
+        console.log(ownerOrg);
 
-        db.collection("Person").where("info.Display.value.map.First_Name.value", "==", OwnerFName)
+        var personRef = db.collection("Person");
+          personRef.where("info.Display.value.map.First_Name.value", "==", ownerFName)
+          personRef.where("info.Display.value.map.Last_Name.value", "==", ownerLName)
+          personRef.where("info.Organization.value.map.Organization.title", "==", ownerOrg)
+          personRef.where("info.Dogs.value.map.First_Name.title", "==", dogName)
           .get()
           .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
-           console.log(doc.id, " => ", doc.data());
+            console.log(doc.id, " => ", doc.data());
             //collection.push(doc.data());
             $("#search_results").append(doc.data());
             });
