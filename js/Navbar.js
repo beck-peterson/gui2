@@ -14,6 +14,7 @@ var siteURL = "https://beck-peterson.github.io/gui2"
 var searchLink = siteURL + "/search/search.html"
 var messagingLink = siteURL + "/messaging/messaging.html"
 var profileLink = siteURL + "/profile/index.html"
+var logoutlink = "logout()"
 
 // Nav destinations shown to logged out users
 var loginLink = siteURL + "/login/LogIn.html"
@@ -26,10 +27,10 @@ $(document).ready(function () {
     /**
      * Generates a .navbar_pill li that displays a glyphicon
      * of the argument Bootstrap glyphicon CSS class.
-     * 
+     *
      * The generated pill should be inserted to the link ul of
      * the site navbar.
-     * 
+     *
      * @param {string} link Pill link destination
      * @param {string} glyphClass CSS class of pill glyphicon
      * @param {string} text Text to prepend glyphicon
@@ -52,8 +53,7 @@ $(document).ready(function () {
             $(jQueryNavPills).append(genNavPill("glyphicon-search", searchLink));
             $(jQueryNavPills).append(genNavPill("glyphicon-envelope", messagingLink));
             $(jQueryNavPills).append(genNavPill("glyphicon-user", profileLink));
-            $(jQueryNavPills).append(genNavPill("glyphicon-cog", "#"));
-            $(jQueryNavPills).append(genNavPill("glyphicon-log-out", "#"));
+            $(jQueryNavPills).append(genNavPill("glyphicon-log-out", logoutlink, "Logout"));
         }
         // When user is unauthenticated, list Log-In/Sign-Up links
         else {
