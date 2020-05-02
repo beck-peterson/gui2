@@ -179,7 +179,7 @@ auth.onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
     console.log(user.uid)
-    window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+    window.location.href = "https://beck-peterson.github.io/gui2/login/LogIn.html";
   } else {
     console.log('user logged out');
   }
