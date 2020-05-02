@@ -57,8 +57,6 @@ $(document).ready(function () {
             + "<span class=\"glyphicon glyphicon-log-out\">"
             + "</span></a></li>");
         }
-        $(jQueryNavPills).append(genNavPill("glyphicon-cog", "#"));
-        $(jQueryNavPills).append(genNavPill("glyphicon-log-out", "#"));
         // When user is unauthenticated, list Log-In/Sign-Up links
         else {
             $(jQueryNavPills).append(genNavPill("glyphicon-log-in", loginLink, "Log-In"));
