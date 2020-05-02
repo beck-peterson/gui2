@@ -56,13 +56,6 @@ $(document).ready(function() {
             window.location.href = "https://beck-peterson.github.io/gui2/landing/LandingOut.html";
         }
     });
-
-function logout() {
-  const auth = firebase.auth();
-  auth.signOut().then(() => {
-    console.log('user pressed the log out button');
-  });
-}
 // Initiate Firebase Auth.
 function initFirebaseAuth() {
   // Listen to auth state changes.
@@ -400,3 +393,10 @@ initFirebaseAuth();
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
 });
+
+function logout() {
+  const auth = firebase.auth();
+  auth.signOut().then(() => {
+    console.log('user pressed the log out button');
+  });
+}
