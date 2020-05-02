@@ -46,45 +46,10 @@ $(document).ready(function() {
     });
 });
 
-function logout() {
-  const auth = firebase.auth();
-  auth.signOut().then(() => {
-      console.log('user pressed the log out button');
-  });
-}
-
-function messages() {
-    window.location.href = '../messaging/messaging.html';
-}
-
 function settingsMessage() {
     if (!deepEqual(window.loggedInPerson, window.currentPerson)) {
         messages();
     }
-}
-
-function randomUser() {
-    var docRef = window.db.collection('TEMP').doc('People');
-    docRef.get().then(function(doc) {
-        if (doc.exists) {
-            var docRef = window.db.collection('Person').doc(doc.data().array[Math.floor(Math.random() * doc.data().array.length)]);
-            docRef.get().then(function(user) {
-                if (user.exists) {
-                    loadAccount(user.data(), user.data(), 'profile');
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log('No such document!');
-                }
-            }).catch(function(error) {
-                console.log('Error getting document:', error);
-            });
-        } else {
-            // doc.data() will be undefined in this case
-            console.log('No such document!');
-        }
-    }).catch(function(error) {
-        console.log('Error getting document:', error);
-    });
 }
 
 // This function can accept person or dog accounts
