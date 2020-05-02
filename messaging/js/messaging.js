@@ -57,7 +57,12 @@ $(document).ready(function() {
         }
     });
 
-
+function logout() {
+  const auth = firebase.auth();
+  auth.signOut().then(() => {
+    console.log('user pressed the log out button');
+  });
+}
 // Initiate Firebase Auth.
 function initFirebaseAuth() {
   // Listen to auth state changes.
@@ -377,7 +382,6 @@ var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
-signOutButtonElement.addEventListener('click', signOut);
 
 // Toggle for the button.
 messageInputElement.addEventListener('keyup', toggleButton);
