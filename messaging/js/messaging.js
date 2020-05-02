@@ -57,11 +57,6 @@ $(document).ready(function() {
         }
     });
 
-// Signs-out of Friendly Chat.
-function signOut() {
-  // Sign out of Firebase.
-  firebase.auth().signOut();
-}
 
 // Initiate Firebase Auth.
 function initFirebaseAuth() {
@@ -219,10 +214,7 @@ function authStateObserver(user) {
     // Hide user's profile and sign-out button.
     userNameElement.setAttribute('hidden', 'true');
     userPicElement.setAttribute('hidden', 'true');
-    signOutButtonElement.setAttribute('hidden', 'true');
 
-    // Show sign-in button.
-    signInButtonElement.removeAttribute('hidden');
   }
 }
 
@@ -400,8 +392,6 @@ mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 
 // initialize Firebase
 initFirebaseAuth();
-
-// TODO: Enable Firebase Performance Monitoring.
 
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
