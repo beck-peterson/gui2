@@ -175,11 +175,15 @@ $(document).ready(function() {
     }
 })
 
-  // listen for auth state changes - user logs in/out
-  auth.onAuthStateChanged(user => {
-     // window.location.href = (window.location + "").replace(/signup\/SignUp.html.*$/, "profile/index.html");
-    //console.log(user);
-  })
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log('user logged in: ', user);
+    console.log(user.uid)
+    window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
+  } else {
+    console.log('user logged out');
+  }
+});
 
 $("#signup").validate({
   rules:{
@@ -561,7 +565,7 @@ function signUpWithFacebook(){
       console.error("Error writing document: ", error);
     });
     console.log(user);
-    alert("Google Account Sign Up Successful.")
+    alert("Facebook Account Sign Up Successful.")
     //window.location.href = "https://beck-peterson.github.io/gui2/profile/index.html";
   }).catch(function(error) {
     // Handle Errors here.
