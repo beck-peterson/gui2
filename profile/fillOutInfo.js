@@ -46,6 +46,13 @@ $(document).ready(function() {
     });
 });
 
+function logout() {
+  const auth = firebase.auth();
+  auth.signOut().then(() => {
+      console.log('user pressed the log out button');
+  });
+}
+
 function settingsMessage() {
     if (!deepEqual(window.loggedInPerson, window.currentPerson)) {
         messages();
