@@ -247,7 +247,7 @@ function loadAccount(person = window.currentPerson, account = window.currentAcco
                         var lineBrokeText = '';
                         var currentLine = '';
                         for (let word of words) {
-                            if ((currentLine + ' ' + word).length <= 60) {
+                            if ((currentLine + ' ' + word).length <= 50) {
                                 currentLine += ' ' + word;
                             } else {
                                 lineBrokeText += currentLine + '<br>';
