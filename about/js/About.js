@@ -7,7 +7,7 @@ $(document).ready(function () {
       console.log(user.displayName);
     }else {
       console.log('user logged out');
-      window.location.href = "https://beck-peterson.github.io/gui2/landing/LandingOut.html";
+      //window.location.href = "https://beck-peterson.github.io/gui2/landing/LandingOut.html";
     }
   });
 });
